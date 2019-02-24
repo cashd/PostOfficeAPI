@@ -33,3 +33,4 @@ def authenticate():
             resp = setAuthCookiesResponse(resp, email, 'Driver')
             return resp
 
+app.run(port=8080, debug=True)
