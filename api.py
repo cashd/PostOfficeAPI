@@ -32,5 +32,8 @@ def authenticate():
             resp = make_response(jsonify(respBody))
             resp = setAuthCookiesResponse(resp, email, 'Driver')
             return resp
+        else:
+            return make_response(jsonify({'isAuth': False}))
 
-app.run(port=8080, debug=True)
+if __name__ == "__main__":
+    app.run(port=8080, debug=True)
