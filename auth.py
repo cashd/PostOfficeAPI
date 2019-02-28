@@ -10,6 +10,7 @@ def isConsumer(email, password):
             .format(email, password))
     result = bool(cursor.fetchone()[0])
     db.close()
+    print(result)
     return result
 
 
