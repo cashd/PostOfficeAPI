@@ -6,7 +6,7 @@ def isConsumer(email, password):
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
     cursor.execute(
-        """ select exists(select 1 from Customer where Customer_Email = \'{}\' and Customer_Password = \'{}\') """
+        """ select exists(select 1 from customer where customer_email = \'{}\' and customer_password = \'{}\') """
             .format(email, password))
     result = bool(cursor.fetchone()[0])
     db.close()
