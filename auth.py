@@ -26,8 +26,8 @@ def isAnyRole():
     return isConsumer() or isFacility() or isDriver()
 
 def setAuthCookiesResponse(resp, email, role):
-    resp.set_cookie('user_id', getIDfromEmail(email))
-    resp.set_cookie('role', role)
+    resp.set_cookie('user_id', getIDfromEmail(email), domain='.team9postoffice.ga')
+    resp.set_cookie('role', role, domain='.team9postoffice.ga')
     return resp
 
 
