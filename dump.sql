@@ -24,6 +24,87 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `PostOffice` /*!40100 DEFAULT CHARACTER
 USE `PostOffice`;
 
 --
+-- Table structure for table `auth_password_customer`
+--
+
+DROP TABLE IF EXISTS `auth_password_customer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_password_customer` (
+  `customer_pw_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_password` varchar(45) DEFAULT NULL,
+  `customer_fk_pw_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`customer_pw_id`),
+  UNIQUE KEY `customer_pw_id_UNIQUE` (`customer_pw_id`),
+  KEY `customer_fk_pw_id_idx` (`customer_fk_pw_id`),
+  CONSTRAINT `customer_fk_pw_id` FOREIGN KEY (`customer_fk_pw_id`) REFERENCES `customer` (`customer_pw_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_password_customer`
+--
+
+LOCK TABLES `auth_password_customer` WRITE;
+/*!40000 ALTER TABLE `auth_password_customer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_password_customer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_password_facility`
+--
+
+DROP TABLE IF EXISTS `auth_password_facility`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_password_facility` (
+  `facility_pw_id` int(11) NOT NULL AUTO_INCREMENT,
+  `facility_password` varchar(45) DEFAULT NULL,
+  `facility_fk_pw_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`facility_pw_id`),
+  UNIQUE KEY `employee_pw_id_UNIQUE` (`facility_pw_id`),
+  KEY `facility_fk_pw_id_idx` (`facility_fk_pw_id`),
+  CONSTRAINT `facility_fk_pw_id` FOREIGN KEY (`facility_fk_pw_id`) REFERENCES `facility` (`facility_pw_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_password_facility`
+--
+
+LOCK TABLES `auth_password_facility` WRITE;
+/*!40000 ALTER TABLE `auth_password_facility` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_password_facility` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_password_vehicle`
+--
+
+DROP TABLE IF EXISTS `auth_password_vehicle`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_password_vehicle` (
+  `vehicle_pw_id` int(11) NOT NULL,
+  `vehicle_password` varchar(45) DEFAULT NULL,
+  `vehicle_fk_pw_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`vehicle_pw_id`),
+  UNIQUE KEY `vehicle_pw_id_UNIQUE` (`vehicle_pw_id`),
+  KEY `vehicle_fk_pw_id_idx` (`vehicle_fk_pw_id`),
+  CONSTRAINT `vehicle_fk_pw_id` FOREIGN KEY (`vehicle_fk_pw_id`) REFERENCES `vehicle` (`vehicle_pw_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_password_vehicle`
+--
+
+LOCK TABLES `auth_password_vehicle` WRITE;
+/*!40000 ALTER TABLE `auth_password_vehicle` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_password_vehicle` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `city_lookup_table`
 --
 
@@ -33,7 +114,8 @@ DROP TABLE IF EXISTS `city_lookup_table`;
 CREATE TABLE `city_lookup_table` (
   `city_id` int(11) NOT NULL AUTO_INCREMENT,
   `city` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`city_id`)
+  PRIMARY KEY (`city_id`),
+  UNIQUE KEY `city_id_UNIQUE` (`city_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lookup city table that can be accessed by the facility, package, and customer tables using the city_id';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -63,12 +145,15 @@ CREATE TABLE `customer` (
   `customer_zip_code` varchar(10) NOT NULL,
   `customer_phone_number` varchar(15) DEFAULT NULL,
   `customer_email` varchar(45) DEFAULT NULL,
-  `customer_password` varchar(30) DEFAULT NULL,
+  `customer_pw_id` int(11) DEFAULT NULL,
   `mail_hold_status` tinyint(1) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `package_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`customer_id`),
+  UNIQUE KEY `city_id_UNIQUE` (`city_id`),
+  UNIQUE KEY `state_id_UNIQUE` (`state_id`),
   UNIQUE KEY `customer_email_UNIQUE` (`customer_email`),
+  UNIQUE KEY `customer_pw_id_UNIQUE` (`customer_pw_id`),
   KEY `employee_id_idx` (`employee_id`),
   CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Email will be used as login tool : needs to be unique. Although, the customer can also track the package without logging in with an email. They just will not be able to see any details\\nPhone number is 15 varchar and front end will accept only integers (calling overseas is at most 15).Package will be shipped domestically; contact may have an overseas number though. Zip code front end will accept integer for now since we are only interested in tracking domestic packages; using varchar to handle if expanding to international. State is 2 letter abbreviation for US for now';
@@ -109,6 +194,8 @@ CREATE TABLE `employee` (
   `facility_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`employee_id`),
   UNIQUE KEY `employee_work_email_UNIQUE` (`employee_work_email`),
+  UNIQUE KEY `city_id_UNIQUE` (`city_id`),
+  UNIQUE KEY `state_id_UNIQUE` (`state_id`),
   KEY `vehicle_fk_id_idx` (`vehicle_fk_id`),
   KEY `facility_fk_id_idx` (`facility_id`),
   KEY `facility_id_idx` (`facility_id`),
@@ -134,20 +221,23 @@ DROP TABLE IF EXISTS `facility`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `facility` (
   `facility_id` int(11) NOT NULL AUTO_INCREMENT,
-  `facility_password` varchar(30) NOT NULL,
+  `facility_pw_id` int(11) NOT NULL,
   `facility_type` enum('Drop Off','Sorting','Sales') NOT NULL,
   `zip_codes_served` enum('Area 1','Area 2','Area 3','Area 4','Area 5') NOT NULL,
   `package_date_in` datetime DEFAULT NULL,
   `package_date_out` datetime DEFAULT NULL,
   `facility_name` varchar(30) NOT NULL,
   `facility_address` varchar(45) NOT NULL,
-  `facility_city` varchar(30) NOT NULL,
-  `facility_state` varchar(2) NOT NULL,
+  `city_id` int(11) NOT NULL,
+  `state_id` varchar(2) NOT NULL,
   `facility_zip_code` varchar(10) NOT NULL,
-  `employee_fk1_id` int(11) DEFAULT NULL,
+  `manager_employee_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`facility_id`),
-  KEY `employee_id_idx` (`employee_fk1_id`),
-  CONSTRAINT `employee_fk1_id` FOREIGN KEY (`employee_fk1_id`) REFERENCES `employee` (`employee_id`) ON DELETE SET NULL ON UPDATE CASCADE
+  UNIQUE KEY `facility_pw_id_UNIQUE` (`facility_pw_id`),
+  UNIQUE KEY `city_id_UNIQUE` (`city_id`),
+  UNIQUE KEY `state_id_UNIQUE` (`state_id`),
+  KEY `employee_id_idx` (`manager_employee_id`),
+  CONSTRAINT `manager_employee_id` FOREIGN KEY (`manager_employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Enum values are available for facility_type and zip_codes_served. The zip code areas will be defined by management and they will decide which zipcodes belong to Area 1, Area 2, and so on. To login to a facility database, the facility_id will be used and there will be one password for each facility. The name of the manager can be accessed through the employee table with the foreign key. Constraints  added in the CreateTable: a package date_in will not be after the package_date_out.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,50 +295,6 @@ LOCK TABLES `package` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `receives`
---
-
-DROP TABLE IF EXISTS `receives`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `receives` (
-  `customer_id` int(11) DEFAULT NULL,
-  `recipient_customer_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `receives`
---
-
-LOCK TABLES `receives` WRITE;
-/*!40000 ALTER TABLE `receives` DISABLE KEYS */;
-/*!40000 ALTER TABLE `receives` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sends`
---
-
-DROP TABLE IF EXISTS `sends`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sends` (
-  `customer_id` int(11) DEFAULT NULL,
-  `sender_customer_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sends`
---
-
-LOCK TABLES `sends` WRITE;
-/*!40000 ALTER TABLE `sends` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sends` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `state_lookup_table`
 --
 
@@ -259,7 +305,8 @@ CREATE TABLE `state_lookup_table` (
   `state_id` int(11) NOT NULL AUTO_INCREMENT,
   `state_name` varchar(30) DEFAULT NULL,
   `state_abbrev` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`state_id`)
+  PRIMARY KEY (`state_id`),
+  UNIQUE KEY `state_id_UNIQUE` (`state_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lookup table of all the 50 states to be used by the facility, customer and employee table';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -314,7 +361,7 @@ DROP TABLE IF EXISTS `vehicle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vehicle` (
   `vehicle_id` int(11) NOT NULL AUTO_INCREMENT,
-  `vehicle_password` varchar(45) NOT NULL,
+  `vehicle_pw_id` int(11) NOT NULL,
   `date_vehicle_in` datetime NOT NULL,
   `date_vehicle_out` datetime NOT NULL,
   `zip_code_destination` enum('Zone 1','Zone 2','Zone 3','Zone 4','Zone 5','Zone 6','Zone 7','Zone 8','Zone 9','Zone 10') NOT NULL,
@@ -322,6 +369,7 @@ CREATE TABLE `vehicle` (
   `vfacility_fk_id` int(11) DEFAULT NULL,
   `employee_fk_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`vehicle_id`),
+  UNIQUE KEY `vehicle_pw_id_UNIQUE` (`vehicle_pw_id`),
   KEY `vfacility_fk_id_idx` (`vfacility_fk_id`),
   KEY `employee_fk_id_idx` (`employee_fk_id`),
   CONSTRAINT `employee_fk_id` FOREIGN KEY (`employee_fk_id`) REFERENCES `employee` (`employee_id`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -660,7 +708,7 @@ CREATE TABLE `innodb_index_stats` (
 
 LOCK TABLES `innodb_index_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_index_stats` DISABLE KEYS */;
-INSERT INTO `innodb_index_stats` VALUES ('PostOffice','city_lookup_table','PRIMARY','2019-03-20 23:25:54','n_diff_pfx01',0,1,'city_id'),('PostOffice','city_lookup_table','PRIMARY','2019-03-20 23:25:54','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','city_lookup_table','PRIMARY','2019-03-20 23:25:54','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','PRIMARY','2019-03-20 23:47:27','n_diff_pfx01',0,1,'customer_id'),('PostOffice','customer','PRIMARY','2019-03-20 23:47:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','PRIMARY','2019-03-20 23:47:27','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','customer_email_UNIQUE','2019-03-20 23:47:27','n_diff_pfx01',0,1,'customer_email'),('PostOffice','customer','customer_email_UNIQUE','2019-03-20 23:47:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','customer_email_UNIQUE','2019-03-20 23:47:27','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','employee_id_idx','2019-03-20 23:47:27','n_diff_pfx01',0,1,'employee_id'),('PostOffice','customer','employee_id_idx','2019-03-20 23:47:27','n_diff_pfx02',0,1,'employee_id,customer_id'),('PostOffice','customer','employee_id_idx','2019-03-20 23:47:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','employee_id_idx','2019-03-20 23:47:27','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','PRIMARY','2019-03-20 23:48:21','n_diff_pfx01',0,1,'employee_id'),('PostOffice','employee','PRIMARY','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','PRIMARY','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','employee_work_email_UNIQUE','2019-03-20 23:48:21','n_diff_pfx01',0,1,'employee_work_email'),('PostOffice','employee','employee_work_email_UNIQUE','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','employee_work_email_UNIQUE','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx01',0,1,'facility_id'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx02',0,1,'facility_id,employee_id'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','n_diff_pfx01',0,1,'facility_id'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','n_diff_pfx02',0,1,'facility_id,employee_id'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx01',0,1,'vehicle_fk_id'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx02',0,1,'vehicle_fk_id,employee_id'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','PRIMARY','2019-03-20 23:48:57','n_diff_pfx01',0,1,'facility_id'),('PostOffice','facility','PRIMARY','2019-03-20 23:48:57','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','PRIMARY','2019-03-20 23:48:57','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','employee_id_idx','2019-03-20 23:48:57','n_diff_pfx01',0,1,'employee_fk1_id'),('PostOffice','facility','employee_id_idx','2019-03-20 23:48:57','n_diff_pfx02',0,1,'employee_fk1_id,facility_id'),('PostOffice','facility','employee_id_idx','2019-03-20 23:48:57','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','employee_id_idx','2019-03-20 23:48:57','size',1,NULL,'Number of pages in the index'),('PostOffice','package','PRIMARY','2019-03-20 23:50:30','n_diff_pfx01',0,1,'package_id'),('PostOffice','package','PRIMARY','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','PRIMARY','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'pfacility_fk_id'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'pfacility_fk_id,package_id'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'recepient_customer_id'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'recepient_customer_id,package_id'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'sender_customer_id'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'sender_customer_id,package_id'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'vehicle_id'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'vehicle_id,package_id'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','receives','GEN_CLUST_INDEX','2019-03-02 15:11:43','n_diff_pfx01',0,1,'DB_ROW_ID'),('PostOffice','receives','GEN_CLUST_INDEX','2019-03-02 15:11:43','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','receives','GEN_CLUST_INDEX','2019-03-02 15:11:43','size',1,NULL,'Number of pages in the index'),('PostOffice','sends','GEN_CLUST_INDEX','2019-03-02 15:05:41','n_diff_pfx01',0,1,'DB_ROW_ID'),('PostOffice','sends','GEN_CLUST_INDEX','2019-03-02 15:05:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','sends','GEN_CLUST_INDEX','2019-03-02 15:05:41','size',1,NULL,'Number of pages in the index'),('PostOffice','state_lookup_table','PRIMARY','2019-03-20 23:29:26','n_diff_pfx01',0,1,'state_id'),('PostOffice','state_lookup_table','PRIMARY','2019-03-20 23:29:26','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','state_lookup_table','PRIMARY','2019-03-20 23:29:26','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','PRIMARY','2019-03-20 23:51:22','n_diff_pfx01',0,1,'tracking_id'),('PostOffice','tracking','PRIMARY','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','PRIMARY','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx01',0,1,'facility_fk_id'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx02',0,1,'facility_fk_id,tracking_id'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx01',0,1,'package_fk_id'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx02',0,1,'package_fk_id,tracking_id'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx01',0,1,'vehicle_fk_id'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx02',0,1,'vehicle_fk_id,tracking_id'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','PRIMARY','2019-03-20 23:51:54','n_diff_pfx01',0,1,'vehicle_id'),('PostOffice','vehicle','PRIMARY','2019-03-20 23:51:54','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','PRIMARY','2019-03-20 23:51:54','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-20 23:51:54','n_diff_pfx01',0,1,'employee_fk_id'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-20 23:51:54','n_diff_pfx02',0,1,'employee_fk_id,vehicle_id'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-20 23:51:54','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-20 23:51:54','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-20 23:51:54','n_diff_pfx01',0,1,'vfacility_fk_id'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-20 23:51:54','n_diff_pfx02',0,1,'vfacility_fk_id,vehicle_id'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-20 23:51:54','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-20 23:51:54','size',1,NULL,'Number of pages in the index'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','n_diff_pfx01',2,1,'variable'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','size',1,NULL,'Number of pages in the index');
+INSERT INTO `innodb_index_stats` VALUES ('PostOffice','auth_password_customer','PRIMARY','2019-03-21 02:34:44','n_diff_pfx01',0,1,'customer_pw_id'),('PostOffice','auth_password_customer','PRIMARY','2019-03-21 02:34:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_customer','PRIMARY','2019-03-21 02:34:44','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-03-21 02:34:44','n_diff_pfx01',0,1,'customer_fk_pw_id'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-03-21 02:34:44','n_diff_pfx02',0,1,'customer_fk_pw_id,customer_pw_id'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-03-21 02:34:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-03-21 02:34:44','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_customer','customer_pw_id_UNIQUE','2019-03-21 02:34:44','n_diff_pfx01',0,1,'customer_pw_id'),('PostOffice','auth_password_customer','customer_pw_id_UNIQUE','2019-03-21 02:34:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_customer','customer_pw_id_UNIQUE','2019-03-21 02:34:44','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_facility','PRIMARY','2019-03-21 02:34:27','n_diff_pfx01',0,1,'facility_pw_id'),('PostOffice','auth_password_facility','PRIMARY','2019-03-21 02:34:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_facility','PRIMARY','2019-03-21 02:34:27','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_facility','employee_pw_id_UNIQUE','2019-03-21 02:34:27','n_diff_pfx01',0,1,'facility_pw_id'),('PostOffice','auth_password_facility','employee_pw_id_UNIQUE','2019-03-21 02:34:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_facility','employee_pw_id_UNIQUE','2019-03-21 02:34:27','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_facility','facility_fk_pw_id_idx','2019-03-21 02:34:27','n_diff_pfx01',0,1,'facility_fk_pw_id'),('PostOffice','auth_password_facility','facility_fk_pw_id_idx','2019-03-21 02:34:27','n_diff_pfx02',0,1,'facility_fk_pw_id,facility_pw_id'),('PostOffice','auth_password_facility','facility_fk_pw_id_idx','2019-03-21 02:34:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_facility','facility_fk_pw_id_idx','2019-03-21 02:34:27','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_vehicle','PRIMARY','2019-03-21 02:34:03','n_diff_pfx01',0,1,'vehicle_pw_id'),('PostOffice','auth_password_vehicle','PRIMARY','2019-03-21 02:34:03','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_vehicle','PRIMARY','2019-03-21 02:34:03','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_vehicle','vehicle_fk_pw_id_idx','2019-03-21 02:34:03','n_diff_pfx01',0,1,'vehicle_fk_pw_id'),('PostOffice','auth_password_vehicle','vehicle_fk_pw_id_idx','2019-03-21 02:34:03','n_diff_pfx02',0,1,'vehicle_fk_pw_id,vehicle_pw_id'),('PostOffice','auth_password_vehicle','vehicle_fk_pw_id_idx','2019-03-21 02:34:03','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_vehicle','vehicle_fk_pw_id_idx','2019-03-21 02:34:03','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_vehicle','vehicle_pw_id_UNIQUE','2019-03-21 02:34:03','n_diff_pfx01',0,1,'vehicle_pw_id'),('PostOffice','auth_password_vehicle','vehicle_pw_id_UNIQUE','2019-03-21 02:34:03','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_vehicle','vehicle_pw_id_UNIQUE','2019-03-21 02:34:03','size',1,NULL,'Number of pages in the index'),('PostOffice','city_lookup_table','PRIMARY','2019-03-20 23:25:54','n_diff_pfx01',0,1,'city_id'),('PostOffice','city_lookup_table','PRIMARY','2019-03-20 23:25:54','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','city_lookup_table','PRIMARY','2019-03-20 23:25:54','size',1,NULL,'Number of pages in the index'),('PostOffice','city_lookup_table','city_id_UNIQUE','2019-03-21 01:51:18','n_diff_pfx01',0,1,'city_id'),('PostOffice','city_lookup_table','city_id_UNIQUE','2019-03-21 01:51:18','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','city_lookup_table','city_id_UNIQUE','2019-03-21 01:51:18','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','PRIMARY','2019-03-21 01:29:21','n_diff_pfx01',0,1,'customer_id'),('PostOffice','customer','PRIMARY','2019-03-21 01:29:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','PRIMARY','2019-03-21 01:29:21','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','city_id_UNIQUE','2019-03-21 01:48:40','n_diff_pfx01',0,1,'city_id'),('PostOffice','customer','city_id_UNIQUE','2019-03-21 01:48:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','city_id_UNIQUE','2019-03-21 01:48:40','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','customer_email_UNIQUE','2019-03-21 01:29:21','n_diff_pfx01',0,1,'customer_email'),('PostOffice','customer','customer_email_UNIQUE','2019-03-21 01:29:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','customer_email_UNIQUE','2019-03-21 01:29:21','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','customer_pw_id_UNIQUE','2019-03-21 01:47:01','n_diff_pfx01',0,1,'customer_pw_id'),('PostOffice','customer','customer_pw_id_UNIQUE','2019-03-21 01:47:01','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','customer_pw_id_UNIQUE','2019-03-21 01:47:01','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','employee_id_idx','2019-03-21 01:29:21','n_diff_pfx01',0,1,'employee_id'),('PostOffice','customer','employee_id_idx','2019-03-21 01:29:21','n_diff_pfx02',0,1,'employee_id,customer_id'),('PostOffice','customer','employee_id_idx','2019-03-21 01:29:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','employee_id_idx','2019-03-21 01:29:21','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','state_id_UNIQUE','2019-03-21 01:48:40','n_diff_pfx01',0,1,'state_id'),('PostOffice','customer','state_id_UNIQUE','2019-03-21 01:48:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','state_id_UNIQUE','2019-03-21 01:48:40','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','PRIMARY','2019-03-20 23:48:21','n_diff_pfx01',0,1,'employee_id'),('PostOffice','employee','PRIMARY','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','PRIMARY','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','city_id_UNIQUE','2019-03-21 01:51:51','n_diff_pfx01',0,1,'city_id'),('PostOffice','employee','city_id_UNIQUE','2019-03-21 01:51:51','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','city_id_UNIQUE','2019-03-21 01:51:51','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','employee_work_email_UNIQUE','2019-03-20 23:48:21','n_diff_pfx01',0,1,'employee_work_email'),('PostOffice','employee','employee_work_email_UNIQUE','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','employee_work_email_UNIQUE','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx01',0,1,'facility_id'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx02',0,1,'facility_id,employee_id'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','n_diff_pfx01',0,1,'facility_id'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','n_diff_pfx02',0,1,'facility_id,employee_id'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','state_id_UNIQUE','2019-03-21 01:51:51','n_diff_pfx01',0,1,'state_id'),('PostOffice','employee','state_id_UNIQUE','2019-03-21 01:51:51','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','state_id_UNIQUE','2019-03-21 01:51:51','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx01',0,1,'vehicle_fk_id'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx02',0,1,'vehicle_fk_id,employee_id'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','PRIMARY','2019-03-21 01:55:46','n_diff_pfx01',0,1,'facility_id'),('PostOffice','facility','PRIMARY','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','PRIMARY','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','city_id_UNIQUE','2019-03-21 01:55:46','n_diff_pfx01',0,1,'city_id'),('PostOffice','facility','city_id_UNIQUE','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','city_id_UNIQUE','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','employee_id_idx','2019-03-21 01:55:46','n_diff_pfx01',0,1,'manager_employee_id'),('PostOffice','facility','employee_id_idx','2019-03-21 01:55:46','n_diff_pfx02',0,1,'manager_employee_id,facility_id'),('PostOffice','facility','employee_id_idx','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','employee_id_idx','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','facility_pw_id_UNIQUE','2019-03-21 01:55:46','n_diff_pfx01',0,1,'facility_pw_id'),('PostOffice','facility','facility_pw_id_UNIQUE','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','facility_pw_id_UNIQUE','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','state_id_UNIQUE','2019-03-21 01:55:46','n_diff_pfx01',0,1,'state_id'),('PostOffice','facility','state_id_UNIQUE','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','state_id_UNIQUE','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','package','PRIMARY','2019-03-20 23:50:30','n_diff_pfx01',0,1,'package_id'),('PostOffice','package','PRIMARY','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','PRIMARY','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'pfacility_fk_id'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'pfacility_fk_id,package_id'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'recepient_customer_id'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'recepient_customer_id,package_id'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'sender_customer_id'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'sender_customer_id,package_id'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'vehicle_id'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'vehicle_id,package_id'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','state_lookup_table','PRIMARY','2019-03-20 23:29:26','n_diff_pfx01',0,1,'state_id'),('PostOffice','state_lookup_table','PRIMARY','2019-03-20 23:29:26','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','state_lookup_table','PRIMARY','2019-03-20 23:29:26','size',1,NULL,'Number of pages in the index'),('PostOffice','state_lookup_table','state_id_UNIQUE','2019-03-21 01:50:13','n_diff_pfx01',0,1,'state_id'),('PostOffice','state_lookup_table','state_id_UNIQUE','2019-03-21 01:50:13','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','state_lookup_table','state_id_UNIQUE','2019-03-21 01:50:13','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','PRIMARY','2019-03-20 23:51:22','n_diff_pfx01',0,1,'tracking_id'),('PostOffice','tracking','PRIMARY','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','PRIMARY','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx01',0,1,'facility_fk_id'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx02',0,1,'facility_fk_id,tracking_id'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx01',0,1,'package_fk_id'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx02',0,1,'package_fk_id,tracking_id'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx01',0,1,'vehicle_fk_id'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx02',0,1,'vehicle_fk_id,tracking_id'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','PRIMARY','2019-03-21 01:35:44','n_diff_pfx01',0,1,'vehicle_id'),('PostOffice','vehicle','PRIMARY','2019-03-21 01:35:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','PRIMARY','2019-03-21 01:35:44','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-21 01:35:44','n_diff_pfx01',0,1,'employee_fk_id'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-21 01:35:44','n_diff_pfx02',0,1,'employee_fk_id,vehicle_id'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-21 01:35:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-21 01:35:44','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','vehicle_pw_id_UNIQUE','2019-03-21 01:50:49','n_diff_pfx01',0,1,'vehicle_pw_id'),('PostOffice','vehicle','vehicle_pw_id_UNIQUE','2019-03-21 01:50:49','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','vehicle_pw_id_UNIQUE','2019-03-21 01:50:49','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-21 01:35:44','n_diff_pfx01',0,1,'vfacility_fk_id'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-21 01:35:44','n_diff_pfx02',0,1,'vfacility_fk_id,vehicle_id'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-21 01:35:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-21 01:35:44','size',1,NULL,'Number of pages in the index'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','n_diff_pfx01',2,1,'variable'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','size',1,NULL,'Number of pages in the index');
 /*!40000 ALTER TABLE `innodb_index_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -688,7 +736,7 @@ CREATE TABLE `innodb_table_stats` (
 
 LOCK TABLES `innodb_table_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_table_stats` DISABLE KEYS */;
-INSERT INTO `innodb_table_stats` VALUES ('PostOffice','city_lookup_table','2019-03-20 23:25:54',0,1,0),('PostOffice','customer','2019-03-20 23:47:27',0,1,2),('PostOffice','employee','2019-03-20 23:48:21',0,1,4),('PostOffice','facility','2019-03-20 23:48:57',0,1,1),('PostOffice','package','2019-03-20 23:50:30',0,1,4),('PostOffice','receives','2019-03-02 15:11:43',0,1,0),('PostOffice','sends','2019-03-02 15:05:41',0,1,0),('PostOffice','state_lookup_table','2019-03-20 23:29:26',0,1,0),('PostOffice','tracking','2019-03-20 23:51:22',0,1,3),('PostOffice','vehicle','2019-03-20 23:51:54',0,1,2),('mysql','gtid_executed','2019-02-19 04:16:41',0,1,0),('sys','sys_config','2019-02-19 04:16:41',2,1,0);
+INSERT INTO `innodb_table_stats` VALUES ('PostOffice','auth_password_customer','2019-03-21 02:34:44',0,1,2),('PostOffice','auth_password_facility','2019-03-21 02:34:27',0,1,2),('PostOffice','auth_password_vehicle','2019-03-21 02:34:03',0,1,2),('PostOffice','city_lookup_table','2019-03-21 01:51:18',0,1,0),('PostOffice','customer','2019-03-21 01:48:40',0,1,2),('PostOffice','employee','2019-03-21 01:51:51',0,1,4),('PostOffice','facility','2019-03-21 01:55:46',0,1,4),('PostOffice','package','2019-03-20 23:50:30',0,1,4),('PostOffice','state_lookup_table','2019-03-21 01:50:13',0,1,0),('PostOffice','tracking','2019-03-20 23:51:22',0,1,3),('PostOffice','vehicle','2019-03-21 01:50:49',0,1,2),('mysql','gtid_executed','2019-02-19 04:16:41',0,1,0),('sys','sys_config','2019-02-19 04:16:41',2,1,0);
 /*!40000 ALTER TABLE `innodb_table_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1260,4 +1308,4 @@ CREATE TABLE IF NOT EXISTS `slow_log` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-21  0:38:01
+-- Dump completed on 2019-03-21  3:47:21
