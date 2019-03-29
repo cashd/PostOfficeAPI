@@ -17,7 +17,7 @@ def authenticate():
         data = request.json
         email = data['email']
         password = data['password']
-        if isConsumer(email, password):
+        if isCustomer(email, password):
             respBody = {'isAuth': True, 'role': 'Customer'}
             resp = make_response(jsonify(respBody))
             resp = setAuthCookiesResponse(resp, email, 'Customer')
@@ -35,4 +35,4 @@ def authenticate():
         else:
             return make_response(jsonify({'isAuth': False}))
 
-#app.run(debug=True, port=8080)
+app.run(debug=True, port=8080)

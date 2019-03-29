@@ -2,12 +2,13 @@ import pymysql.cursors
 from customer import getIDfromEmail
 
 
-def isConsumer(email, password):
+def isCustomer(email, password):
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
     cursor.execute(
-        """ select exists(select 1 from customer where customer_email = \'{}\' and customer_password = \'{}\') """
-            .format(email, password))
+        """ SELECT EXISTS(select 1 FROM customer, auth_password_customer
+        WHERE customer_password= \'{}\' AND customer_email = \'{}\' and customer_fk_pw_id = customer_id);"""
+            .format(password, email))
     result = bool(cursor.fetchone()[0])
     db.close()
     print(result)
