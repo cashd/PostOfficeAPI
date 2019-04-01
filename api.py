@@ -35,4 +35,4 @@ def authenticate():
         else:
             return make_response(jsonify({'isAuth': False}))
 
-app.run(debug=True, port=8080)
+#app.run(debug=True, port=8080)
