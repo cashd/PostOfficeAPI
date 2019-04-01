@@ -41,4 +41,15 @@ def createCustomer(request):
             \'{}\');
 """.format(fname, lname, address, cityid, stateid, zipcode, phone, email))
     db.commit()
+#reduce all the redundancies in the auth and customer, right now they link to each other in too many ways making updates difficult
+    cursor.execute("""select customer_id from PostOffice.customer
+where customer_email = \'{}\'""".format(email))
+    id = int(cursor.fetchone()[0])
+    cursor.execute("""INSERT INTO `PostOffice`.`auth_password_customer`
+(`customer_password`,
+`customer_fk_pw_id`)
+VALUES
+(\'{}\',
+{});""".format(password, id))
+    db.commit()
     db.close()
