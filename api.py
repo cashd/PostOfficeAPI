@@ -1,5 +1,6 @@
 from flask import *
 from auth import *
+from customer import createCustomer
 app = Flask(__name__)
 
 @app.route("/")
@@ -22,12 +23,17 @@ def authenticate():
             resp = make_response(jsonify(respBody))
             resp = setAuthCookiesResponse(resp, email, 'Customer')
             return resp
-        elif isFacility(request):
+        elif isManagerFacility(request):
+            respBody = {'isAuth': True, 'role': 'ManagerFacility'}
+            resp = make_response(jsonify(respBody))
+            resp = setAuthCookiesResponse(resp, email, 'Facility')
+            return resp
+        elif isEmployeeFacility(request):
             respBody = {'isAuth': True, 'role': 'Facility'}
             resp = make_response(jsonify(respBody))
             resp = setAuthCookiesResponse(resp, email, 'Facility')
             return resp
-        elif isDriver(request):
+        elif isEmployeeDriver(request):
             respBody = {'isAuth': True, 'role': 'Driver'}
             resp = make_response(jsonify(respBody))
             resp = setAuthCookiesResponse(resp, email, 'Driver')
@@ -35,4 +41,13 @@ def authenticate():
         else:
             return make_response(jsonify({'isAuth': False}))
 
-#app.run(debug=True, port=8080)
+@app.route('/signupCustomer', methods=['POST'])
+def signup():
+    if "user_id" in request.cookies and 'role' in request.cookies:
+        return make_response(jsonify(message='Signup Failed: You are already logged in.'), 400)
+    else:
+        createCustomer(request)
+        return make_response(jsonify(message='Signup Successful'), 200)
+
+if __name__ == '__main__':
+    app.run(debug=True, port=8000)

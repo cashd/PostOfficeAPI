@@ -15,22 +15,20 @@ def isCustomer(email, password):
     return result
 
 
-def isFacility(request):
+def isEmployeeFacility(request):
     return False
 
-
-def isDriver(request):
+def isEmployeeDriver(request):
     return False
 
+#see who is authorized to create employees and assign them to specific vehicles or facilities
+def isManagerFacility():
+    return False
 
 def isAnyRole():
-    return isConsumer() or isFacility() or isDriver()
+    return isCustomer() or isManagerFacility() or isEmployeeDriver() or isEmployeeFacility()
 
 def setAuthCookiesResponse(resp, email, role):
     resp.set_cookie('user_id', getIDfromEmail(email), domain='.team9postoffice.ga')
     resp.set_cookie('role', role, domain='.team9postoffice.ga')
     return resp
-
-
-
-
