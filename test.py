@@ -13,4 +13,4 @@ def testcase2():
     print(r.headers)
 
 if __name__ == '__main__':
-    testcase2()
+    testcase1()

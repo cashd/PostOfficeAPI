@@ -22,7 +22,7 @@ def isEmployeeDriver(request):
     return False
 
 #see who is authorized to create employees and assign them to specific vehicles or facilities
-def isManagerFacility():
+def isManagerFacility(request):
     return False
 
 def isAnyRole():
