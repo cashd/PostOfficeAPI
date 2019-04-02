@@ -41,13 +41,13 @@ def authenticate():
         else:
             return make_response(jsonify({'isAuth': False}))
 
-@app.route('/signupCustomer', methods=['POST'])
+@app.route('/signup/customer', methods=['POST'])
 def signup():
     if "user_id" in request.cookies and 'role' in request.cookies:
         return make_response(jsonify(message='Signup Failed: You are already logged in.'), 400)
     else:
         createCustomer(request)
-        return make_response(jsonify(message='Signup Successful'), 200)
+        return make_response(jsonify({ "success": True }), 200)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
