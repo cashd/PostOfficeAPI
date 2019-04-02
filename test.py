@@ -1,7 +1,7 @@
 import requests
 
 def testcase1():
-    payload = {'email': 'js@hotmail.com', 'password': 'password'}
+    payload = {'email': 'notexistent@hotmail.com', 'password': 'password'}
     r = requests.post('http://127.0.0.1:8000/auth', json=payload)
     print(r.text)
     print(r.headers)
