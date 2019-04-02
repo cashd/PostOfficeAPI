@@ -8,19 +8,38 @@ def getIDfromEmail(email):
     db.close()
     return result
 
+def getStateID(state):
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""select state_id from state_lookup_table where state_name = \'{}\';""".format(state))
+    stateid = str(cursor.fetchone()[0])
+    db.close()
+    return stateid
+
+def getCityID(city):
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""select city_id from city_lookup_table where city = \'{}\';""".format(city))
+    cityid = str(cursor.fetchone()[0])
+    db.close()
+    return cityid
+
 def createCustomer(request):
     data = request.json
     fname = data['firstName']
     lname = data['lastName']
     address = data['address']
     email = data['email']
-    cityid = int(data['cityid'])
-    stateid = int(data['stateid'])
+    city = data['cityid']
+    cityid = getCityID(city)
+    state = data['stateid']
+    stateid =getStateID(state)
     phone = data['phoneNum']
-    zipcode = data['zipcode']
+    zipcode = str(data['zipcode'])
     password = data['password']
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
+
     cursor.execute("""INSERT INTO `PostOffice`.`customer`
             (`customer_first_name`,
             `customer_last_name`,

@@ -23,10 +23,10 @@ def authenticate():
             resp = make_response(jsonify(respBody))
             resp = setAuthCookiesResponse(resp, email, 'Customer')
             return resp
-        elif isManagerFacility(request):
+        elif isManagerFacility(email, password):
             respBody = {'isAuth': True, 'role': 'ManagerFacility'}
             resp = make_response(jsonify(respBody))
-            resp = setAuthCookiesResponse(resp, email, 'Facility')
+            resp = setAuthCookiesResponse(resp, email, 'ManagerFacility')
             return resp
         elif isEmployeeFacility(request):
             respBody = {'isAuth': True, 'role': 'Facility'}
