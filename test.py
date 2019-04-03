@@ -1,24 +1,36 @@
 import requests
+from auth import isManagerFacility
+from auth import isEmployeeFacility
+from auth import isEmployeeDriver
+from auth import isEmployee
 
 #isCustomer
 def testcase1():
-    payload = {'email': 'notexistent@hotmail.com', 'password': 'password'}
+    payload = {'email': 'money@gmail.com', 'password': 'plooploo'}
     r = requests.post('http://127.0.0.1:8000/auth', json=payload)
     print(r.text)
     print(r.headers)
 
 #create customer
 def testcase2():
-    payload = {'firstName':'Cash', 'lastName': 'DeLeon', 'address' : '123 GH', 'email': 'money@gmail.com', 'phoneNum':'324502345', 'password': 'plooploo', 'cityid': 'Houston', 'stateid': 'Texas', 'zipcode': 77259}
-    r = requests.post('http://127.0.0.1:8000/signupCustomer', json=payload)
+    payload = {'firstName':'John', 'lastName': 'Doe', 'address' : '4412 Providence', 'email': 'jdoe@gmail.com', 'phoneNum':'3245552345', 'password': 'seven', 'cityid': 'Dallas', 'stateid': 'Texas', 'zipcode': 77559}
+    r = requests.post('http://127.0.0.1:8000/signup/customer', json=payload)
     print(r.text)
     print(r.headers)
-#isManagerFacility
+#isEmployee()
 def testcase3():
-    payload = {'email': 'sosu@gmail.com', 'password': 'pwd123'}
+    payload = {'email': 'test@usps.gov', 'password': 'test'}
     r = requests.post('http://127.0.0.1:8000/auth', json=payload)
     print(r.text)
     print(r.headers)
+
+#isEmployee()
+def testcase4():
+#    payload = {'email': 'sosu@gmail.com', 'password': 'pwd123'}
+#    r = requests.post('http://127.0.0.1:8000/auth', json=payload)
+#    print(r.text)
+#    print(r.headers)
+    print(isEmployee('fastguy@gmail.com','speedy'))
 
 if __name__ == '__main__':
     testcase2()

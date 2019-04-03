@@ -19,24 +19,13 @@ def authenticate():
         email = data['email']
         password = data['password']
         if isCustomer(email, password):
-            respBody = {'isAuth': True, 'role': 'Customer'}
+            id = getIDfromEmail(email)
+            respBody = {'isAuth': True, 'role': 'customer' , 'id': id }
             resp = make_response(jsonify(respBody))
-            resp = setAuthCookiesResponse(resp, email, 'Customer')
+            #resp = setAuthCookiesResponse(resp, email, 'Customer')
             return resp
-        elif isManagerFacility(email, password):
-            respBody = {'isAuth': True, 'role': 'ManagerFacility'}
-            resp = make_response(jsonify(respBody))
-            resp = setAuthCookiesResponse(resp, email, 'ManagerFacility')
-            return resp
-        elif isEmployeeFacility(request):
-            respBody = {'isAuth': True, 'role': 'Facility'}
-            resp = make_response(jsonify(respBody))
-            resp = setAuthCookiesResponse(resp, email, 'Facility')
-            return resp
-        elif isEmployeeDriver(request):
-            respBody = {'isAuth': True, 'role': 'Driver'}
-            resp = make_response(jsonify(respBody))
-            resp = setAuthCookiesResponse(resp, email, 'Driver')
+        elif isEmployee(email, password):
+            resp = jsonify(makeEmpResponse(email,password))
             return resp
         else:
             return make_response(jsonify({'isAuth': False}))
@@ -46,8 +35,11 @@ def signup():
     if "user_id" in request.cookies and 'role' in request.cookies:
         return make_response(jsonify(message='Signup Failed: You are already logged in.'), 400)
     else:
-        createCustomer(request)
-        return make_response(jsonify({ "success": True }), 200)
+        isSuccess = createCustomer(request)
+        if isSuccess:
+            return make_response(jsonify({ "success": isSuccess }), 200)
+        else:
+            return make_response(jsonify({ "success": isSuccess }), 200)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
