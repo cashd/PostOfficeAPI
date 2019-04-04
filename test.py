@@ -1,9 +1,7 @@
 import requests
-from auth import isManagerFacility
-from auth import isEmployeeFacility
-from auth import isEmployeeDriver
 from auth import isEmployee
-
+from employee import getEmpIDfromEmail
+from auth import isManager
 #isCustomer
 def testcase1():
     payload = {'email': 'money@gmail.com', 'password': 'plooploo'}
@@ -24,13 +22,16 @@ def testcase3():
     print(r.text)
     print(r.headers)
 
-#isEmployee()
+#test random functions here
 def testcase4():
-#    payload = {'email': 'sosu@gmail.com', 'password': 'pwd123'}
-#    r = requests.post('http://127.0.0.1:8000/auth', json=payload)
-#    print(r.text)
-#    print(r.headers)
-    print(isEmployee('fastguy@gmail.com','speedy'))
+    print(isManager('9'))
+
+#create employee
+def testcase5():
+    payload = {'managerId': 9, 'firstName':'Postal', 'lastName': 'Worker', 'address' : '4205 Clay', 'email': 'pw7@gmail.com', 'phoneNum':'8325556642', 'password': 'pass', 'cityid': 'Houston', 'stateid': 'Texas', 'zipcode': 77080, 'position': 'Clerk', 'role': 'facility', 'fkid': 1}
+    r = requests.post('http://127.0.0.1:8000/manager/addEmployee', json=payload)
+    print(r.text)
+    print(r.headers)
 
 if __name__ == '__main__':
-    testcase2()
+    testcase5()

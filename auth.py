@@ -66,6 +66,15 @@ def isEmployee(email, password):
     #print(result)
     return result
 
+def isManager(id):
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""SELECT EXISTS (SELECT * FROM auth_password_employee WHERE employee_id_fk = {} and employee_role = \'supervisor\');  """.format(str(id)))
+    result = bool(cursor.fetchone()[0])
+    db.close()
+
+    print(result)
+    return result
 
 def isAnyRole():
     return isCustomer() or isManagerFacility() or isEmployeeDriver() or isEmployeeFacility()

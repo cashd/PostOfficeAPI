@@ -1,6 +1,7 @@
 from flask import *
 from auth import *
 from customer import createCustomer
+from employee import createEmployee
 app = Flask(__name__)
 
 @app.route("/")
@@ -39,7 +40,20 @@ def signup():
         if isSuccess:
             return make_response(jsonify({ "success": isSuccess }), 200)
         else:
+            return make_response(jsonify({ "success": isSuccess }), 400)
+
+@app.route('/manager/addEmployee', methods=['POST'])
+def empSignup():
+    data = request.json
+    if isManager(data['managerId']) == False:
+        return make_response(jsonify(message='Not Authorized'), 400)
+    else:
+        isSuccess = createEmployee(request)
+        if isSuccess:
             return make_response(jsonify({ "success": isSuccess }), 200)
+        else:
+            return make_response(jsonify({ "success": isSuccess }), 400)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
