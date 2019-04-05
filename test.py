@@ -1,7 +1,8 @@
 import requests
-from auth import isEmployee
+from auth import *
 from employee import getEmpIDfromEmail
-from auth import isManager
+from package import *
+
 #isCustomer
 def testcase1():
     payload = {'email': 'money@gmail.com', 'password': 'plooploo'}
@@ -24,7 +25,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(isManager('9'))
+    getAllIncomingPackages(25)
 
 #create employee
 def testcase5():
@@ -33,5 +34,12 @@ def testcase5():
     print(r.text)
     print(r.headers)
 
+#packagesSent or packages incoming
+def testcase6():
+    payload = {'id': 25 }
+    r = requests.post('http://127.0.0.1:8000/customer/incomingpackages', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase5()
+    testcase6()

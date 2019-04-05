@@ -8,6 +8,23 @@ def getIDfromEmail(email):
     db.close()
     return result
 
+def getEmailFromID(id):
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""select customer_email from customer where customer_id = {};""".format(id))
+    result = str(cursor.fetchone()[0])
+    db.close()
+    return result
+
+def getAddressFromID(id):
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""select customer_street_address from customer where customer_id = {};""".format(id))
+    result = str(cursor.fetchone()[0])
+    db.close()
+    return result
+
+
 def getStateID(state):
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()

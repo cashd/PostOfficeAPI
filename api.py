@@ -2,6 +2,7 @@ from flask import *
 from auth import *
 from customer import createCustomer
 from employee import createEmployee
+from package import *
 app = Flask(__name__)
 
 @app.route("/")
@@ -53,6 +54,20 @@ def empSignup():
             return make_response(jsonify({ "success": isSuccess }), 200)
         else:
             return make_response(jsonify({ "success": isSuccess }), 400)
+
+@app.route('/customer/packages', methods=['POST'])
+def packagesSent():
+    data = request.json
+    id = data['id']
+    return make_response(jsonify(getAllSentPackages(id)), 200)
+
+@app.route('/customer/incomingpackages', methods=['POST'])
+def packagesIncoming():
+    data = request.json
+    id = data['id']
+    return make_response(jsonify(getAllIncomingPackages(id)), 200)
+
+
 
 
 if __name__ == '__main__':
