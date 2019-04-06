@@ -1,6 +1,6 @@
 import requests
 from auth import *
-from employee import getEmpIDfromEmail
+from employee import *
 from package import *
 from vehicle import *
 
@@ -26,7 +26,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    createPackage({'senderID': 1, 'recipientEmail': 'tjo@gmail.com', 'recipientAddress': '4411 Main', 'weight': 31.5})
+    print(getAllEmployeesInFacility(3))
 
 #create employee
 def testcase5():
@@ -56,5 +56,12 @@ def testcase8():
     print(r.text)
     print(r.headers)
 
+#get all employee sin facility
+def testcase9():
+    payload = {'managerID': 9, 'facilityID': 1}
+    r = requests.post('http://127.0.0.1:8000/facility/employees', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase8()
+    testcase9()

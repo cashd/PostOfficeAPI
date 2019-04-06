@@ -34,7 +34,7 @@ def getAllIncomingPackages(id):
     cursor.execute("""SELECT EXISTS (SELECT * FROM package WHERE recepient_customer_id = {});  """.format(str(id)))
     result = bool(cursor.fetchone()[0])
     if not result:
-        respBody = {'empty': True}
+        respBody = {'empty': True, 'packages': []}
     else:
         receiverEmail = getEmailFromID(id)
         respBody = {'empty': False, 'packages': []}

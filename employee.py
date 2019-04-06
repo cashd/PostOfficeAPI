@@ -87,3 +87,27 @@ def createEmployee(request):
     #    return False
     db.close()
     return True
+
+def getAllEmployeesInFacility(id):
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""SELECT EXISTS (SELECT * FROM employee WHERE facility_id = {});  """.format(str(id)))
+    result = bool(cursor.fetchone()[0])
+    if not result:
+        respBody = {'empty': True, 'employees': []}
+    else:
+        respBody = {'empty': False, 'employees': []}
+        cursor.execute("""SELECT employee_id, employee_first_name, employee_last_name, employee_position, employee_work_number, 
+        employee_work_email ,employee_salary FROM employee WHERE facility_id = {};  """.format(str(id)))
+        results = cursor.fetchall()
+        for row in results:
+            #print(row[0])
+            #print(row[1])
+            print(row[6])
+            respBody['employees'].append({'id': row[0], 'firstName': row[1], 'lastName': row[2],
+                                         'position': row[3], 'workPhoneNum': row[4], 'workEmail': row[5], 'salary': int(row[6])})
+    db.close()
+
+    print(result)
+    print(respBody)
+    return respBody

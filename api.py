@@ -1,7 +1,7 @@
 from flask import *
 from auth import *
 from customer import createCustomer
-from employee import createEmployee
+from employee import *
 from package import *
 from vehicle import getTruckTypeFromID
 app = Flask(__name__)
@@ -47,7 +47,7 @@ def signup():
 @app.route('/manager/addEmployee', methods=['POST'])
 def empSignup():
     data = request.json
-    if isManager(data['managerId']) == False:
+    if not isManager(data['managerId']):
         return make_response(jsonify(message='Not Authorized'), 400)
     else:
         isSuccess = createEmployee(request)
@@ -79,6 +79,14 @@ def newPackage():
     createPackage(request)
     return make_response(jsonify({"success": True}), 200)
 
+@app.route('/facility/employees', methods=['POST'])
+def employeesInFacility():
+    data = request.json
+    if not isManager(data['managerID']):
+        return make_response(jsonify(message='Not Authorized'), 400)
+    else:
+        facilityid = data['facilityID']
+        return make_response(jsonify(getAllEmployeesInFacility(facilityid), 200))
 
 
 if __name__ == '__main__':
