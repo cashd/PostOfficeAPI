@@ -3,6 +3,7 @@ from auth import *
 from customer import createCustomer
 from employee import createEmployee
 from package import *
+from vehicle import getTruckTypeFromID
 app = Flask(__name__)
 
 @app.route("/")
@@ -67,6 +68,16 @@ def packagesIncoming():
     id = data['id']
     return make_response(jsonify(getAllIncomingPackages(id)), 200)
 
+@app.route('/truck/type', methods=['POST'])
+def truckType():
+    data = request.json
+    truckID = data['truckID']
+    return make_response(jsonify({"truckType": getTruckTypeFromID(truckID)}), 200)
+
+@app.route('/customer/newPackage', methods=['POST'])
+def newPackage():
+    createPackage(request)
+    return make_response(jsonify({"success": True}), 200)
 
 
 

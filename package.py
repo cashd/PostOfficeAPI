@@ -1,5 +1,4 @@
-from customer import getEmailFromID
-from customer import getAddressFromID
+from customer import *
 import pymysql.cursors
 
 def getAllSentPackages(id):
@@ -56,3 +55,46 @@ def getAllIncomingPackages(id):
     print(respBody)
     return respBody
 
+def createPackage(request):
+    data = request.json
+    #data = request
+    recipientEmail = data['recipientEmail']
+    weight = float(data['weight'])
+    senderID = data['senderID']
+    recipientID = getIDfromEmail(recipientEmail)
+
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("SELECT NOW()")
+    date = str(cursor.fetchone()[0])
+
+    if weight <= 2:
+        packageCategory = 'small'
+        packageType = 'Letter'
+    else:
+        if weight > 2 and weight <= 32:
+            packageCategory = 'Small'
+            packageType = 'Flat Envelope'
+        else:
+            packageCategory = 'Large'
+            packageType = 'Parcel'
+
+    cursor.execute("""INSERT INTO `package`
+(`package_type`,
+`sender_customer_id`,
+`recepient_customer_id`,
+`date_received`,
+`package_category`,
+`delivery_status`,
+`package_weight`)
+VALUES
+(\'{}\',
+{},
+{},
+\'{}\',
+\'{}\',
+\'Label Created\',
+{});""".format(packageType,senderID,recipientID,date,packageCategory,weight))
+    db.commit()
+    db.close()
+    return

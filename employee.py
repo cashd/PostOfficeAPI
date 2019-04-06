@@ -76,9 +76,9 @@ def createEmployee(request):
      \'{}\');""".format(id,password,role))
     db.commit()
 
-    if role == 'driver':
+    if role == 'Driver':
         cursor.execute("""update employee set vehicle_fk_id = {} where employee_id = {} """.format(fkid,id))
-    if role == 'facility' or role == 'supervisor':
+    if role == 'Facility' or role == 'Supervisor':
         cursor.execute("""update employee set facility_id = {} where employee_id = {} """.format(fkid, id))
     db.commit()
 

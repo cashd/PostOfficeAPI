@@ -50,7 +50,7 @@ def createCustomer(request):
     city = data['cityid']
     cityid = getCityID(city)
     state = data['stateid']
-    stateid =getStateID(state)
+    stateid = getStateID(state)
     phone = data['phoneNum']
     zipcode = str(data['zipcode'])
     password = data['password']

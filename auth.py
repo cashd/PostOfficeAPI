@@ -103,7 +103,7 @@ def makeEmpResponse(email,password):
 
     respBody = {'empty': 0}
 
-    if role == 'supervisor':
+    if role == 'Supervisor':
         cursor.execute(""" SELECT facility_id FROM employee, auth_password_employee
                                             WHERE employee_password= \'{}\' AND employee_work_email = \'{}\' and employee_id_fk = employee_id;"""
                        .format(password, email))
@@ -111,7 +111,7 @@ def makeEmpResponse(email,password):
         respBody = {'isAuth': True, 'role': 'employee', 'id': id, 'isManager': True, 'facilityID': id2}
         print('here1')
 
-    if role == 'driver':
+    if role == 'Driver':
         cursor.execute(""" SELECT vehicle_fk_id FROM employee, auth_password_employee
                         WHERE employee_password= \'{}\' AND employee_work_email = \'{}\' and employee_id_fk = employee_id;"""
                        .format(password, email))
@@ -119,7 +119,7 @@ def makeEmpResponse(email,password):
         respBody = {'isAuth': True, 'role': 'employee', 'id': id, 'isManager': False, 'truckID': id2}
         print('here3')
 
-    if role == 'facility':
+    if role == 'Facility':
         cursor.execute(""" SELECT facility_id FROM employee, auth_password_employee
                                     WHERE employee_password= \'{}\' AND employee_work_email = \'{}\' and employee_id_fk = employee_id;"""
                        .format(password, email))

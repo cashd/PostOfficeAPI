@@ -2,6 +2,7 @@ import requests
 from auth import *
 from employee import getEmpIDfromEmail
 from package import *
+from vehicle import *
 
 #isCustomer
 def testcase1():
@@ -25,11 +26,11 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    getAllIncomingPackages(25)
+    createPackage({'senderID': 1, 'recipientEmail': 'tjo@gmail.com', 'recipientAddress': '4411 Main', 'weight': 31.5})
 
 #create employee
 def testcase5():
-    payload = {'managerId': 9, 'firstName':'Postal', 'lastName': 'Worker', 'address' : '4205 Clay', 'email': 'pw7@gmail.com', 'phoneNum':'8325556642', 'password': 'pass', 'cityid': 'Houston', 'stateid': 'Texas', 'zipcode': 77080, 'position': 'Clerk', 'role': 'facility', 'fkid': 1}
+    payload = {'managerId': 9, 'firstName':'Postal', 'lastName': 'Worker', 'address' : '4205 Clay', 'email': 'pw8@gmail.com', 'phoneNum':'8325556642', 'password': 'pass', 'cityid': 'Houston', 'stateid': 'Texas', 'zipcode': 77080, 'position': 'Clerk', 'role': 'Facility', 'fkid': 1}
     r = requests.post('http://127.0.0.1:8000/manager/addEmployee', json=payload)
     print(r.text)
     print(r.headers)
@@ -41,5 +42,19 @@ def testcase6():
     print(r.text)
     print(r.headers)
 
+#truck type
+def testcase7():
+    payload = {'id': 25, 'truckID': 13}
+    r = requests.post('http://127.0.0.1:8000/truck/type', json=payload)
+    print(r.text)
+    print(r.headers)
+
+#create package
+def testcase8():
+    payload = {'senderID': 1, 'recipientEmail': 'tjo@gmail.com', 'recipientAddress': '4411 Main', 'weight': 31.5}
+    r = requests.post('http://127.0.0.1:8000/customer/newPackage', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase6()
+    testcase8()
