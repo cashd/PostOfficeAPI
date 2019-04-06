@@ -14,7 +14,7 @@ def isCustomer(email, password):
     print(result)
     return result
 
-
+#not currently used
 def isEmployeeFacility(email,password):
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
@@ -27,7 +27,7 @@ def isEmployeeFacility(email,password):
     print(result)
     return result
 
-
+#not currently used
 def isEmployeeDriver(password, email):
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
@@ -40,7 +40,7 @@ def isEmployeeDriver(password, email):
     print(result)
     return result
 
-#see who is authorized to create employees and assign them to specific vehicles or facilities
+#not currently used
 def isManagerFacility(email,password):
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
@@ -69,16 +69,18 @@ def isEmployee(email, password):
 def isManager(id):
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
-    cursor.execute("""SELECT EXISTS (SELECT * FROM auth_password_employee WHERE employee_id_fk = {} and employee_role = \'supervisor\');  """.format(str(id)))
+    cursor.execute("""SELECT EXISTS (SELECT * FROM auth_password_employee WHERE employee_id_fk = {} and employee_role = \'Supervisor\');  """.format(str(id)))
     result = bool(cursor.fetchone()[0])
     db.close()
 
     print(result)
     return result
 
+#not currently used
 def isAnyRole():
     return isCustomer() or isManagerFacility() or isEmployeeDriver() or isEmployeeFacility()
 
+#not currently used
 def setAuthCookiesResponse(resp, email, role):
     #change this to use the getEmpIDfromEmail function in employee.py
     if role == 'ManagerFacility':

@@ -7,7 +7,7 @@ def getAllSentPackages(id):
     cursor.execute("""SELECT EXISTS (SELECT * FROM package WHERE sender_customer_id = {});  """.format(str(id)))
     result = bool(cursor.fetchone()[0])
     if not result:
-        respBody = {'empty': True}
+        respBody = {'empty': True, 'packages': []}
     else:
         senderEmail = getEmailFromID(id)
         respBody = {'empty': False, 'packages': []}
