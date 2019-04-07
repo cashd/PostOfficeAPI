@@ -72,7 +72,7 @@ def packagesIncoming():
 def truckType():
     data = request.json
     truckID = data['truckID']
-    return make_response(jsonify({"truckType": getTruckTypeFromID(truckID)}), 200)
+    return make_response(jsonify({"type": getTruckTypeFromID(truckID)}), 200)
 
 @app.route('/customer/newPackage', methods=['POST'])
 def newPackage():
