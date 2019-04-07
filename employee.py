@@ -13,6 +13,7 @@ def getEmpIDfromEmail(email):
 
 def createEmployee(request):
     data = request.json
+    managerID = data['managerID']
     fname = data['firstName']
     lname = data['lastName']
     position = data['position']
@@ -27,7 +28,7 @@ def createEmployee(request):
     zipcode = str(data['zip'])
     password = data['password']
     #startdate = data['startdate']
-    #salary = float(data['salary'])
+    salary = float(data['salary'])
     #dob = data['dob']
     role = data['role']
     fkid = int(data['facilityID'])
@@ -46,8 +47,9 @@ def createEmployee(request):
      `employee_address`,
      `city_id`,
      `state_id`,
+     `employee_salary`,
      `employee_zip_code`,
-     `employee_cell_number`)
+     `employee_work_number`)
     VALUES
     (\'{}\',
      \'{}\',
@@ -56,8 +58,9 @@ def createEmployee(request):
      \'{}\',
      {},
      {},
+     {},
      \'{}\',
-     \'{}\');""".format(fname,lname,position,email,address,cityid,stateid,zipcode,phone))
+     \'{}\');""".format(fname,lname,position,email,address,cityid,stateid,salary,zipcode,phone))
     db.commit()
 
     cursor.execute("""select employee_id from employee
