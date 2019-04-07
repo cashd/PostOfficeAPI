@@ -3,7 +3,7 @@ from auth import *
 from customer import createCustomer
 from employee import *
 from package import *
-from vehicle import getTruckTypeFromID
+from vehicle import *
 app = Flask(__name__)
 
 @app.route("/")
@@ -94,7 +94,16 @@ def packagesInFacility():
     facilityid = data['facilityID']
     return make_response(jsonify(getAllPackagesInFacility(facilityid)), 200)
 
+@app.route('/facility/trucks', methods=['POST'])
+def trucksInFacility():
+    data = request.json
+    facilityid = data['facilityID']
+    return make_response(jsonify(getAllTrucksAtFacility(facilityid)), 200)
 
+@app.route('/facility/move', methods=['POST'])
+def movePackageToTruck():
+    data = request.json
+    return make_response(jsonify(moveFromFacilityToTruck(data)), 200)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

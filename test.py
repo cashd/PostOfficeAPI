@@ -26,7 +26,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(getAllPackagesInFacility(3))
+    print(moveFromFacilityToTruck({'packages': [13, 14], 'truckID': 4, 'facilityID': 8}))
 
 #create employee
 def testcase5():
@@ -52,7 +52,7 @@ def testcase7():
 
 #create package
 def testcase8():
-    payload = {'senderID': 1, 'recipientEmail': 'tjo@gmail.com', 'recipientAddress': '4411 Main', 'weight': 31.5}
+    payload = {'senderID': 1, 'recipientEmail': 'tjo@gmail.com', 'recipientAddress': '4411 Main', 'weight': 80}
     r = requests.post('http://127.0.0.1:8000/customer/newPackage', json=payload)
     print(r.text)
     print(r.headers)
@@ -66,10 +66,24 @@ def testcase9():
 
 #get all packages in facility
 def testcase10():
-    payload = {'facilityID': 3}
+    payload = {'facilityID': 1}
     r = requests.post('http://127.0.0.1:8000/facility/packages', json=payload)
     print(r.text)
     print(r.headers)
 
+#get all trucks in facility
+def testcase11():
+    payload = {'facilityID': 4}
+    r = requests.post('http://127.0.0.1:8000/facility/trucks', json=payload)
+    print(r.text)
+    print(r.headers)
+
+#get all trucks in facility
+def testcase12():
+    payload = {'packages': [15], 'truckID': 4, 'facilityID': 3}
+    r = requests.post('http://127.0.0.1:8000/facility/move', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase5()
+    testcase12()

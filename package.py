@@ -113,7 +113,6 @@ def createPackage(request):
 (`package_type`,
 `sender_customer_id`,
 `recepient_customer_id`,
-`date_received`,
 `package_category`,
 `delivery_status`,
 `package_weight`)
@@ -122,9 +121,8 @@ VALUES
 {},
 {},
 \'{}\',
-\'{}\',
 \'Label Created\',
-{});""".format(packageType,senderID,recipientID,date,packageCategory,weight))
+{});""".format(packageType,senderID,recipientID,packageCategory,weight))
     db.commit()
     db.close()
     return
