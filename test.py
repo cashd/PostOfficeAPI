@@ -30,7 +30,7 @@ def testcase4():
 
 #create employee
 def testcase5():
-    payload = {'managerID': 9, 'firstName':'Postal', 'lastName': 'Worker', 'address' : '4205 Clay', 'email': 'pw11@gmail.com', 'phoneNum':'8325556642', 'password': 'pass', 'cityid': 'Houston', 'stateid': 'Texas', 'zipcode': 77080, 'position': 'Clerk', 'role': 'Facility', 'facilityID': 1}
+    payload = {'managerID': 9, 'firstName':'Postal', 'lastName': 'Worker', 'address' : '4205 Clay', 'email': 'pw12@gmail.com', 'phoneNum':'8325556642', 'password': 'pass', 'city': 'Houston', 'state': 'Texas', 'zip': 77080, 'position': 'Clerk', 'role': 'Facility', 'facilityID': 1}
     r = requests.post('http://127.0.0.1:8000/manager/addEmployee', json=payload)
     print(r.text)
     print(r.headers)
