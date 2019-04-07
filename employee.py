@@ -24,7 +24,7 @@ def createEmployee(request):
     stateid = getStateID(state)
     phone = data['phoneNum']
     #workphone = data['workNum']
-    zipcode = str(data['zipcode'])
+    zipcode = str(data['zip'])
     password = data['password']
     #startdate = data['startdate']
     #salary = float(data['salary'])
