@@ -18,13 +18,13 @@ def createEmployee(request):
     position = data['position']
     address = data['address']
     email = data['email']
-    city = data['cityid']
+    city = data['city']
     cityid = getCityID(city)
-    state = data['stateid']
+    state = data['state']
     stateid = getStateID(state)
     phone = data['phoneNum']
     #workphone = data['workNum']
-    zipcode = str(data['zipcode'])
+    zipcode = str(data['zip'])
     password = data['password']
     #startdate = data['startdate']
     #salary = float(data['salary'])
