@@ -26,11 +26,11 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(getAllEmployeesInFacility(3))
+    print(getAllPackagesInFacility(3))
 
 #create employee
 def testcase5():
-    payload = {'managerId': 9, 'firstName':'Postal', 'lastName': 'Worker', 'address' : '4205 Clay', 'email': 'pw8@gmail.com', 'phoneNum':'8325556642', 'password': 'pass', 'cityid': 'Houston', 'stateid': 'Texas', 'zipcode': 77080, 'position': 'Clerk', 'role': 'Facility', 'fkid': 1}
+    payload = {'managerID': 9, 'firstName':'Postal', 'lastName': 'Worker', 'address' : '4205 Clay', 'email': 'pw9@gmail.com', 'phoneNum':'8325556642', 'password': 'pass', 'cityid': 'Houston', 'stateid': 'Texas', 'zipcode': 77080, 'position': 'Clerk', 'role': 'Facility', 'fkid': 1}
     r = requests.post('http://127.0.0.1:8000/manager/addEmployee', json=payload)
     print(r.text)
     print(r.headers)
@@ -63,5 +63,12 @@ def testcase9():
     print(r.text)
     print(r.headers)
 
+#get all employee sin facility
+def testcase10():
+    payload = {'facilityID': 3}
+    r = requests.post('http://127.0.0.1:8000/facility/packages', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase9()
+    testcase5()

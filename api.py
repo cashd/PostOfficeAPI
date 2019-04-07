@@ -47,7 +47,7 @@ def signup():
 @app.route('/manager/addEmployee', methods=['POST'])
 def empSignup():
     data = request.json
-    if not isManager(data['managerId']):
+    if not isManager(data['managerID']):
         return make_response(jsonify(message='Not Authorized'), 400)
     else:
         isSuccess = createEmployee(request)
@@ -86,7 +86,14 @@ def employeesInFacility():
         return make_response(jsonify(message='Not Authorized'), 400)
     else:
         facilityid = data['facilityID']
-        return make_response(jsonify(getAllEmployeesInFacility(facilityid), 200))
+        return make_response(jsonify(getAllEmployeesInFacility(facilityid)), 200)
+
+@app.route('/facility/packages', methods=['POST'])
+def packagesInFacility():
+    data = request.json
+    facilityid = data['facilityID']
+    return make_response(jsonify(getAllPackagesInFacility(facilityid)), 200)
+
 
 
 if __name__ == '__main__':
