@@ -30,7 +30,7 @@ def createEmployee(request):
     #salary = float(data['salary'])
     #dob = data['dob']
     role = data['role']
-    fkid = int(data['fkid'])
+    fkid = int(data['facilityID'])
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
     #try:
@@ -76,10 +76,10 @@ def createEmployee(request):
      \'{}\');""".format(id,password,role))
     db.commit()
 
-    if role == 'Driver':
-        cursor.execute("""update employee set vehicle_fk_id = {} where employee_id = {} """.format(fkid,id))
-    if role == 'Facility' or role == 'Supervisor':
-        cursor.execute("""update employee set facility_id = {} where employee_id = {} """.format(fkid, id))
+    #if role == 'Driver':
+        #cursor.execute("""update employee set vehicle_fk_id = {} where employee_id = {} """.format(fkid,id))
+    #if role == 'Facility' or role == 'Supervisor':
+    cursor.execute("""update employee set facility_id = {} where employee_id = {} """.format(fkid, id))
     db.commit()
 
     #except Exception:
