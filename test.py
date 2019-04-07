@@ -17,6 +17,7 @@ def testcase2():
     r = requests.post('http://127.0.0.1:8000/signup/customer', json=payload)
     print(r.text)
     print(r.headers)
+
 #isEmployee()
 def testcase3():
     payload = {'email': 'test@usps.gov', 'password': 'test'}
@@ -26,7 +27,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(moveFromFacilityToTruck({'packages': [13, 14], 'truckID': 4, 'facilityID': 8}))
+    print(deliverPackage({'packageID': 1, 'driverID': 4}))
 
 #create employee
 def testcase5():
@@ -78,12 +79,26 @@ def testcase11():
     print(r.text)
     print(r.headers)
 
-#get all trucks in facility
+#move from facility to truck
 def testcase12():
     payload = {'packages': [15], 'truckID': 4, 'facilityID': 3}
     r = requests.post('http://127.0.0.1:8000/facility/move', json=payload)
     print(r.text)
     print(r.headers)
 
+#deliver package
+def testcase13():
+    payload = {'packageID': 6, 'driverID': 4}
+    r = requests.post('http://127.0.0.1:8000/truck/deliver', json=payload)
+    print(r.text)
+    print(r.headers)
+
+#move from truck to facility
+def testcase14():
+    payload = {'packages': [13, 14, 15], 'truckID': 4, 'facilityID': 2}
+    r = requests.post('http://127.0.0.1:8000/truck/travel', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase12()
+    testcase14()
