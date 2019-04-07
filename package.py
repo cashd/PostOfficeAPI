@@ -55,6 +55,36 @@ def getAllIncomingPackages(id):
     print(respBody)
     return respBody
 
+def getAllPackagesInFacility(id):
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""SELECT EXISTS (SELECT * FROM package WHERE pfacility_fk_id = {});  """.format(str(id)))
+    result = bool(cursor.fetchone()[0])
+    if not result:
+        respBody = {'empty': True, 'packages': []}
+    else:
+        respBody = {'empty': False, 'packages': []}
+        cursor.execute("""SELECT package_id, sender_customer_id, recepient_customer_id, delivery_status, package_weight 
+        FROM package WHERE pfacility_fk_id = {};  """.format(str(id)))
+        results = cursor.fetchall()
+        for row in results:
+            #print(row[0])
+            #print(row[1])
+            #print(row[2])
+            #print(row[3])
+            #print(row[4])
+            senderEmail = getEmailFromID(row[1])
+            receiverEmail = getEmailFromID(row[2])
+            weight = (str(row[4]) + 'oz')
+            respBody['packages'].append({'id': row[0], 'senderEmail': senderEmail, 'recipientEmail': receiverEmail,
+                                         'senderAddress': getAddressFromID(row[1]), 'recipientAddress': getAddressFromID(row[2]),
+                                         'deliveryStatus': row[3], 'packageWeight': weight})
+
+    db.close()
+    #print(respBody)
+    return respBody
+
+
 def createPackage(request):
     data = request.json
     #data = request

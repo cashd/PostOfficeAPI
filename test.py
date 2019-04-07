@@ -26,7 +26,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(getAllEmployeesInFacility(3))
+    print(getAllPackagesInFacility(3))
 
 #create employee
 def testcase5():
@@ -60,6 +60,13 @@ def testcase8():
 def testcase9():
     payload = {'managerID': 9, 'facilityID': 1}
     r = requests.post('http://127.0.0.1:8000/facility/employees', json=payload)
+    print(r.text)
+    print(r.headers)
+
+#get all employee sin facility
+def testcase10():
+    payload = {'facilityID': 3}
+    r = requests.post('http://127.0.0.1:8000/facility/packages', json=payload)
     print(r.text)
     print(r.headers)
 
