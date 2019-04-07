@@ -47,7 +47,7 @@ def signup():
 @app.route('/manager/addEmployee', methods=['POST'])
 def empSignup():
     data = request.json
-    if not isManager(data['managerId']):
+    if not isManager(data['managerID']):
         return make_response(jsonify(message='Not Authorized'), 400)
     else:
         isSuccess = createEmployee(request)
