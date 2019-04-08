@@ -23,3 +23,12 @@ def getAllFacilities():
     db.close()
     print(respBody)
     return respBody
+
+def getFacilityType(data):
+    facilityID = data['facilityID']
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""SELECT facility_type FROM facility WHERE facility_id = {};""".format(facilityID))
+    result = cursor.fetchone()[0]
+    db.close()
+    return {'type': result}

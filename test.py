@@ -28,7 +28,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(getAllFacilities())
+    print(getFacilityType({'facilityID': 4}))
 
 #create employee
 def testcase5():
@@ -114,5 +114,11 @@ def testcase16():
     print(r.text)
     print(r.headers)
 
+def testcase17():
+    payload = {'facilityID': 3}
+    r = requests.post('http://127.0.0.1:8000/facility/type', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase16()
+    testcase17()
