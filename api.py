@@ -115,5 +115,10 @@ def truckTravel():
     data = request.json
     return make_response(jsonify(moveFromTruckToFacility(data)), 200)
 
+@app.route('/truck/packages', methods=['POST'])
+def truckPackages():
+    data = request.json
+    return make_response(jsonify(getAllPackagesOnTruck(data)), 200)
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

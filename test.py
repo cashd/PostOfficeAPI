@@ -27,7 +27,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(deliverPackage({'packageID': 1, 'driverID': 4}))
+    print(getAllPackagesOnTruck({'truckID': 4}))
 
 #create employee
 def testcase5():
@@ -100,5 +100,12 @@ def testcase14():
     print(r.text)
     print(r.headers)
 
+#get all packages on truck
+def testcase15():
+    payload = {'truckID': 4}
+    r = requests.post('http://127.0.0.1:8000/truck/packages', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase14()
+    testcase15()
