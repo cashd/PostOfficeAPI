@@ -3,6 +3,7 @@ from auth import *
 from employee import *
 from package import *
 from vehicle import *
+from facility import *
 
 #isCustomer
 def testcase1():
@@ -27,7 +28,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(getAllPackagesOnTruck({'truckID': 4}))
+    print(getAllFacilities())
 
 #create employee
 def testcase5():
@@ -107,5 +108,11 @@ def testcase15():
     print(r.text)
     print(r.headers)
 
+def testcase16():
+    payload = {}
+    r = requests.post('http://127.0.0.1:8000/facility/all', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase15()
+    testcase16()

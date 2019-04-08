@@ -4,6 +4,7 @@ from customer import createCustomer
 from employee import *
 from package import *
 from vehicle import *
+from facility import *
 app = Flask(__name__)
 
 @app.route("/")
@@ -119,6 +120,10 @@ def truckTravel():
 def truckPackages():
     data = request.json
     return make_response(jsonify(getAllPackagesOnTruck(data)), 200)
+
+@app.route('/facility/all', methods=['POST'])
+def getFacilities():
+    return make_response(jsonify(getAllFacilities()), 200)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
