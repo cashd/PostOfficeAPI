@@ -130,6 +130,11 @@ def facilityType():
     data = request.json
     return make_response(jsonify(getFacilityType(data)), 200)
 
+@app.route('/package/history', methods=['POST'])
+def packageHistory():
+    data = request.json
+    return make_response(jsonify(getHistory(data)), 200)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

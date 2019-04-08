@@ -71,7 +71,7 @@ def moveFromTruckToFacility(data):
     cursor = db.cursor()
     for row in packages:
         cursor.execute("""UPDATE package SET pfacility_fk_id = {}, vehicle_id = NULL WHERE package_id = {}""".format(facilityID, row))
-        cursor.execute("""INSERT INTO tracking (event_type, vehicle_fk_id, package_fk_id)
+        cursor.execute("""INSERT INTO tracking (event_type, facility_fk_id, package_fk_id)
         VALUES( \'Arrived to Facility\', {}, {})""".format(facilityID, row))
         db.commit()
 

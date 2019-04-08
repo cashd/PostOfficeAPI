@@ -95,8 +95,8 @@ def createPackage(request):
 
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
-    cursor.execute("SELECT NOW()")
-    date = str(cursor.fetchone()[0])
+    #cursor.execute("SELECT NOW()")
+    #date = str(cursor.fetchone()[0])
 
     if weight <= 2:
         packageCategory = 'small'
@@ -126,3 +126,28 @@ VALUES
     db.commit()
     db.close()
     return
+
+def getHistory(data):
+    packageID = data['packageID']
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    respBody = {'packageID': packageID, 'history': []}
+    cursor.execute("""SELECT event_type, time_of_event, facility_fk_id FROM tracking WHERE package_fk_id = {}""".format(packageID))
+    results = cursor.fetchall()
+    for row in results:
+        if row[0] == "Arrived to Facility" or row[0] == "Dropped Off" or row[0] == "Left Facility":
+            cursor.execute("""SELECT facility_address FROM facility WHERE facility_id = {}""".format(row[2]))
+            address = cursor.fetchone()[0]
+            respBody['history'].append({'eventType': row[0], 'timeOfEvent': row[1], 'locationOfEvent': address})
+        if row[0] == "Delivered":
+            cursor.execute("""SELECT customer_street_address FROM package, customer WHERE package.package_id = {} AND 
+            customer_id = recepient_customer_id""".format(packageID))
+            address = cursor.fetchone()[0]
+            respBody['history'].append({'eventType': row[0], 'timeOfEvent': row[1], 'locationOfEvent': address})
+        if row[0] == "Label Created":
+            cursor.execute("""SELECT customer_street_address FROM package, customer WHERE package.package_id = {} AND 
+            customer_id = sender_customer_id""".format(packageID))
+            address = cursor.fetchone()[0]
+            respBody['history'].append({'eventType': row[0], 'timeOfEvent': row[1], 'locationOfEvent': address})
+    db.close()
+    return respBody
