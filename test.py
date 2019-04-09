@@ -121,16 +121,16 @@ def testcase17():
     print(r.headers)
 
 def testcase18():
-    payload = {'packageID': 5}
+    payload = {'packageID': 18}
     r = requests.post('http://127.0.0.1:8000/package/history', json=payload)
     print(r.text)
     print(r.headers)
 
 def testcase19():
-    payload = {'packageID': 9, 'facilityID': 1}
+    payload = {'packageID': 9, 'facilityID': 3}
     r = requests.post('http://127.0.0.1:8000/facility/checkin', json=payload)
     print(r.text)
     print(r.headers)
 
 if __name__ == '__main__':
-    testcase8()
+    testcase18()

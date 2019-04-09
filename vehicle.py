@@ -73,8 +73,8 @@ def dropoffPackage(data):
         db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
         cursor = db.cursor()
         cursor.execute("""UPDATE package SET pfacility_fk_id = {}, vehicle_id = NULL WHERE package_id = {}""".format(facilityID, package))
-        cursor.execute("""INSERT INTO tracking (event_type, package_fk_id)
-            VALUES( \'Dropped Off\', {})""".format(package))
+        cursor.execute("""INSERT INTO tracking (event_type, facility_fk_id, package_fk_id)
+            VALUES( \'Dropped Off\', {}, {})""".format(facilityID, package))
         db.commit()
         return {'success': True}
     else:
