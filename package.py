@@ -124,6 +124,10 @@ VALUES
 \'Label Created\',
 {});""".format(packageType,senderID,recipientID,packageCategory,weight))
     db.commit()
+    packageID = cursor.lastrowid
+    cursor.execute("""INSERT INTO tracking (event_type, package_fk_id)
+        VALUES( \'Label Created\', {})""".format(packageID))
+    db.commit()
     db.close()
     return
 

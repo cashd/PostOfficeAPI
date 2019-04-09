@@ -1,5 +1,6 @@
 import pymysql.cursors
 from customer import getEmailFromID, getAddressFromID
+from facility import getFacilityType
 
 #input: vehicle_id
 def getTruckTypeFromID(id):
@@ -61,6 +62,24 @@ def deliverPackage(data):
     db.commit()
 
     return {'success': True}
+
+def dropoffPackage(data):
+    package = data['packageID']
+    facilityID = data['facilityID']
+
+    data2 = getFacilityType({'facilityID': facilityID})
+
+    if data2['type'] == "Drop Off":
+        db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+        cursor = db.cursor()
+        cursor.execute("""UPDATE package SET pfacility_fk_id = {}, vehicle_id = NULL WHERE package_id = {}""".format(facilityID, package))
+        cursor.execute("""INSERT INTO tracking (event_type, package_fk_id)
+            VALUES( \'Dropped Off\', {})""".format(package))
+        db.commit()
+        return {'success': True}
+    else:
+        return {'error': 'Facility is not a Drop Off facility.'}
+
 
 def moveFromTruckToFacility(data):
     packages = data['packages']
