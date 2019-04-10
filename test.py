@@ -54,7 +54,7 @@ def testcase7():
 
 #create package
 def testcase8():
-    payload = {'senderID': 1, 'recipientEmail': 'tjo@gmail.com', 'recipientAddress': '4411 Main', 'weight': 23}
+    payload = {'senderID': 8, 'recipientEmail': 'money@gmail.com', 'recipientAddress': '123 GH', 'weight': 44}
     r = requests.post('http://127.0.0.1:8000/customer/newPackage', json=payload)
     print(r.text)
     print(r.headers)
@@ -82,7 +82,7 @@ def testcase11():
 
 #move from facility to truck
 def testcase12():
-    payload = {'packages': [15], 'truckID': 4, 'facilityID': 3}
+    payload = {'packages': [12], 'truckID': 4, 'facilityID': 3}
     r = requests.post('http://127.0.0.1:8000/facility/move', json=payload)
     print(r.text)
     print(r.headers)
@@ -121,16 +121,16 @@ def testcase17():
     print(r.headers)
 
 def testcase18():
-    payload = {'packageID': 18}
+    payload = {'packageID': 12}
     r = requests.post('http://127.0.0.1:8000/package/history', json=payload)
     print(r.text)
     print(r.headers)
 
 def testcase19():
-    payload = {'packageID': 9, 'facilityID': 3}
+    payload = {'packageID': 20, 'facilityID': 3}
     r = requests.post('http://127.0.0.1:8000/facility/checkin', json=payload)
     print(r.text)
     print(r.headers)
 
 if __name__ == '__main__':
-    testcase18()
+    testcase12()

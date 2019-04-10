@@ -139,6 +139,9 @@ def getHistory(data):
     cursor.execute("""SELECT event_type, time_of_event, facility_fk_id FROM tracking WHERE package_fk_id = {}""".format(packageID))
     results = cursor.fetchall()
     for row in results:
+        print(row[0])
+        print(row[1])
+        print(row[2])
         if row[0] == "Arrived to Facility" or row[0] == "Dropped Off" or row[0] == "Left Facility":
             cursor.execute("""SELECT facility_address FROM facility WHERE facility_id = {}""".format(row[2]))
             address = cursor.fetchone()[0]
