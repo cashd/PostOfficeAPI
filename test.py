@@ -54,7 +54,7 @@ def testcase7():
 
 #create package
 def testcase8():
-    payload = {'senderID': 8, 'recipientEmail': 'money@gmail.com', 'recipientAddress': '123 GH', 'weight': 44}
+    payload = {'senderID': 8, 'recipientEmail': 'new@gmail.com', 'recipientAddress': '456 New Rd', 'weight': 5.5}
     r = requests.post('http://127.0.0.1:8000/customer/newPackage', json=payload)
     print(r.text)
     print(r.headers)
@@ -133,4 +133,4 @@ def testcase19():
     print(r.headers)
 
 if __name__ == '__main__':
-    testcase12()
+    testcase8()

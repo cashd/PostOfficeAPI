@@ -87,17 +87,40 @@ def getAllPackagesInFacility(id):
 
 def createPackage(request):
     data = request.json
-    #data = request
     recipientEmail = data['recipientEmail']
     weight = float(data['weight'])
     senderID = data['senderID']
-    recipientID = getIDfromEmail(recipientEmail)
+    recipientAddress = data['recipientAddress']
+
 
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
-    cursor = db.cursor()
-    #cursor.execute("SELECT NOW()")
-    #date = str(cursor.fetchone()[0])
 
+    cursor = db.cursor()
+    cursor.execute("""SELECT EXISTS(SELECT * FROM customer WHERE customer_email = \'{}\');""".format(recipientEmail));
+    found = bool(cursor.fetchone()[0])
+    if not found:
+        cursor.execute("""INSERT INTO `PostOffice`.`customer`
+                     (`customer_first_name`,
+                     `customer_last_name`,
+                     `customer_street_address`,
+                     `city_id`,
+                     `state_id`,
+                     `customer_zip_code`,
+                     `customer_email`)
+                     VALUES
+                     ( \'{}\',
+                     \'{}\',
+                     \'{}\',
+                     {},
+                     {},
+                     \'{}\',
+                     \'{}\');
+         """.format('###', '###', recipientAddress, 0, 0, '###', recipientEmail))
+        db.commit()
+        recipientID = cursor.lastrowid
+    else:
+        recipientID = getIDfromEmail(recipientEmail)
+    price = .49
     if weight <= 2:
         packageCategory = 'small'
         packageType = 'Letter'
@@ -108,6 +131,7 @@ def createPackage(request):
         else:
             packageCategory = 'Large'
             packageType = 'Parcel'
+        price += .1 * (weight - 2)
 
     cursor.execute("""INSERT INTO `package`
 (`package_type`,
@@ -115,14 +139,16 @@ def createPackage(request):
 `recepient_customer_id`,
 `package_category`,
 `delivery_status`,
-`package_weight`)
+`package_weight`,
+`postage_paid`)
 VALUES
 (\'{}\',
 {},
 {},
 \'{}\',
 \'Label Created\',
-{});""".format(packageType,senderID,recipientID,packageCategory,weight))
+{},
+{});""".format(packageType,senderID,recipientID,packageCategory,weight,price))
     db.commit()
     packageID = cursor.lastrowid
     cursor.execute("""INSERT INTO tracking (event_type, package_fk_id)
