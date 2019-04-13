@@ -11,7 +11,7 @@ def getAllSentPackages(id):
     else:
         senderEmail = getEmailFromID(id)
         respBody = {'empty': False, 'packages': []}
-        cursor.execute("""SELECT package_id, recepient_customer_id, delivery_status, package_weight FROM package WHERE sender_customer_id = {};  """.format(str(id)))
+        cursor.execute("""SELECT package_id, recepient_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE sender_customer_id = {};  """.format(str(id)))
         results = cursor.fetchall()
         for row in results:
             #print(row[0])
@@ -20,7 +20,7 @@ def getAllSentPackages(id):
             weight = (str(row[3]) + 'oz')
             respBody['packages'].append({'id': row[0], 'senderEmail': senderEmail, 'recipientEmail': getEmailFromID(row[1]),
                                          'senderAddress': getAddressFromID(id), 'recipientAddress': getAddressFromID(row[1]),
-                                         'deliveryStatus': row[2], 'packageWeight': weight})
+                                         'deliveryStatus': row[2], 'packageWeight': weight, 'price': float(row[4])})
 
     db.close()
 
@@ -38,7 +38,7 @@ def getAllIncomingPackages(id):
     else:
         receiverEmail = getEmailFromID(id)
         respBody = {'empty': False, 'packages': []}
-        cursor.execute("""SELECT package_id, sender_customer_id, delivery_status, package_weight FROM package WHERE recepient_customer_id = {};  """.format(str(id)))
+        cursor.execute("""SELECT package_id, sender_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE recepient_customer_id = {};  """.format(str(id)))
         results = cursor.fetchall()
         for row in results:
             #print(row[0])
@@ -47,7 +47,7 @@ def getAllIncomingPackages(id):
             weight = (str(row[3]) + 'oz')
             respBody['packages'].append({'id': row[0], 'senderEmail': getEmailFromID(row[1]), 'recipientEmail': receiverEmail,
                                          'senderAddress': getAddressFromID(row[1]), 'recipientAddress': getAddressFromID(id),
-                                         'deliveryStatus': row[2], 'packageWeight': weight})
+                                         'deliveryStatus': row[2], 'packageWeight': weight, 'price': float(row[4])})
 
     db.close()
 
