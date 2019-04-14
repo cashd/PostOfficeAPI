@@ -140,6 +140,9 @@ def packageCheckin():
     data = request.json
     return make_response(jsonify(dropoffPackage(data)), 200)
 
+@app.route('/package/report', methods=['POST'])
+def getPackageReport():
+    return make_response(jsonify(packageReport()), 200)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

@@ -28,7 +28,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(dropoffPackage({'packageID': 9, 'facilityID': 3}))
+    print(packageReport())
 
 #create employee
 def testcase5():
@@ -131,6 +131,12 @@ def testcase19():
     r = requests.post('http://127.0.0.1:8000/facility/checkin', json=payload)
     print(r.text)
     print(r.headers)
+#package report
+def testcase20():
+    payload = {}
+    r = requests.post('http://127.0.0.1:8000/package/report', json=payload)
+    print(r.text)
+    print(r.headers)
 
 if __name__ == '__main__':
-    testcase6()
+    testcase20()
