@@ -1,0 +1,1079 @@
+/usr/sbin/mysqld, Version: 5.7.25-0ubuntu0.18.04.2-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+2019-04-15T03:41:16.161683Z	   23 Quit	
+2019-04-15T03:41:29.532141Z	   25 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:29.532537Z	   25 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:29.532751Z	   25 Query	SELECT EXISTS (SELECT * FROM package WHERE pfacility_fk_id = 10)
+2019-04-15T03:41:29.535808Z	   26 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:29.536069Z	   27 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:29.536345Z	   27 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:29.536522Z	   26 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:29.536694Z	   26 Query	SELECT facility_type FROM facility WHERE facility_id = 10
+2019-04-15T03:41:29.537011Z	   27 Query	SELECT EXISTS (SELECT * FROM vehicle WHERE vfacility_fk_id = 10)
+2019-04-15T03:41:29.537487Z	   25 Quit	
+2019-04-15T03:41:29.537860Z	   27 Query	SELECT vehicle.vehicle_id, employee.employee_first_name, employee.employee_last_name, vehicle.destination_type 
+        FROM vehicle, employee WHERE vehicle.vfacility_fk_id = 10 and vehicle.vehicle_id = employee.vehicle_fk_id
+2019-04-15T03:41:29.538341Z	   26 Quit	
+2019-04-15T03:41:29.538704Z	   27 Quit	
+2019-04-15T03:41:45.479866Z	   28 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.480064Z	   28 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.480266Z	   28 Query	SELECT EXISTS(select 1 FROM customer, auth_password_customer
+        WHERE customer_password= 'pass' AND customer_email = 'js@hotmail.com' and customer_fk_pw_id = customer_id)
+2019-04-15T03:41:45.482484Z	   28 Quit	
+2019-04-15T03:41:45.483085Z	   29 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.483222Z	   29 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.483370Z	   29 Query	select customer_id from customer where customer_email = 'js@hotmail.com'
+2019-04-15T03:41:45.483637Z	   29 Quit	
+2019-04-15T03:41:45.663992Z	   30 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.664183Z	   30 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.664383Z	   30 Query	SELECT EXISTS (SELECT * FROM package WHERE sender_customer_id = 1)
+2019-04-15T03:41:45.665428Z	   31 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.665685Z	   32 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.665833Z	   31 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.665960Z	   32 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.666124Z	   31 Query	SELECT EXISTS (SELECT * FROM package WHERE recepient_customer_id = 1)
+2019-04-15T03:41:45.666623Z	   32 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:41:45.667450Z	   32 Quit	
+2019-04-15T03:41:45.667680Z	   30 Query	SELECT package_id, recepient_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE sender_customer_id = 1
+2019-04-15T03:41:45.668017Z	   33 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.669233Z	   33 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.669400Z	   33 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:41:45.669773Z	   33 Quit	
+2019-04-15T03:41:45.669972Z	   31 Query	SELECT package_id, sender_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE recepient_customer_id = 1
+2019-04-15T03:41:45.670960Z	   34 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.671183Z	   35 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.671362Z	   34 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.671493Z	   35 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.671643Z	   34 Query	select customer_email from customer where customer_id = 2
+2019-04-15T03:41:45.671891Z	   35 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:45.672160Z	   34 Quit	
+2019-04-15T03:41:45.672364Z	   35 Quit	
+2019-04-15T03:41:45.673148Z	   37 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.673366Z	   36 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.673522Z	   37 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.673704Z	   36 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.673853Z	   37 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:45.674094Z	   36 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.674364Z	   37 Quit	
+2019-04-15T03:41:45.674574Z	   36 Quit	
+2019-04-15T03:41:45.675315Z	   38 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.675517Z	   39 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.675646Z	   38 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.675783Z	   39 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.676007Z	   38 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.676262Z	   39 Query	select customer_street_address from customer where customer_id = 2
+2019-04-15T03:41:45.676646Z	   38 Quit	
+2019-04-15T03:41:45.676905Z	   39 Quit	
+2019-04-15T03:41:45.677857Z	   41 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.678035Z	   40 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.678174Z	   41 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.678300Z	   40 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.678454Z	   40 Query	select customer_email from customer where customer_id = 25
+2019-04-15T03:41:45.678658Z	   41 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:45.678930Z	   41 Quit	
+2019-04-15T03:41:45.679120Z	   40 Quit	
+2019-04-15T03:41:45.679849Z	   43 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.680051Z	   42 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.680186Z	   42 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.680310Z	   43 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.680448Z	   42 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:45.680738Z	   43 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.680979Z	   42 Quit	
+2019-04-15T03:41:45.681164Z	   43 Quit	
+2019-04-15T03:41:45.681850Z	   44 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.682210Z	   45 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.682353Z	   44 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.682496Z	   45 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.682639Z	   44 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.682839Z	   45 Query	select customer_street_address from customer where customer_id = 25
+2019-04-15T03:41:45.683079Z	   44 Quit	
+2019-04-15T03:41:45.683266Z	   45 Quit	
+2019-04-15T03:41:45.684030Z	   46 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.684231Z	   47 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.684360Z	   46 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.684481Z	   47 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.684619Z	   46 Query	select customer_email from customer where customer_id = 25
+2019-04-15T03:41:45.684818Z	   47 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:45.685087Z	   46 Quit	
+2019-04-15T03:41:45.685272Z	   47 Quit	
+2019-04-15T03:41:45.686070Z	   48 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.686288Z	   49 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.686439Z	   48 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.686563Z	   49 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.686705Z	   48 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.686900Z	   49 Query	select customer_street_address from customer where customer_id = 25
+2019-04-15T03:41:45.687160Z	   49 Quit	
+2019-04-15T03:41:45.687426Z	   48 Quit	
+2019-04-15T03:41:45.688179Z	   50 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.688393Z	   51 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.688520Z	   50 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.688639Z	   51 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.688778Z	   50 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.688972Z	   51 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:45.689202Z	   50 Quit	
+2019-04-15T03:41:45.689382Z	   51 Quit	
+2019-04-15T03:41:45.689526Z	   31 Quit	
+2019-04-15T03:41:45.690363Z	   52 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.690929Z	   52 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.691076Z	   52 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:45.691320Z	   52 Quit	
+2019-04-15T03:41:45.692111Z	   53 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.692244Z	   53 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.692386Z	   53 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.692646Z	   53 Quit	
+2019-04-15T03:41:45.693162Z	   54 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.693305Z	   54 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.693447Z	   54 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:45.693774Z	   54 Quit	
+2019-04-15T03:41:45.694290Z	   55 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.694450Z	   55 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.694607Z	   55 Query	select customer_email from customer where customer_id = 13
+2019-04-15T03:41:45.694848Z	   55 Quit	
+2019-04-15T03:41:45.695317Z	   56 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.695443Z	   56 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.695622Z	   56 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.695886Z	   56 Quit	
+2019-04-15T03:41:45.696363Z	   57 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.696490Z	   57 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.696627Z	   57 Query	select customer_street_address from customer where customer_id = 13
+2019-04-15T03:41:45.696865Z	   57 Quit	
+2019-04-15T03:41:45.697345Z	   58 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.697471Z	   58 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.697607Z	   58 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:45.697926Z	   58 Quit	
+2019-04-15T03:41:45.698407Z	   59 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.698537Z	   59 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.698674Z	   59 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.698913Z	   59 Quit	
+2019-04-15T03:41:45.699384Z	   60 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.699512Z	   60 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.699645Z	   60 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:45.699881Z	   60 Quit	
+2019-04-15T03:41:45.700393Z	   61 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.700519Z	   61 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.700670Z	   61 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:45.700913Z	   61 Quit	
+2019-04-15T03:41:45.701367Z	   62 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.701491Z	   62 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.701699Z	   62 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.701955Z	   62 Quit	
+2019-04-15T03:41:45.702518Z	   63 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.702651Z	   63 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.702787Z	   63 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:45.703078Z	   63 Quit	
+2019-04-15T03:41:45.703593Z	   64 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.703719Z	   64 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.703868Z	   64 Query	select customer_email from customer where customer_id = 28
+2019-04-15T03:41:45.704107Z	   64 Quit	
+2019-04-15T03:41:45.704575Z	   65 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.704715Z	   65 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.704864Z	   65 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.705102Z	   65 Quit	
+2019-04-15T03:41:45.705562Z	   66 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.705749Z	   66 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.705890Z	   66 Query	select customer_street_address from customer where customer_id = 28
+2019-04-15T03:41:45.706128Z	   66 Quit	
+2019-04-15T03:41:45.706622Z	   67 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.706750Z	   67 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.706885Z	   67 Query	select customer_email from customer where customer_id = 33
+2019-04-15T03:41:45.707115Z	   67 Quit	
+2019-04-15T03:41:45.707584Z	   68 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.707709Z	   68 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.707843Z	   68 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:45.708086Z	   68 Quit	
+2019-04-15T03:41:45.708563Z	   69 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:45.708686Z	   69 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:45.708821Z	   69 Query	select customer_street_address from customer where customer_id = 33
+2019-04-15T03:41:45.709051Z	   69 Quit	
+2019-04-15T03:41:45.709191Z	   30 Quit	
+2019-04-15T03:41:53.569670Z	   70 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.569874Z	   70 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.570068Z	   70 Query	SELECT EXISTS(SELECT * FROM customer WHERE customer_email = 'bob@gmail.com')
+2019-04-15T03:41:53.570880Z	   71 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.571045Z	   71 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.571240Z	   71 Query	select customer_id from customer where customer_email = 'bob@gmail.com'
+2019-04-15T03:41:53.571524Z	   71 Quit	
+2019-04-15T03:41:53.571794Z	   70 Query	INSERT INTO `package`
+(`package_type`,
+`sender_customer_id`,
+`recepient_customer_id`,
+`package_category`,
+`delivery_status`,
+`package_weight`,
+`postage_paid`)
+VALUES
+('Parcel',
+1,
+33,
+'Large',
+'Label Created',
+55.0,
+5.79)
+2019-04-15T03:41:53.572148Z	   70 Query	COMMIT
+2019-04-15T03:41:53.573348Z	   70 Query	INSERT INTO tracking (event_type, package_fk_id)
+        VALUES( 'Label Created', 38)
+2019-04-15T03:41:53.573445Z	   70 Query	update package
+  SET package.delivery_status ='Label Created'
+  where new.package_fk_id = package.package_id
+2019-04-15T03:41:53.573912Z	   70 Query	COMMIT
+2019-04-15T03:41:53.575592Z	   70 Quit	
+2019-04-15T03:41:53.914658Z	   72 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.914865Z	   72 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.915065Z	   72 Query	SELECT EXISTS (SELECT * FROM package WHERE recepient_customer_id = 1)
+2019-04-15T03:41:53.915513Z	   73 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.916106Z	   73 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.916495Z	   73 Query	SELECT EXISTS (SELECT * FROM package WHERE sender_customer_id = 1)
+2019-04-15T03:41:53.916882Z	   74 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.917023Z	   74 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.917171Z	   74 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:41:53.917895Z	   74 Quit	
+2019-04-15T03:41:53.918098Z	   72 Query	SELECT package_id, sender_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE recepient_customer_id = 1
+2019-04-15T03:41:53.918555Z	   75 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.919351Z	   75 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.919630Z	   75 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:41:53.919898Z	   75 Quit	
+2019-04-15T03:41:53.920105Z	   73 Query	SELECT package_id, recepient_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE sender_customer_id = 1
+2019-04-15T03:41:53.920643Z	   76 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.921582Z	   76 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.921781Z	   76 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:53.922144Z	   76 Quit	
+2019-04-15T03:41:53.922574Z	   77 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.923132Z	   78 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.923274Z	   77 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.923396Z	   78 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.923541Z	   77 Query	select customer_email from customer where customer_id = 2
+2019-04-15T03:41:53.923757Z	   78 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:53.924045Z	   77 Quit	
+2019-04-15T03:41:53.924387Z	   78 Quit	
+2019-04-15T03:41:53.925671Z	   79 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.926124Z	   80 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.926466Z	   79 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.926708Z	   79 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.927041Z	   79 Quit	
+2019-04-15T03:41:53.927214Z	   80 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.927443Z	   80 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.927990Z	   80 Quit	
+2019-04-15T03:41:53.928711Z	   81 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.928868Z	   81 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.929247Z	   82 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.929454Z	   81 Query	select customer_street_address from customer where customer_id = 2
+2019-04-15T03:41:53.929797Z	   82 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.930057Z	   81 Quit	
+2019-04-15T03:41:53.930277Z	   82 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:53.930680Z	   82 Quit	
+2019-04-15T03:41:53.932030Z	   83 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.932236Z	   83 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.932561Z	   84 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.932781Z	   83 Query	select customer_email from customer where customer_id = 25
+2019-04-15T03:41:53.933165Z	   83 Quit	
+2019-04-15T03:41:53.933358Z	   84 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.933579Z	   84 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:53.934451Z	   84 Quit	
+2019-04-15T03:41:53.934784Z	   85 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.935363Z	   85 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.935658Z	   86 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.935999Z	   85 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.936263Z	   86 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.936546Z	   85 Quit	
+2019-04-15T03:41:53.936864Z	   86 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.937257Z	   86 Quit	
+2019-04-15T03:41:53.938387Z	   87 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.938651Z	   88 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.938808Z	   87 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.938962Z	   87 Query	select customer_street_address from customer where customer_id = 25
+2019-04-15T03:41:53.939169Z	   88 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.939380Z	   87 Quit	
+2019-04-15T03:41:53.939553Z	   88 Query	select customer_email from customer where customer_id = 25
+2019-04-15T03:41:53.939836Z	   88 Quit	
+2019-04-15T03:41:53.940917Z	   89 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.941130Z	   90 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.941258Z	   90 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.941400Z	   90 Query	select customer_street_address from customer where customer_id = 25
+2019-04-15T03:41:53.941768Z	   89 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.942001Z	   89 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:53.942147Z	   90 Quit	
+2019-04-15T03:41:53.942670Z	   89 Quit	
+2019-04-15T03:41:53.942955Z	   91 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.943468Z	   91 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.943623Z	   91 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.943873Z	   91 Quit	
+2019-04-15T03:41:53.944094Z	   92 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.944273Z	   72 Quit	
+2019-04-15T03:41:53.944512Z	   92 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.945278Z	   92 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.945598Z	   92 Quit	
+2019-04-15T03:41:53.946670Z	   93 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.946809Z	   93 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.946952Z	   93 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:53.947225Z	   93 Quit	
+2019-04-15T03:41:53.947876Z	   94 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.948011Z	   94 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.948257Z	   94 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:53.948734Z	   94 Quit	
+2019-04-15T03:41:53.949317Z	   95 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.949448Z	   95 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.949587Z	   95 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.949936Z	   95 Quit	
+2019-04-15T03:41:53.950438Z	   96 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.950584Z	   96 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.950825Z	   96 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:53.951114Z	   96 Quit	
+2019-04-15T03:41:53.951622Z	   97 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.951750Z	   97 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.951970Z	   97 Query	select customer_email from customer where customer_id = 13
+2019-04-15T03:41:53.952211Z	   97 Quit	
+2019-04-15T03:41:53.952924Z	   98 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.953060Z	   98 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.953198Z	   98 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.953515Z	   98 Quit	
+2019-04-15T03:41:53.954200Z	   99 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.954459Z	   99 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.954653Z	   99 Query	select customer_street_address from customer where customer_id = 13
+2019-04-15T03:41:53.954909Z	   99 Quit	
+2019-04-15T03:41:53.955461Z	  100 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.955592Z	  100 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.955730Z	  100 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:53.955966Z	  100 Quit	
+2019-04-15T03:41:53.956454Z	  101 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.956587Z	  101 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.956849Z	  101 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.957110Z	  101 Quit	
+2019-04-15T03:41:53.957773Z	  102 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.958069Z	  102 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.958224Z	  102 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:53.958713Z	  102 Quit	
+2019-04-15T03:41:53.959217Z	  103 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.959347Z	  103 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.959484Z	  103 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:41:53.959720Z	  103 Quit	
+2019-04-15T03:41:53.960272Z	  104 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.960399Z	  104 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.960657Z	  104 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.961026Z	  104 Quit	
+2019-04-15T03:41:53.961596Z	  105 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.961886Z	  105 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.962029Z	  105 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:41:53.962308Z	  105 Quit	
+2019-04-15T03:41:53.962871Z	  106 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.963006Z	  106 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.963142Z	  106 Query	select customer_email from customer where customer_id = 28
+2019-04-15T03:41:53.963473Z	  106 Quit	
+2019-04-15T03:41:53.963961Z	  107 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.964090Z	  107 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.964226Z	  107 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.964460Z	  107 Quit	
+2019-04-15T03:41:53.964991Z	  108 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.965152Z	  108 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.965399Z	  108 Query	select customer_street_address from customer where customer_id = 28
+2019-04-15T03:41:53.965843Z	  108 Quit	
+2019-04-15T03:41:53.966471Z	  109 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.966621Z	  109 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.966780Z	  109 Query	select customer_email from customer where customer_id = 33
+2019-04-15T03:41:53.967066Z	  109 Quit	
+2019-04-15T03:41:53.967807Z	  110 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.967939Z	  110 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.968079Z	  110 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.968332Z	  110 Quit	
+2019-04-15T03:41:53.968794Z	  111 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.968919Z	  111 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.969051Z	  111 Query	select customer_street_address from customer where customer_id = 33
+2019-04-15T03:41:53.969382Z	  111 Quit	
+2019-04-15T03:41:53.970136Z	  112 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.970267Z	  112 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.970519Z	  112 Query	select customer_email from customer where customer_id = 33
+2019-04-15T03:41:53.970862Z	  112 Quit	
+2019-04-15T03:41:53.971334Z	  113 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.971481Z	  113 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.971617Z	  113 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:41:53.971986Z	  113 Quit	
+2019-04-15T03:41:53.972493Z	  114 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:41:53.972619Z	  114 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:41:53.972784Z	  114 Query	select customer_street_address from customer where customer_id = 33
+2019-04-15T03:41:53.973285Z	  114 Quit	
+2019-04-15T03:41:53.973469Z	   73 Quit	
+2019-04-15T03:42:11.129434Z	  115 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:11.129669Z	  115 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:11.129897Z	  115 Query	SELECT EXISTS(select 1 FROM customer, auth_password_customer
+        WHERE customer_password= 'pass' AND customer_email = 'ef@usps.gov' and customer_fk_pw_id = customer_id)
+2019-04-15T03:42:11.130273Z	  115 Quit	
+2019-04-15T03:42:11.130929Z	  116 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:11.131075Z	  116 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:11.131229Z	  116 Query	SELECT EXISTS(select * FROM employee, auth_password_employee
+        WHERE employee_password= 'pass' AND employee_work_email = 'ef@usps.gov' and employee_id_fk = employee_id)
+2019-04-15T03:42:11.131768Z	  116 Quit	
+2019-04-15T03:42:11.132387Z	  117 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:11.132527Z	  117 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:11.132684Z	  117 Query	select employee_role FROM employee, auth_password_employee
+            WHERE employee_password= 'pass' AND employee_work_email = 'ef@usps.gov' and employee_id_fk = employee_id
+2019-04-15T03:42:11.133191Z	  117 Query	SELECT employee_id FROM employee, auth_password_employee
+                WHERE employee_password= 'pass' AND employee_work_email = 'ef@usps.gov' and employee_id_fk = employee_id
+2019-04-15T03:42:11.133529Z	  117 Query	SELECT facility_id FROM employee, auth_password_employee
+                                            WHERE employee_password= 'pass' AND employee_work_email = 'ef@usps.gov' and employee_id_fk = employee_id
+2019-04-15T03:42:11.133818Z	  117 Quit	
+2019-04-15T03:42:11.318951Z	  118 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:11.320776Z	  118 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:11.320976Z	  118 Query	SELECT EXISTS (SELECT * FROM package WHERE pfacility_fk_id = 5)
+2019-04-15T03:42:11.321320Z	  118 Quit	
+2019-04-15T03:42:11.321880Z	  119 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:11.322124Z	  120 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:11.322575Z	  119 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:11.322755Z	  120 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:11.322950Z	  119 Query	SELECT facility_type FROM facility WHERE facility_id = 5
+2019-04-15T03:42:11.323390Z	  120 Query	SELECT EXISTS (SELECT * FROM vehicle WHERE vfacility_fk_id = 5)
+2019-04-15T03:42:11.323907Z	  119 Quit	
+2019-04-15T03:42:11.324176Z	  120 Query	SELECT vehicle.vehicle_id, employee.employee_first_name, employee.employee_last_name, vehicle.destination_type 
+        FROM vehicle, employee WHERE vehicle.vfacility_fk_id = 5 and vehicle.vehicle_id = employee.vehicle_fk_id
+2019-04-15T03:42:11.325002Z	  120 Quit	
+2019-04-15T03:42:14.638923Z	  121 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:14.639237Z	  121 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:14.639489Z	  121 Query	SELECT facility_type FROM facility WHERE facility_id = 5
+2019-04-15T03:42:14.639989Z	  121 Quit	
+2019-04-15T03:42:14.640785Z	  122 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:14.640971Z	  122 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:14.641183Z	  122 Query	UPDATE package SET pfacility_fk_id = 5, vehicle_id = NULL WHERE package_id = 38
+2019-04-15T03:42:14.644382Z	  122 Query	INSERT INTO tracking (event_type, facility_fk_id, package_fk_id)
+            VALUES( 'Dropped Off', 5, 38)
+2019-04-15T03:42:14.646032Z	  122 Query	update package
+  SET package.delivery_status ='Drop Off'
+  where new.package_fk_id = package.package_id
+2019-04-15T03:42:14.646578Z	  122 Query	COMMIT
+2019-04-15T03:42:14.910588Z	  124 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:14.910919Z	  123 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:14.911141Z	  124 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:14.911347Z	  123 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:14.911591Z	  124 Query	SELECT EXISTS (SELECT * FROM vehicle WHERE vfacility_fk_id = 5)
+2019-04-15T03:42:14.912100Z	  123 Query	SELECT EXISTS (SELECT * FROM package WHERE pfacility_fk_id = 5)
+2019-04-15T03:42:14.912952Z	  124 Query	SELECT vehicle.vehicle_id, employee.employee_first_name, employee.employee_last_name, vehicle.destination_type 
+        FROM vehicle, employee WHERE vehicle.vfacility_fk_id = 5 and vehicle.vehicle_id = employee.vehicle_fk_id
+2019-04-15T03:42:14.913712Z	  123 Query	SELECT package_id, sender_customer_id, recepient_customer_id, delivery_status, package_weight 
+        FROM package WHERE pfacility_fk_id = 5
+2019-04-15T03:42:14.914338Z	  124 Quit	
+2019-04-15T03:42:14.916233Z	  125 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:14.916661Z	  125 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:14.917837Z	  125 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:42:14.918599Z	  125 Quit	
+2019-04-15T03:42:14.919373Z	  126 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:14.919582Z	  126 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:14.919798Z	  126 Query	select customer_email from customer where customer_id = 33
+2019-04-15T03:42:14.920492Z	  126 Quit	
+2019-04-15T03:42:14.920875Z	  127 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:14.921486Z	  127 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:14.921940Z	  128 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:14.922120Z	  127 Query	SELECT facility_type FROM facility WHERE facility_id = 5
+2019-04-15T03:42:14.922553Z	  127 Quit	
+2019-04-15T03:42:14.922760Z	  128 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:14.922975Z	  128 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:42:14.924014Z	  128 Quit	
+2019-04-15T03:42:14.924754Z	  129 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:14.925291Z	  129 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:14.925525Z	  129 Query	select customer_street_address from customer where customer_id = 33
+2019-04-15T03:42:14.925956Z	  129 Quit	
+2019-04-15T03:42:14.926143Z	  123 Quit	
+2019-04-15T03:42:23.894643Z	  130 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:23.894825Z	  130 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:23.895026Z	  130 Query	UPDATE package SET pfacility_fk_id = NULL, vehicle_id = 5 WHERE package_id = 38
+2019-04-15T03:42:23.895486Z	  130 Query	INSERT INTO tracking (event_type, facility_fk_id, package_fk_id)
+        VALUES( 'Left Facility', 5, 38)
+2019-04-15T03:42:23.895576Z	  130 Query	update package
+   set package.delivery_status = 'In Transit'
+    where new.package_fk_id = package.package_id
+2019-04-15T03:42:23.895918Z	  130 Query	COMMIT
+2019-04-15T03:42:24.216024Z	  131 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:24.216283Z	  131 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:24.216552Z	  131 Query	SELECT EXISTS (SELECT * FROM package WHERE pfacility_fk_id = 5)
+2019-04-15T03:42:24.217074Z	  131 Quit	
+2019-04-15T03:42:24.217507Z	  132 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:24.220208Z	  132 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:24.220501Z	  132 Query	SELECT EXISTS (SELECT * FROM vehicle WHERE vfacility_fk_id = 5)
+2019-04-15T03:42:24.221177Z	  132 Query	SELECT vehicle.vehicle_id, employee.employee_first_name, employee.employee_last_name, vehicle.destination_type 
+        FROM vehicle, employee WHERE vehicle.vfacility_fk_id = 5 and vehicle.vehicle_id = employee.vehicle_fk_id
+2019-04-15T03:42:24.222107Z	  132 Quit	
+2019-04-15T03:42:24.223567Z	  133 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:42:24.223869Z	  133 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:42:24.224127Z	  133 Query	SELECT facility_type FROM facility WHERE facility_id = 5
+2019-04-15T03:42:24.224631Z	  133 Quit	
+2019-04-15T03:42:41.783513Z	    4 Query	SELECT * FROM PostOffice.tracking
+LIMIT 0, 1000
+2019-04-15T03:42:41.844379Z	    5 Query	SHOW INDEX FROM `PostOffice`.`tracking`
+2019-04-15T03:46:21.595164Z	   20 Query	SHOW DATABASES
+2019-04-15T03:46:21.824883Z	   20 Query	SHOW FULL TABLES FROM `PostOffice`
+2019-04-15T03:46:21.906744Z	   20 Query	SHOW PROCEDURE STATUS WHERE Db='PostOffice'
+2019-04-15T03:46:21.992335Z	   20 Query	SHOW FUNCTION STATUS WHERE Db='PostOffice'
+2019-04-15T03:46:22.155751Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`auth_password_customer`
+2019-04-15T03:46:22.237918Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`auth_password_employee`
+2019-04-15T03:46:22.319465Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`city_lookup_table`
+2019-04-15T03:46:22.327821Z	   20 Query	SHOW FULL COLUMNS FROM `PostOffice`.`customer`
+2019-04-15T03:46:22.402747Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`customer`
+2019-04-15T03:46:22.484575Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`employee`
+2019-04-15T03:46:22.493985Z	   20 Query	SHOW INDEXES FROM `PostOffice`.`customer`
+2019-04-15T03:46:22.566089Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`facility`
+2019-04-15T03:46:22.648142Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`package`
+2019-04-15T03:46:22.661624Z	   20 Query	SHOW FULL COLUMNS FROM `PostOffice`.`employee`
+2019-04-15T03:46:22.729654Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`state_lookup_table`
+2019-04-15T03:46:22.812800Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`tracking`
+2019-04-15T03:46:22.828562Z	   20 Query	SHOW INDEXES FROM `PostOffice`.`employee`
+2019-04-15T03:46:22.894815Z	   21 Query	SHOW FULL COLUMNS FROM `PostOffice`.`vehicle`
+2019-04-15T03:46:22.992431Z	   20 Query	SHOW TRIGGERS FROM `PostOffice` LIKE 'employee'
+2019-04-15T03:46:23.158097Z	   20 Query	SHOW FULL COLUMNS FROM `PostOffice`.`facility`
+2019-04-15T03:46:23.324529Z	   20 Query	SHOW INDEXES FROM `PostOffice`.`facility`
+2019-04-15T03:46:23.491275Z	   20 Query	SHOW FULL COLUMNS FROM `PostOffice`.`package`
+2019-04-15T03:46:23.658147Z	   20 Query	SHOW INDEXES FROM `PostOffice`.`package`
+2019-04-15T03:46:23.824532Z	   20 Query	SHOW FULL COLUMNS FROM `PostOffice`.`state_lookup_table`
+2019-04-15T03:46:23.988794Z	   20 Query	SHOW INDEXES FROM `PostOffice`.`state_lookup_table`
+2019-04-15T03:46:24.155065Z	   20 Query	SHOW FULL COLUMNS FROM `PostOffice`.`tracking`
+2019-04-15T03:46:24.320045Z	   20 Query	SHOW INDEXES FROM `PostOffice`.`tracking`
+2019-04-15T03:46:24.484188Z	   20 Query	SHOW TRIGGERS FROM `PostOffice` LIKE 'tracking'
+2019-04-15T03:46:24.652959Z	   20 Query	SHOW FULL COLUMNS FROM `PostOffice`.`vehicle`
+2019-04-15T03:46:24.814973Z	   20 Query	SHOW INDEXES FROM `PostOffice`.`vehicle`
+2019-04-15T03:46:24.978641Z	   20 Query	SHOW TRIGGERS FROM `PostOffice` LIKE 'vehicle'
+2019-04-15T03:46:33.846439Z	   21 Query	SELECT * FROM PostOffice.tracking
+LIMIT 0, 1000
+2019-04-15T03:46:34.009956Z	   20 Query	SELECT st.* FROM performance_schema.events_statements_current st JOIN performance_schema.threads thr ON thr.thread_id = st.thread_id WHERE thr.processlist_id = 21
+2019-04-15T03:46:34.172513Z	   20 Query	SELECT st.* FROM performance_schema.events_stages_history_long st WHERE st.nesting_event_id = 0
+2019-04-15T03:46:34.334701Z	   20 Query	SELECT st.* FROM performance_schema.events_waits_history_long st WHERE st.nesting_event_id = 0
+2019-04-15T03:46:34.416035Z	   20 Query	SHOW INDEX FROM `PostOffice`.`tracking`
+2019-04-15T03:49:56.360150Z	  134 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.360433Z	  134 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.360731Z	  134 Query	SELECT EXISTS(select 1 FROM customer, auth_password_customer
+        WHERE customer_password= 'pass' AND customer_email = 'js@hotmail.com' and customer_fk_pw_id = customer_id)
+2019-04-15T03:49:56.361353Z	  134 Quit	
+2019-04-15T03:49:56.362296Z	  135 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.362522Z	  135 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.362769Z	  135 Query	select customer_id from customer where customer_email = 'js@hotmail.com'
+2019-04-15T03:49:56.363213Z	  135 Quit	
+2019-04-15T03:49:56.623224Z	  136 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.623477Z	  136 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.623805Z	  136 Query	SELECT EXISTS (SELECT * FROM package WHERE sender_customer_id = 1)
+2019-04-15T03:49:56.626937Z	  137 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.627293Z	  138 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.627526Z	  137 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.627726Z	  138 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.627973Z	  137 Query	SELECT EXISTS (SELECT * FROM package WHERE recepient_customer_id = 1)
+2019-04-15T03:49:56.628409Z	  138 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:49:56.629453Z	  138 Quit	
+2019-04-15T03:49:56.629952Z	  139 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.630166Z	  136 Query	SELECT package_id, recepient_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE sender_customer_id = 1
+2019-04-15T03:49:56.631826Z	  139 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.632065Z	  139 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:49:56.632466Z	  139 Quit	
+2019-04-15T03:49:56.632749Z	  137 Query	SELECT package_id, sender_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE recepient_customer_id = 1
+2019-04-15T03:49:56.634004Z	  140 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.634235Z	  140 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.634458Z	  140 Query	select customer_email from customer where customer_id = 2
+2019-04-15T03:49:56.635181Z	  141 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.635550Z	  140 Quit	
+2019-04-15T03:49:56.635779Z	  141 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.636369Z	  141 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:49:56.636666Z	  141 Quit	
+2019-04-15T03:49:56.636940Z	  142 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.637398Z	  142 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.637556Z	  142 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.637954Z	  143 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.638159Z	  142 Quit	
+2019-04-15T03:49:56.638300Z	  143 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.638741Z	  143 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:49:56.638994Z	  143 Quit	
+2019-04-15T03:49:56.639214Z	  144 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.639647Z	  144 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.639790Z	  144 Query	select customer_street_address from customer where customer_id = 2
+2019-04-15T03:49:56.640059Z	  145 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.640276Z	  144 Quit	
+2019-04-15T03:49:56.640411Z	  145 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.640897Z	  145 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.641148Z	  145 Quit	
+2019-04-15T03:49:56.641367Z	  146 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.641890Z	  146 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.642037Z	  146 Query	select customer_email from customer where customer_id = 25
+2019-04-15T03:49:56.642284Z	  146 Quit	
+2019-04-15T03:49:56.642533Z	  147 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.642947Z	  147 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.643134Z	  147 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:49:56.643398Z	  148 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.643638Z	  147 Quit	
+2019-04-15T03:49:56.643799Z	  148 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.644233Z	  148 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.644480Z	  148 Quit	
+2019-04-15T03:49:56.644740Z	  149 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.645167Z	  149 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.645307Z	  149 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:49:56.645581Z	  150 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.645813Z	  149 Quit	
+2019-04-15T03:49:56.645951Z	  150 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.646087Z	  150 Query	select customer_street_address from customer where customer_id = 25
+2019-04-15T03:49:56.646627Z	  150 Quit	
+2019-04-15T03:49:56.646847Z	  151 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.647290Z	  151 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.647521Z	  152 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.647695Z	  151 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.647947Z	  151 Quit	
+2019-04-15T03:49:56.648083Z	  152 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.648219Z	  152 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:49:56.648781Z	  152 Quit	
+2019-04-15T03:49:56.649270Z	  153 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.649468Z	  154 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.649597Z	  153 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.649809Z	  153 Query	select customer_email from customer where customer_id = 25
+2019-04-15T03:49:56.649995Z	  154 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.650182Z	  153 Quit	
+2019-04-15T03:49:56.650332Z	  154 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.650564Z	  154 Quit	
+2019-04-15T03:49:56.651322Z	  155 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.651547Z	  156 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.651681Z	  155 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.651820Z	  155 Query	select customer_street_address from customer where customer_id = 25
+2019-04-15T03:49:56.652002Z	  156 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.652191Z	  155 Quit	
+2019-04-15T03:49:56.652340Z	  156 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:49:56.652572Z	  156 Quit	
+2019-04-15T03:49:56.653338Z	  157 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.653539Z	  158 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.653773Z	  158 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.653860Z	  157 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.653995Z	  157 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.654204Z	  158 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:49:56.654454Z	  157 Quit	
+2019-04-15T03:49:56.654662Z	  158 Quit	
+2019-04-15T03:49:56.654817Z	  137 Quit	
+2019-04-15T03:49:56.656019Z	  159 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.656174Z	  159 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.656334Z	  159 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.656613Z	  159 Quit	
+2019-04-15T03:49:56.657437Z	  160 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.657583Z	  160 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.657800Z	  160 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:49:56.658064Z	  160 Quit	
+2019-04-15T03:49:56.658598Z	  161 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.658742Z	  161 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.658890Z	  161 Query	select customer_email from customer where customer_id = 13
+2019-04-15T03:49:56.659149Z	  161 Quit	
+2019-04-15T03:49:56.659635Z	  162 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.659760Z	  162 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.659893Z	  162 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.660126Z	  162 Quit	
+2019-04-15T03:49:56.660588Z	  163 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.660709Z	  163 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.660840Z	  163 Query	select customer_street_address from customer where customer_id = 13
+2019-04-15T03:49:56.661079Z	  163 Quit	
+2019-04-15T03:49:56.661565Z	  164 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.661753Z	  164 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.661891Z	  164 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:49:56.662126Z	  164 Quit	
+2019-04-15T03:49:56.662594Z	  165 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.662776Z	  165 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.662920Z	  165 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.663154Z	  165 Quit	
+2019-04-15T03:49:56.663644Z	  166 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.663770Z	  166 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.663899Z	  166 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:49:56.664129Z	  166 Quit	
+2019-04-15T03:49:56.664595Z	  167 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.664717Z	  167 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.664843Z	  167 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:49:56.665068Z	  167 Quit	
+2019-04-15T03:49:56.665512Z	  168 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.665717Z	  168 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.665861Z	  168 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.666094Z	  168 Quit	
+2019-04-15T03:49:56.666546Z	  169 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.666680Z	  169 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.666809Z	  169 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:49:56.667036Z	  169 Quit	
+2019-04-15T03:49:56.667522Z	  170 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.667662Z	  170 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.667792Z	  170 Query	select customer_email from customer where customer_id = 28
+2019-04-15T03:49:56.668021Z	  170 Quit	
+2019-04-15T03:49:56.668567Z	  171 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.668724Z	  171 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.668860Z	  171 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.669107Z	  171 Quit	
+2019-04-15T03:49:56.669572Z	  172 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.669757Z	  172 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.669891Z	  172 Query	select customer_street_address from customer where customer_id = 28
+2019-04-15T03:49:56.670123Z	  172 Quit	
+2019-04-15T03:49:56.670603Z	  173 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.670728Z	  173 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.670856Z	  173 Query	select customer_email from customer where customer_id = 33
+2019-04-15T03:49:56.671086Z	  173 Quit	
+2019-04-15T03:49:56.671566Z	  174 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.671718Z	  174 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.671851Z	  174 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.672098Z	  174 Quit	
+2019-04-15T03:49:56.672563Z	  175 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.672701Z	  175 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.672846Z	  175 Query	select customer_street_address from customer where customer_id = 33
+2019-04-15T03:49:56.673076Z	  175 Quit	
+2019-04-15T03:49:56.673580Z	  176 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.673788Z	  176 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.673932Z	  176 Query	select customer_email from customer where customer_id = 33
+2019-04-15T03:49:56.674164Z	  176 Quit	
+2019-04-15T03:49:56.674686Z	  177 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.674812Z	  177 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.674943Z	  177 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:49:56.675175Z	  177 Quit	
+2019-04-15T03:49:56.675642Z	  178 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:49:56.675767Z	  178 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:49:56.675896Z	  178 Query	select customer_street_address from customer where customer_id = 33
+2019-04-15T03:49:56.676193Z	  178 Quit	
+2019-04-15T03:49:56.676334Z	  136 Quit	
+2019-04-15T03:50:14.457328Z	  179 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.457598Z	  179 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.457910Z	  179 Query	SELECT EXISTS(SELECT * FROM customer WHERE customer_email = 'gerogecurios@gmail.com')
+2019-04-15T03:50:14.458438Z	  179 Query	INSERT INTO `PostOffice`.`customer`
+                     (`customer_first_name`,
+                     `customer_last_name`,
+                     `customer_street_address`,
+                     `city_id`,
+                     `state_id`,
+                     `customer_zip_code`,
+                     `customer_email`)
+                     VALUES
+                     ( '###',
+                     '###',
+                     '123 Monkey St.',
+                     0,
+                     0,
+                     '###',
+                     'gerogecurios@gmail.com')
+2019-04-15T03:50:14.458788Z	  179 Query	COMMIT
+2019-04-15T03:50:14.460077Z	  179 Query	INSERT INTO `package`
+(`package_type`,
+`sender_customer_id`,
+`recepient_customer_id`,
+`package_category`,
+`delivery_status`,
+`package_weight`,
+`postage_paid`)
+VALUES
+('Flat Envelope',
+1,
+35,
+'Small',
+'Label Created',
+15.0,
+1.79)
+2019-04-15T03:50:14.460401Z	  179 Query	COMMIT
+2019-04-15T03:50:14.460791Z	  179 Query	INSERT INTO tracking (event_type, package_fk_id)
+        VALUES( 'Label Created', 39)
+2019-04-15T03:50:14.460886Z	  179 Query	update package
+  SET package.delivery_status ='Label Created'
+  where new.package_fk_id = package.package_id
+2019-04-15T03:50:14.461250Z	  179 Query	COMMIT
+2019-04-15T03:50:14.461610Z	  179 Quit	
+2019-04-15T03:50:14.827829Z	  180 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.828200Z	  181 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.828431Z	  180 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.828680Z	  180 Query	SELECT EXISTS (SELECT * FROM package WHERE recepient_customer_id = 1)
+2019-04-15T03:50:14.829043Z	  181 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.829911Z	  181 Query	SELECT EXISTS (SELECT * FROM package WHERE sender_customer_id = 1)
+2019-04-15T03:50:14.830947Z	  182 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.831256Z	  183 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.831438Z	  182 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.831665Z	  182 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:50:14.831952Z	  183 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.832223Z	  182 Quit	
+2019-04-15T03:50:14.832451Z	  183 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:50:14.832797Z	  183 Quit	
+2019-04-15T03:50:14.833069Z	  180 Query	SELECT package_id, sender_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE recepient_customer_id = 1
+2019-04-15T03:50:14.833892Z	  181 Query	SELECT package_id, recepient_customer_id, delivery_status, package_weight, postage_paid FROM package WHERE sender_customer_id = 1
+2019-04-15T03:50:14.836376Z	  185 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.836627Z	  185 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.836858Z	  185 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:50:14.837329Z	  184 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.837702Z	  185 Quit	
+2019-04-15T03:50:14.837926Z	  184 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.838554Z	  184 Query	select customer_email from customer where customer_id = 2
+2019-04-15T03:50:14.838949Z	  184 Quit	
+2019-04-15T03:50:14.839276Z	  186 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.839852Z	  186 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.840047Z	  186 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:50:14.840417Z	  186 Quit	
+2019-04-15T03:50:14.840746Z	  187 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.841328Z	  187 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.841540Z	  187 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.842016Z	  188 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.842317Z	  187 Quit	
+2019-04-15T03:50:14.842503Z	  188 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.843111Z	  188 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.843480Z	  188 Quit	
+2019-04-15T03:50:14.843825Z	  189 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.844421Z	  189 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.844628Z	  189 Query	select customer_street_address from customer where customer_id = 2
+2019-04-15T03:50:14.844985Z	  189 Quit	
+2019-04-15T03:50:14.845316Z	  190 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.846979Z	  190 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.847207Z	  190 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:50:14.847609Z	  190 Quit	
+2019-04-15T03:50:14.847945Z	  191 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.848522Z	  191 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.848729Z	  191 Query	select customer_email from customer where customer_id = 25
+2019-04-15T03:50:14.849107Z	  191 Quit	
+2019-04-15T03:50:14.849432Z	  192 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.849797Z	  192 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.850009Z	  192 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:50:14.850694Z	  192 Quit	
+2019-04-15T03:50:14.851022Z	  193 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.851644Z	  193 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.851870Z	  193 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.852415Z	  193 Quit	
+2019-04-15T03:50:14.852636Z	  194 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.852807Z	  194 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.853328Z	  194 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.853696Z	  194 Quit	
+2019-04-15T03:50:14.853974Z	  195 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.854438Z	  195 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.854590Z	  195 Query	select customer_street_address from customer where customer_id = 25
+2019-04-15T03:50:14.854869Z	  196 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.855069Z	  195 Quit	
+2019-04-15T03:50:14.855241Z	  196 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.855754Z	  196 Query	select customer_email from customer where customer_id = 25
+2019-04-15T03:50:14.856039Z	  196 Quit	
+2019-04-15T03:50:14.856271Z	  197 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.856403Z	  197 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.856837Z	  197 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:50:14.857096Z	  197 Quit	
+2019-04-15T03:50:14.857331Z	  198 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.857803Z	  198 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.857957Z	  198 Query	select customer_street_address from customer where customer_id = 25
+2019-04-15T03:50:14.858267Z	  199 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.858487Z	  198 Quit	
+2019-04-15T03:50:14.858631Z	  199 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.859067Z	  199 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.859381Z	  199 Quit	
+2019-04-15T03:50:14.859684Z	  200 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.860097Z	  200 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.860241Z	  200 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.860503Z	  201 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.860694Z	  200 Quit	
+2019-04-15T03:50:14.860825Z	  201 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.860968Z	  180 Quit	
+2019-04-15T03:50:14.861123Z	  201 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:50:14.861833Z	  201 Quit	
+2019-04-15T03:50:14.862344Z	  202 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.862759Z	  202 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.862962Z	  202 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:50:14.863722Z	  202 Quit	
+2019-04-15T03:50:14.864430Z	  203 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.864628Z	  203 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.864846Z	  203 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.865218Z	  203 Quit	
+2019-04-15T03:50:14.866023Z	  204 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.866215Z	  204 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.866424Z	  204 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:50:14.866789Z	  204 Quit	
+2019-04-15T03:50:14.867517Z	  205 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.867727Z	  205 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.867935Z	  205 Query	select customer_email from customer where customer_id = 13
+2019-04-15T03:50:14.868304Z	  205 Quit	
+2019-04-15T03:50:14.868977Z	  206 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.869191Z	  206 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.869377Z	  206 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.869809Z	  206 Quit	
+2019-04-15T03:50:14.870484Z	  207 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.870659Z	  207 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.870869Z	  207 Query	select customer_street_address from customer where customer_id = 13
+2019-04-15T03:50:14.871217Z	  207 Quit	
+2019-04-15T03:50:14.871921Z	  208 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.872091Z	  208 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.872279Z	  208 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:50:14.872627Z	  208 Quit	
+2019-04-15T03:50:14.873268Z	  209 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.873437Z	  209 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.873621Z	  209 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.874025Z	  209 Quit	
+2019-04-15T03:50:14.874660Z	  210 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.874834Z	  210 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.875022Z	  210 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:50:14.875370Z	  210 Quit	
+2019-04-15T03:50:14.876072Z	  211 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.876246Z	  211 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.876432Z	  211 Query	select customer_email from customer where customer_id = 8
+2019-04-15T03:50:14.876770Z	  211 Quit	
+2019-04-15T03:50:14.877455Z	  212 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.877709Z	  212 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.877921Z	  212 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.878338Z	  212 Quit	
+2019-04-15T03:50:14.879004Z	  213 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.879179Z	  213 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.879365Z	  213 Query	select customer_street_address from customer where customer_id = 8
+2019-04-15T03:50:14.879744Z	  213 Quit	
+2019-04-15T03:50:14.880456Z	  214 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.880644Z	  214 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.880849Z	  214 Query	select customer_email from customer where customer_id = 28
+2019-04-15T03:50:14.881207Z	  214 Quit	
+2019-04-15T03:50:14.881974Z	  215 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.882166Z	  215 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.882371Z	  215 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.882733Z	  215 Quit	
+2019-04-15T03:50:14.883395Z	  216 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.883591Z	  216 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.883800Z	  216 Query	select customer_street_address from customer where customer_id = 28
+2019-04-15T03:50:14.884169Z	  216 Quit	
+2019-04-15T03:50:14.884853Z	  217 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.885029Z	  217 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.885216Z	  217 Query	select customer_email from customer where customer_id = 33
+2019-04-15T03:50:14.885560Z	  217 Quit	
+2019-04-15T03:50:14.886325Z	  218 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.886518Z	  218 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.886718Z	  218 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.887065Z	  218 Quit	
+2019-04-15T03:50:14.887773Z	  219 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.887968Z	  219 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.888182Z	  219 Query	select customer_street_address from customer where customer_id = 33
+2019-04-15T03:50:14.888544Z	  219 Quit	
+2019-04-15T03:50:14.889263Z	  220 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.889454Z	  220 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.889714Z	  220 Query	select customer_email from customer where customer_id = 33
+2019-04-15T03:50:14.890077Z	  220 Quit	
+2019-04-15T03:50:14.890790Z	  221 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.890974Z	  221 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.891172Z	  221 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.891521Z	  221 Quit	
+2019-04-15T03:50:14.892199Z	  222 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.892380Z	  222 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.892570Z	  222 Query	select customer_street_address from customer where customer_id = 33
+2019-04-15T03:50:14.892912Z	  222 Quit	
+2019-04-15T03:50:14.893585Z	  223 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.893835Z	  223 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.894037Z	  223 Query	select customer_email from customer where customer_id = 35
+2019-04-15T03:50:14.894399Z	  223 Quit	
+2019-04-15T03:50:14.895094Z	  224 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.895284Z	  224 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.895496Z	  224 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:14.895882Z	  224 Quit	
+2019-04-15T03:50:14.896583Z	  225 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:14.896774Z	  225 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:14.896981Z	  225 Query	select customer_street_address from customer where customer_id = 35
+2019-04-15T03:50:14.897337Z	  225 Quit	
+2019-04-15T03:50:14.897543Z	  181 Quit	
+2019-04-15T03:50:24.496873Z	  226 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:24.497138Z	  226 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:24.497437Z	  226 Query	SELECT EXISTS(select 1 FROM customer, auth_password_customer
+        WHERE customer_password= 'pass' AND customer_email = 'ef@usps.gov' and customer_fk_pw_id = customer_id)
+2019-04-15T03:50:24.498295Z	  226 Quit	
+2019-04-15T03:50:24.499197Z	  227 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:24.499413Z	  227 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:24.499692Z	  227 Query	SELECT EXISTS(select * FROM employee, auth_password_employee
+        WHERE employee_password= 'pass' AND employee_work_email = 'ef@usps.gov' and employee_id_fk = employee_id)
+2019-04-15T03:50:24.500469Z	  227 Quit	
+2019-04-15T03:50:24.501268Z	  228 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:24.501473Z	  228 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:24.501772Z	  228 Query	select employee_role FROM employee, auth_password_employee
+            WHERE employee_password= 'pass' AND employee_work_email = 'ef@usps.gov' and employee_id_fk = employee_id
+2019-04-15T03:50:24.502297Z	  228 Query	SELECT employee_id FROM employee, auth_password_employee
+                WHERE employee_password= 'pass' AND employee_work_email = 'ef@usps.gov' and employee_id_fk = employee_id
+2019-04-15T03:50:24.502760Z	  228 Query	SELECT facility_id FROM employee, auth_password_employee
+                                            WHERE employee_password= 'pass' AND employee_work_email = 'ef@usps.gov' and employee_id_fk = employee_id
+2019-04-15T03:50:24.503161Z	  228 Quit	
+2019-04-15T03:50:24.691894Z	  229 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:24.692266Z	  229 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:24.692462Z	  229 Query	SELECT EXISTS (SELECT * FROM vehicle WHERE vfacility_fk_id = 5)
+2019-04-15T03:50:24.692866Z	  229 Query	SELECT vehicle.vehicle_id, employee.employee_first_name, employee.employee_last_name, vehicle.destination_type 
+        FROM vehicle, employee WHERE vehicle.vfacility_fk_id = 5 and vehicle.vehicle_id = employee.vehicle_fk_id
+2019-04-15T03:50:24.693265Z	  229 Quit	
+2019-04-15T03:50:24.769324Z	  230 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:24.769929Z	  230 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:24.770204Z	  230 Query	SELECT EXISTS (SELECT * FROM package WHERE pfacility_fk_id = 5)
+2019-04-15T03:50:24.770721Z	  230 Quit	
+2019-04-15T03:50:24.774318Z	  231 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:24.774550Z	  231 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:24.774786Z	  231 Query	SELECT facility_type FROM facility WHERE facility_id = 5
+2019-04-15T03:50:24.775210Z	  231 Quit	
+2019-04-15T03:50:28.101043Z	  232 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:28.101303Z	  232 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:28.101572Z	  232 Query	SELECT facility_type FROM facility WHERE facility_id = 5
+2019-04-15T03:50:28.102096Z	  232 Quit	
+2019-04-15T03:50:28.102885Z	  233 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:28.103088Z	  233 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:28.103316Z	  233 Query	UPDATE package SET pfacility_fk_id = 5, vehicle_id = NULL WHERE package_id = 39
+2019-04-15T03:50:28.103856Z	  233 Query	INSERT INTO tracking (event_type, facility_fk_id, package_fk_id)
+            VALUES( 'Dropped Off', 5, 39)
+2019-04-15T03:50:28.104966Z	  233 Query	update package
+  SET package.delivery_status ='Drop Off'
+  where new.package_fk_id = package.package_id
+2019-04-15T03:50:28.105443Z	  233 Query	COMMIT
+2019-04-15T03:50:28.537388Z	  235 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:28.537828Z	  234 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:28.538051Z	  235 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:28.538257Z	  234 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:28.538499Z	  235 Query	SELECT EXISTS (SELECT * FROM package WHERE pfacility_fk_id = 5)
+2019-04-15T03:50:28.538919Z	  234 Query	SELECT EXISTS (SELECT * FROM vehicle WHERE vfacility_fk_id = 5)
+2019-04-15T03:50:28.539375Z	  235 Query	SELECT package_id, sender_customer_id, recepient_customer_id, delivery_status, package_weight 
+        FROM package WHERE pfacility_fk_id = 5
+2019-04-15T03:50:28.539876Z	  234 Query	SELECT vehicle.vehicle_id, employee.employee_first_name, employee.employee_last_name, vehicle.destination_type 
+        FROM vehicle, employee WHERE vehicle.vfacility_fk_id = 5 and vehicle.vehicle_id = employee.vehicle_fk_id
+2019-04-15T03:50:28.541291Z	  234 Quit	
+2019-04-15T03:50:28.541960Z	  236 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:28.542635Z	  236 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:28.543092Z	  236 Query	select customer_email from customer where customer_id = 1
+2019-04-15T03:50:28.543475Z	  236 Quit	
+2019-04-15T03:50:28.545906Z	  238 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:28.546119Z	  238 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:28.546359Z	  238 Query	select customer_email from customer where customer_id = 35
+2019-04-15T03:50:28.546769Z	  238 Quit	
+2019-04-15T03:50:28.547150Z	  237 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:28.547784Z	  237 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:28.548085Z	  239 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:28.548339Z	  237 Query	SELECT facility_type FROM facility WHERE facility_id = 5
+2019-04-15T03:50:28.548803Z	  237 Quit	
+2019-04-15T03:50:28.549006Z	  239 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:28.549206Z	  239 Query	select customer_street_address from customer where customer_id = 1
+2019-04-15T03:50:28.549569Z	  239 Quit	
+2019-04-15T03:50:28.551009Z	  240 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:28.551571Z	  240 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:28.551783Z	  240 Query	select customer_street_address from customer where customer_id = 35
+2019-04-15T03:50:28.552146Z	  240 Quit	
+2019-04-15T03:50:28.552290Z	  235 Quit	
+2019-04-15T03:50:38.339319Z	  241 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:38.339626Z	  241 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:38.339912Z	  241 Query	UPDATE package SET pfacility_fk_id = NULL, vehicle_id = 5 WHERE package_id = 39
+2019-04-15T03:50:38.340459Z	  241 Query	INSERT INTO tracking (event_type, facility_fk_id, package_fk_id)
+        VALUES( 'Left Facility', 5, 39)
+2019-04-15T03:50:38.341465Z	  241 Query	update package
+   set package.delivery_status = 'In Transit'
+    where new.package_fk_id = package.package_id
+2019-04-15T03:50:38.341946Z	  241 Query	COMMIT
+2019-04-15T03:50:38.344079Z	  241 Quit	
+2019-04-15T03:50:38.707307Z	  243 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:38.707598Z	  242 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:38.707758Z	  243 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:38.707970Z	  243 Query	SELECT EXISTS (SELECT * FROM package WHERE pfacility_fk_id = 5)
+2019-04-15T03:50:38.708264Z	  242 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:38.708472Z	  243 Quit	
+2019-04-15T03:50:38.708662Z	  242 Query	SELECT EXISTS (SELECT * FROM vehicle WHERE vfacility_fk_id = 5)
+2019-04-15T03:50:38.709048Z	  242 Query	SELECT vehicle.vehicle_id, employee.employee_first_name, employee.employee_last_name, vehicle.destination_type 
+        FROM vehicle, employee WHERE vehicle.vfacility_fk_id = 5 and vehicle.vehicle_id = employee.vehicle_fk_id
+2019-04-15T03:50:38.709930Z	  244 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:50:38.710268Z	  242 Quit	
+2019-04-15T03:50:38.710441Z	  244 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:50:38.710600Z	  244 Query	SELECT facility_type FROM facility WHERE facility_id = 5
+2019-04-15T03:50:38.711664Z	  244 Quit	
+2019-04-15T03:50:46.060704Z	   21 Query	SELECT * FROM PostOffice.tracking
+LIMIT 0, 1000
+2019-04-15T03:50:46.228399Z	   20 Query	SELECT st.* FROM performance_schema.events_statements_current st JOIN performance_schema.threads thr ON thr.thread_id = st.thread_id WHERE thr.processlist_id = 21
+2019-04-15T03:50:46.392001Z	   20 Query	SELECT st.* FROM performance_schema.events_stages_history_long st WHERE st.nesting_event_id = 0
+2019-04-15T03:50:46.554555Z	   20 Query	SELECT st.* FROM performance_schema.events_waits_history_long st WHERE st.nesting_event_id = 0
+2019-04-15T03:50:46.637571Z	   20 Query	SHOW INDEX FROM `PostOffice`.`tracking`
+2019-04-15T03:52:42.871073Z	   20 Query	SHOW CREATE TABLE `PostOffice`.`tracking`
+2019-04-15T03:52:51.752431Z	   20 Query	SHOW TRIGGERS FROM `PostOffice` LIKE 'package'
+2019-04-15T03:53:08.788429Z	   20 Query	SHOW TRIGGERS FROM `PostOffice` LIKE 'facility'
+2019-04-15T03:54:00.804287Z	  245 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:54:00.804475Z	  245 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:54:00.804654Z	  245 Query	SELECT event_type, time_of_event, facility_fk_id FROM tracking WHERE package_fk_id = 39
+2019-04-15T03:54:00.805261Z	  245 Query	SELECT customer_street_address FROM package, customer WHERE package.package_id = 39 AND 
+            customer_id = sender_customer_id
+2019-04-15T03:54:00.805581Z	  245 Query	SELECT facility_address FROM facility WHERE facility_id = 5
+2019-04-15T03:54:00.805901Z	  245 Query	SELECT facility_address FROM facility WHERE facility_id = 5
+2019-04-15T03:54:00.806120Z	  245 Quit	
+2019-04-15T03:54:22.719605Z	  246 Connect	team9@178.128.64.18 on PostOffice using TCP/IP
+2019-04-15T03:54:22.719894Z	  246 Query	SET AUTOCOMMIT = 0
+2019-04-15T03:54:22.720191Z	  246 Query	SELECT event_type, time_of_event, facility_fk_id FROM tracking WHERE package_fk_id = 39
+2019-04-15T03:54:22.721094Z	  246 Query	SELECT customer_street_address FROM package, customer WHERE package.package_id = 39 AND 
+            customer_id = sender_customer_id
+2019-04-15T03:54:22.721536Z	  246 Query	SELECT facility_address FROM facility WHERE facility_id = 5
+2019-04-15T03:54:22.722059Z	  246 Query	SELECT facility_address FROM facility WHERE facility_id = 5
+2019-04-15T03:54:22.722399Z	  246 Quit	
+2019-04-15T03:54:29.968655Z	    4 Query	show triggers
+2019-04-15T03:54:30.097146Z	    5 Query	SELECT st.* FROM performance_schema.events_statements_current st JOIN performance_schema.threads thr ON thr.thread_id = st.thread_id WHERE thr.processlist_id = 4
+2019-04-15T03:54:30.200404Z	    5 Query	SELECT st.* FROM performance_schema.events_stages_history_long st WHERE st.nesting_event_id = 0
+2019-04-15T03:54:30.311012Z	    5 Query	SELECT st.* FROM performance_schema.events_waits_history_long st WHERE st.nesting_event_id = 0
