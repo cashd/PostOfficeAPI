@@ -28,7 +28,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(dropoffPackage({'packageID': 9, 'facilityID': 3}))
+    print(packageReport())
 
 #create employee
 def testcase5():
@@ -82,21 +82,21 @@ def testcase11():
 
 #move from facility to truck
 def testcase12():
-    payload = {'packages': [12], 'truckID': 4, 'facilityID': 3}
+    payload = {'packages': [12], 'truckID': 5, 'facilityID': 5}
     r = requests.post('http://127.0.0.1:8000/facility/move', json=payload)
     print(r.text)
     print(r.headers)
 
 #deliver package
 def testcase13():
-    payload = {'packageID': 6, 'driverID': 4}
+    payload = {'packageID': 37, 'driverID': 4}
     r = requests.post('http://127.0.0.1:8000/truck/deliver', json=payload)
     print(r.text)
     print(r.headers)
 
 #move from truck to facility
 def testcase14():
-    payload = {'packages': [13, 14, 15], 'truckID': 4, 'facilityID': 2}
+    payload = {'packages': [37], 'truckID': 5, 'facilityID': 10}
     r = requests.post('http://127.0.0.1:8000/truck/travel', json=payload)
     print(r.text)
     print(r.headers)
@@ -121,16 +121,22 @@ def testcase17():
     print(r.headers)
 
 def testcase18():
-    payload = {'packageID': 12}
+    payload = {'packageID': 37}
     r = requests.post('http://127.0.0.1:8000/package/history', json=payload)
     print(r.text)
     print(r.headers)
 
 def testcase19():
-    payload = {'packageID': 20, 'facilityID': 3}
+    payload = {'packageID': 37, 'facilityID': 5}
     r = requests.post('http://127.0.0.1:8000/facility/checkin', json=payload)
+    print(r.text)
+    print(r.headers)
+#package report
+def testcase20():
+    payload = {}
+    r = requests.post('http://127.0.0.1:8000/package/report', json=payload)
     print(r.text)
     print(r.headers)
 
 if __name__ == '__main__':
-    testcase6()
+    testcase13()

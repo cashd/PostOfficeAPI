@@ -184,3 +184,19 @@ def getHistory(data):
             respBody['history'].append({'eventType': row[0], 'timeOfEvent': row[1], 'locationOfEvent': address})
     db.close()
     return respBody
+
+
+def packageReport():
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""SELECT delivery_status, COUNT(*) FROM package GROUP BY delivery_status;""")
+    results = cursor.fetchall()
+    cursor.execute("""SELECT SUM(postage_paid), AVG(postage_paid) FROM package;""")
+    stats = cursor.fetchone()
+    respBody = {'counts':[], 'sumPrice': float(stats[0]), 'avgPrice': float(stats[1])}
+    for row in results:
+        print(row[0])
+        print(row[1])
+        respBody['counts'].append( {'eventType': row[0], 'count': row[1]})
+    db.close()
+    return respBody
