@@ -47,7 +47,7 @@ def moveFromFacilityToTruck(data):
         cursor.execute("""INSERT INTO tracking (event_type, facility_fk_id, package_fk_id)
         VALUES( \'Left Facility\', {}, {})""".format(facilityID, row))
         db.commit()
-
+    db.close()
     return {'success': True}
 
 def deliverPackage(data):
@@ -60,7 +60,7 @@ def deliverPackage(data):
     cursor.execute("""INSERT INTO tracking (event_type, package_fk_id)
         VALUES( \'Delivered\', {})""".format(package))
     db.commit()
-
+    db.close()
     return {'success': True}
 
 def dropoffPackage(data):
@@ -76,8 +76,10 @@ def dropoffPackage(data):
         cursor.execute("""INSERT INTO tracking (event_type, facility_fk_id, package_fk_id)
             VALUES( \'Dropped Off\', {}, {})""".format(facilityID, package))
         db.commit()
+        db.close()
         return {'success': True}
     else:
+        db.close()
         return {'error': 'Facility is not a Drop Off facility.'}
 
 
@@ -93,7 +95,7 @@ def moveFromTruckToFacility(data):
         cursor.execute("""INSERT INTO tracking (event_type, facility_fk_id, package_fk_id)
         VALUES( \'Arrived to Facility\', {}, {})""".format(facilityID, row))
         db.commit()
-
+    db.close()
     return {'success': True}
 
 def getAllPackagesOnTruck(data):

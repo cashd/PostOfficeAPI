@@ -91,6 +91,7 @@ def createCustomer(request):
     {});""".format(password, id))
         db.commit()
     except Exception:
+        db.close()
         return False
 
     db.close()
