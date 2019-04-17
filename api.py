@@ -159,7 +159,10 @@ def customerInfo():
     data = request.json
     return make_response(jsonify(getCustomerinfo(data)), 200)
 
-
+@app.route('/customer/update', methods=['POST'])
+def customerUpdate():
+    data = request.json
+    return make_response(jsonify(updateCustomerinfo(data)), 200)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

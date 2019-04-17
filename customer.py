@@ -135,3 +135,33 @@ def getCustomerinfo(data):
 
     db.close()
     return respBody
+
+def updateCustomerinfo(data):
+    id = data['ID']
+    fname = data['firstName']
+    lname = data['lastName']
+    address = data['address']
+    city = data['city']
+    cityid = getCityID(city)
+    state = data['state']
+    stateid = getStateID(state)
+    zipcode = data['zip']
+    phone = data['phoneNum']
+    email = data['email']
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+
+    cursor = db.cursor()
+    cursor.execute("""UPDATE `customer` SET 
+                `customer_first_name` = \'{}\',
+                `customer_last_name` = \'{}\',
+                `customer_street_address` = \'{}\',
+                `city_id` = {},
+                `state_id` = {},
+                `customer_zip_code` = \'{}\',
+                `customer_phone_number` = \'{}\',
+                `customer_email` = \'{}\'
+                 WHERE customer_id = {};""".format(fname, lname, address, cityid, stateid, zipcode, phone, email, id))
+    db.commit()
+    db.close()
+    respBody = {'success': True}
+    return respBody

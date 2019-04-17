@@ -158,6 +158,13 @@ def testcase23():
     print(r.text)
     print(r.headers)
 
+def testcase24():
+    payload = {'ID': 38, 'firstName': 'Jonas', 'lastName': 'Salk', 'email': 'jsalk@nopolio.com',
+               'address': '1557 Vaccine Dr', 'city': 'Fort Worth', 'state': 'Texas', 'zip': '77782',
+               'phoneNum': '7775556455'}
+    r = requests.post('http://127.0.0.1:8000/customer/update', json=payload)
+    print(r.text)
+    print(r.headers)
 
 if __name__ == '__main__':
-    testcase23()
+    testcase24()
