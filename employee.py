@@ -139,3 +139,37 @@ def getEmployeeInfo(data):
 
     db.close()
     return respBody
+
+def updateEmployeeInfo(data):
+    id = data['ID']
+    fname = data['firstName']
+    lname = data['lastName']
+    position = data['position']
+    address = data['address']
+    email = data['workEmail']
+    city = data['city']
+    cityid = getCityID(city)
+    state = data['state']
+    stateid = getStateID(state)
+    phone = data['workPhoneNum']
+    zipcode = str(data['zip'])
+    salary = float(data['salary'])
+
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""UPDATE `employee` SET 
+    `employee_first_name` = \'{}\',
+     `employee_last_name` = \'{}\',
+     `employee_position` = \'{}\',
+     `employee_work_email` = \'{}\',
+     `employee_address` = \'{}\',
+     `city_id` = {},
+     `state_id` = {},
+     `employee_salary` = {},
+     `employee_zip_code` = \'{}\',
+     `employee_work_number` = \'{}\' WHERE `employee_id` = {} ;""".format(fname, lname, position, email, address, cityid,
+                                                                       stateid, salary, zipcode, phone, id))
+    db.commit()
+    respBody = {'success': True}
+    db.close()
+    return respBody

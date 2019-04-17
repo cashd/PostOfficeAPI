@@ -144,5 +144,14 @@ def testcase21():
     print(r.text)
     print(r.headers)
 
+def testcase22():
+    payload = {'ID': 33, 'firstName': 'Ricardo', 'lastName': 'Gonzalez', 'position': 'Driver', 'workEmail': 'rigo@usps.gov',
+               'address': '4578 New Town Rd', 'city': 'Houston', 'state': 'Texas', 'salary': '32500', 'zip': '77777',
+               'workPhoneNum': '7775557755'}
+    r = requests.post('http://127.0.0.1:8000/employee/update', json=payload)
+    print(r.text)
+    print(r.headers)
+
+
 if __name__ == '__main__':
-    testcase21()
+    testcase22()
