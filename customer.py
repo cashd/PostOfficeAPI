@@ -112,3 +112,26 @@ def createCustomer(request):
 
     db.close()
     return True
+
+def getCustomerinfo(data):
+    id = data['ID']
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+
+    cursor.execute("""SELECT `customer_first_name`,
+                `customer_last_name`,
+                `customer_street_address`,
+                `city_id`,
+                `state_id`,
+                `customer_zip_code`,
+                `customer_phone_number`,
+                `customer_email`
+                 FROM customer WHERE customer_id = {}""".format(id))
+    results = cursor.fetchone()
+
+    respBody = {'firstName': results[0], 'lastName': results[1], 'address': results[2], 'city': getCityFromCityID(results[3]),
+                'state': getStateFromStateID(results[4]), 'zip': results[5], 'phoneNum': results[6],
+                'email': results[7]}
+
+    db.close()
+    return respBody

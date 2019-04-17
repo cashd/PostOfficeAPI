@@ -154,6 +154,12 @@ def employeeUpdate():
     data = request.json
     return make_response(jsonify(updateEmployeeInfo(data)), 200)
 
+@app.route('/customer/info', methods=['POST'])
+def customerInfo():
+    data = request.json
+    return make_response(jsonify(getCustomerinfo(data)), 200)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
