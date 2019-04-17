@@ -1,6 +1,7 @@
 import pymysql.cursors
 from customer import getStateID
 from customer import getCityID
+from customer import getCityFromCityID, getStateFromStateID
 from auth import isManager
 
 def getEmpIDfromEmail(email):
@@ -113,4 +114,28 @@ def getAllEmployeesInFacility(id):
 
     print(result)
     print(respBody)
+    return respBody
+
+def getEmployeeInfo(data):
+    id = data['ID']
+
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""SELECT `employee_first_name`,
+     `employee_last_name`,
+     `employee_position`,
+     `employee_work_email`,
+     `employee_address`,
+     `city_id`,
+     `state_id`,
+     `employee_salary`,
+     `employee_zip_code`,
+     `employee_work_number` FROM employee WHERE employee_id = {};""".format(id))
+    result = cursor.fetchone()
+
+    respBody = {'firstName': result[0], 'lastName': result[1], 'position': result[2], 'workEmail': result[3],
+                'address': result[4], 'city': getCityFromCityID(result[5]), 'state': getStateFromStateID(result[6]),
+                'salary': float(result[7]), 'zip': result[8], 'workPhoneNum': result[9]}
+
+    db.close()
     return respBody

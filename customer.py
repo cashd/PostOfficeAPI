@@ -41,6 +41,22 @@ def getCityID(city):
     db.close()
     return cityid
 
+def getStateFromStateID(stateID):
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""select state_name from state_lookup_table where state_id = {};""".format(stateID))
+    state = str(cursor.fetchone()[0])
+    db.close()
+    return state
+
+def getCityFromCityID(cityID):
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""select city from city_lookup_table where city_id = {};""".format(cityID))
+    city = str(cursor.fetchone()[0])
+    db.close()
+    return city
+
 def createCustomer(request):
     data = request.json
     fname = data['firstName']

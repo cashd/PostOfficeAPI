@@ -144,5 +144,11 @@ def packageCheckin():
 def getPackageReport():
     return make_response(jsonify(packageReport()), 200)
 
+@app.route('/employee/info', methods=['POST'])
+def employeeInfo():
+    data = request.json
+    return make_response(jsonify(getEmployeeInfo(data)), 200)
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

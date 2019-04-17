@@ -28,7 +28,7 @@ def testcase3():
 
 #test random functions here
 def testcase4():
-    print(packageReport())
+    print(getEmployeeInfo({'ID': 33}))
 
 #create employee
 def testcase5():
@@ -54,7 +54,7 @@ def testcase7():
 
 #create package
 def testcase8():
-    payload = {'senderID': 8, 'recipientEmail': 'new@gmail.com', 'recipientAddress': '456 New Rd', 'weight': 5.5}
+    payload = {'senderID': 13, 'recipientEmail': 'new@gmail.com', 'recipientAddress': '456 New Rd', 'weight': 5.5}
     r = requests.post('http://127.0.0.1:8000/customer/newPackage', json=payload)
     print(r.text)
     print(r.headers)
@@ -138,5 +138,11 @@ def testcase20():
     print(r.text)
     print(r.headers)
 
+def testcase21():
+    payload = {'ID': 1}
+    r = requests.post('http://127.0.0.1:8000/employee/info', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase13()
+    testcase21()
