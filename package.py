@@ -208,10 +208,10 @@ def packageRevenueReport():
     date(date_received)
     order by Day;""")
     results = cursor.fetchall()
-    respBody = {'Revenue By Day': []}
+    respBody = {'RevenueDay': []}
     for row in results:
         print(row[0], row[1])
         #print(row[1])
-        respBody['Revenue By Day'].append({'Date': row[0], 'Postage Revenue': float(row[1])})
+        respBody['RevenueDay'].append({'Date': row[0], 'Revenue': float(row[1])})
     db.close()
     return respBody
