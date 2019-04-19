@@ -166,5 +166,11 @@ def testcase24():
     print(r.text)
     print(r.headers)
 
+def testcase25():
+    payload = {}
+    r = requests.post('http://127.0.0.1:8000/package/reportRev', json=payload)
+    print(r.text)
+    print(r.headers)
+
 if __name__ == '__main__':
-    testcase24()
+    testcase25()

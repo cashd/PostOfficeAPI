@@ -193,10 +193,25 @@ def packageReport():
     results = cursor.fetchall()
     cursor.execute("""SELECT SUM(postage_paid), AVG(postage_paid) FROM package;""")
     stats = cursor.fetchone()
-    respBody = {'counts':[], 'sumPrice': float(stats[0]), 'avgPrice': float(stats[1])}
+    respBody = {'counts': [], 'sumPrice': float(stats[0]), 'avgPrice': float(stats[1])}
     for row in results:
         print(row[0])
         print(row[1])
-        respBody['counts'].append( {'eventType': row[0], 'count': row[1]})
+        respBody['counts'].append({'eventType': row[0], 'count': row[1]})
+    db.close()
+    return respBody
+
+def packageRevenueReport():
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""SELECT date(date_received) AS Day, SUM(postage_paid) FROM package GROUP BY
+    date(date_received)
+    order by Day;""")
+    results = cursor.fetchall()
+    respBody = {'Revenue By Day': []}
+    for row in results:
+        print(row[0], row[1])
+        #print(row[1])
+        respBody['Revenue By Day'].append({'Date': row[0], 'Postage Revenue': float(row[1])})
     db.close()
     return respBody
