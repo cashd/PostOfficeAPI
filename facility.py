@@ -45,9 +45,9 @@ WHERE `tracking`.`event_type` = 'Arrived to Facility' AND `tracking`.`facility_f
 AND MONTH(time_of_event) = {}
 GROUP BY DATE(`tracking`.`time_of_event`);""".format(facilityID, month))
     results = cursor.fetchall()
-    respBody = {'facilityEvents': []}
+    respBody = {'list': []}
     for row in results:
         print(row[0], row[1])
-        respBody['facilityEvents'].append({'Date': row[0], 'count': row[1]})
+        respBody['list'].append({'Date': row[0], 'value': row[1]})
     db.close()
     return respBody

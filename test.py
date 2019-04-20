@@ -173,7 +173,7 @@ def testcase25():
     print(r.headers)
 
 def testcase26():
-    payload = {'facilityID': 6, 'month': 4}
+    payload = {'facilityID': 5, 'month': 4}
     r = requests.post('http://127.0.0.1:8000/facility/report', json=payload)
     print(r.text)
     print(r.headers)
