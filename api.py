@@ -168,5 +168,10 @@ def customerUpdate():
 def getPackageRevenueReport():
     return make_response(jsonify(packageRevenueReport()), 200)
 
+@app.route('/facility/report', methods=['POST'])
+def getFacilityReport():
+    data = request.json
+    return make_response(jsonify(facilityReport(data)), 200)
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
