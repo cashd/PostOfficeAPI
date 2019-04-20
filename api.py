@@ -166,7 +166,8 @@ def customerUpdate():
 
 @app.route('/package/reportRev', methods=['POST'])
 def getPackageRevenueReport():
-    return make_response(jsonify(packageRevenueReport()), 200)
+    data = request.json
+    return make_response(jsonify(packageRevenueReport(data)), 200)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
