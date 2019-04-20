@@ -203,16 +203,16 @@ def packageReport():
 
 #def packageRevenueReport():
 def packageRevenueReport(data):
-    monthId = data['monthId']
+    monthId = data['month']
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
     cursor.execute("""SELECT date(date_received) AS DayOfMonth, SUM(postage_paid) as Revenue FROM package
     where month(date_received) = {} GROUP BY date(date_received) order by DayOfMonth;;""".format(monthId))
     results = cursor.fetchall()
-    respBody = {'RevenueForMonth': []}
+    respBody = {'list': []}
     for row in results:
         print(row[0])
         print(row[1])
-        respBody['RevenueForMonth'].append({'Date': row[0], 'Revenue': float(row[1])})
+        respBody['list'].append({'Date': row[0], 'value': float(row[1])})
     db.close()
     return respBody
