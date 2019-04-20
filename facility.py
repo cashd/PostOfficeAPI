@@ -32,3 +32,22 @@ def getFacilityType(data):
     result = cursor.fetchone()[0]
     db.close()
     return {'type': result}
+
+def facilityReport(data):
+    facilityID = data['facilityID']
+    month = data['month']
+    db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
+    cursor = db.cursor()
+    cursor.execute("""SELECT DATE(`tracking`.`time_of_event`) AS `Date`,
+COUNT(*) AS `Packages Arrived`
+FROM `PostOffice`.`tracking`
+WHERE `tracking`.`event_type` = 'Arrived to Facility' AND `tracking`.`facility_fk_id`= {}
+AND MONTH(time_of_event) = {}
+GROUP BY DATE(`tracking`.`time_of_event`);""".format(facilityID, month))
+    results = cursor.fetchall()
+    respBody = {'facilityEvents': []}
+    for row in results:
+        print(row[0], row[1])
+        respBody['facilityEvents'].append({'Date': row[0], 'count': row[1]})
+    db.close()
+    return respBody
