@@ -201,17 +201,18 @@ def packageReport():
     db.close()
     return respBody
 
-def packageRevenueReport():
+#def packageRevenueReport():
+def packageRevenueReport(data):
+    monthId = data['monthId']
     db = pymysql.connect('178.128.64.18', 'team9', 'team9PostOffice', 'PostOffice')
     cursor = db.cursor()
-    cursor.execute("""SELECT date(date_received) AS Day, SUM(postage_paid) FROM package GROUP BY
-    date(date_received)
-    order by Day;""")
+    cursor.execute("""SELECT date(date_received) AS DayOfMonth, SUM(postage_paid) as Revenue FROM package
+    where month(date_received) = {} GROUP BY date(date_received) order by DayOfMonth;;""".format(monthId))
     results = cursor.fetchall()
-    respBody = {'RevenueDay': []}
+    respBody = {'RevenueForMonth': []}
     for row in results:
-        print(row[0], row[1])
-        #print(row[1])
-        respBody['RevenueDay'].append({'Date': row[0], 'Revenue': float(row[1])})
+        print(row[0])
+        print(row[1])
+        respBody['RevenueForMonth'].append({'Date': row[0], 'Revenue': float(row[1])})
     db.close()
     return respBody
