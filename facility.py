@@ -41,7 +41,7 @@ def facilityReport(data):
     cursor.execute("""SELECT DAY(`tracking`.`time_of_event`) AS `Date`,
 COUNT(*) AS `Packages Arrived`
 FROM `PostOffice`.`tracking`
-WHERE `tracking`.`event_type` = 'Arrived to Facility' AND `tracking`.`facility_fk_id`= {}
+WHERE (`tracking`.`event_type` = 'Arrived to Facility' OR `tracking`.`event_type` = 'Dropped Off') AND `tracking`.`facility_fk_id`= {}
 AND MONTH(time_of_event) = {}
 GROUP BY DAY(`tracking`.`time_of_event`);""".format(facilityID, month))
     results = cursor.fetchall()
