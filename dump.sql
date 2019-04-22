@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: 
 -- ------------------------------------------------------
--- Server version	5.7.25-0ubuntu0.18.04.2
+-- Server version	5.7.25-0ubuntu0.18.04.2-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,13 +31,10 @@ DROP TABLE IF EXISTS `auth_password_customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auth_password_customer` (
-  `customer_pw_id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_password` varchar(45) DEFAULT NULL,
+  `customer_password` varchar(30) DEFAULT NULL,
   `customer_fk_pw_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`customer_pw_id`),
-  UNIQUE KEY `customer_pw_id_UNIQUE` (`customer_pw_id`),
-  KEY `customer_fk_pw_id_idx` (`customer_fk_pw_id`),
-  CONSTRAINT `customer_fk_pw_id` FOREIGN KEY (`customer_fk_pw_id`) REFERENCES `customer` (`customer_pw_id`) ON DELETE SET NULL ON UPDATE CASCADE
+  UNIQUE KEY `customer_fk_pw_id_UNIQUE` (`customer_fk_pw_id`),
+  KEY `customer_fk_pw_id_idx` (`customer_fk_pw_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -47,61 +44,33 @@ CREATE TABLE `auth_password_customer` (
 
 LOCK TABLES `auth_password_customer` WRITE;
 /*!40000 ALTER TABLE `auth_password_customer` DISABLE KEYS */;
+INSERT INTO `auth_password_customer` VALUES ('pass',1),('pass',6),('pass',8),('pass',13),('pass',25),('pass',26),('pass',29),('pass',30),('pass',31),('pass',32),('pass',2),('pass',38),('pass',39),('pass',40),('pass',41),('pass',42);
 /*!40000 ALTER TABLE `auth_password_customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `auth_password_facility`
+-- Table structure for table `auth_password_employee`
 --
 
-DROP TABLE IF EXISTS `auth_password_facility`;
+DROP TABLE IF EXISTS `auth_password_employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `auth_password_facility` (
-  `facility_pw_id` int(11) NOT NULL AUTO_INCREMENT,
-  `facility_password` varchar(45) DEFAULT NULL,
-  `facility_fk_pw_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`facility_pw_id`),
-  UNIQUE KEY `employee_pw_id_UNIQUE` (`facility_pw_id`),
-  KEY `facility_fk_pw_id_idx` (`facility_fk_pw_id`),
-  CONSTRAINT `facility_fk_pw_id` FOREIGN KEY (`facility_fk_pw_id`) REFERENCES `facility` (`facility_pw_id`) ON DELETE SET NULL ON UPDATE CASCADE
+CREATE TABLE `auth_password_employee` (
+  `employee_id_fk` int(11) NOT NULL,
+  `employee_password` varchar(30) NOT NULL,
+  `employee_role` enum('Facility','Driver','Supervisor','Other') DEFAULT NULL,
+  UNIQUE KEY `employee_id_fk_UNIQUE` (`employee_id_fk`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `auth_password_facility`
+-- Dumping data for table `auth_password_employee`
 --
 
-LOCK TABLES `auth_password_facility` WRITE;
-/*!40000 ALTER TABLE `auth_password_facility` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_password_facility` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `auth_password_vehicle`
---
-
-DROP TABLE IF EXISTS `auth_password_vehicle`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `auth_password_vehicle` (
-  `vehicle_pw_id` int(11) NOT NULL,
-  `vehicle_password` varchar(45) DEFAULT NULL,
-  `vehicle_fk_pw_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`vehicle_pw_id`),
-  UNIQUE KEY `vehicle_pw_id_UNIQUE` (`vehicle_pw_id`),
-  KEY `vehicle_fk_pw_id_idx` (`vehicle_fk_pw_id`),
-  CONSTRAINT `vehicle_fk_pw_id` FOREIGN KEY (`vehicle_fk_pw_id`) REFERENCES `vehicle` (`vehicle_pw_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `auth_password_vehicle`
---
-
-LOCK TABLES `auth_password_vehicle` WRITE;
-/*!40000 ALTER TABLE `auth_password_vehicle` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_password_vehicle` ENABLE KEYS */;
+LOCK TABLES `auth_password_employee` WRITE;
+/*!40000 ALTER TABLE `auth_password_employee` DISABLE KEYS */;
+INSERT INTO `auth_password_employee` VALUES (1,'pass','Supervisor'),(2,'pass','Driver'),(3,'pass','Facility'),(4,'pass','Driver'),(9,'pass','Supervisor'),(21,'pass','Facility'),(28,'pass','Driver'),(29,'pass','Driver'),(31,'pass','Facility'),(32,'pass','Facility'),(33,'pass','Driver'),(34,'pass','Driver'),(35,'pass','Driver'),(36,'pass','Driver'),(37,'pass','Driver'),(38,'pass','Driver'),(39,'pass','Supervisor'),(40,'pass','Driver'),(41,'pass','Supervisor'),(47,'pass','Supervisor'),(48,'pass','Supervisor'),(54,'pass','Supervisor'),(55,'pass','Facility'),(56,'pass','Driver'),(57,'pass','Driver'),(58,'pass','Supervisor'),(59,'pass','Driver'),(60,'pass','Driver'),(61,'pass','Facility'),(62,'pass','Supervisor'),(63,'pass','Driver'),(64,'pass','Driver'),(66,'pass','Facility'),(67,'pass','Supervisor'),(68,'pass','Driver'),(69,'pass','Driver'),(72,'pass','Supervisor'),(73,'pass','Driver'),(74,'pass','Driver'),(78,'pass','Supervisor'),(79,'pass','Driver'),(80,'pass','Driver'),(83,'pass','Supervisor'),(84,'pass','Driver'),(85,'pass','Driver'),(86,'pass','Facility'),(88,'pass','Driver'),(89,'pass','Driver'),(90,'pass','Supervisor'),(97,'pass','Driver'),(98,'pass','Driver'),(99,'pass','Facility'),(100,'pass','Facility'),(101,'pass','Facility');
+/*!40000 ALTER TABLE `auth_password_employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -116,7 +85,7 @@ CREATE TABLE `city_lookup_table` (
   `city` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`city_id`),
   UNIQUE KEY `city_id_UNIQUE` (`city_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lookup city table that can be accessed by the facility, package, and customer tables using the city_id';
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=latin1 COMMENT='Lookup city table that can be accessed by the facility, package, and customer tables using the city_id';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +94,7 @@ CREATE TABLE `city_lookup_table` (
 
 LOCK TABLES `city_lookup_table` WRITE;
 /*!40000 ALTER TABLE `city_lookup_table` DISABLE KEYS */;
+INSERT INTO `city_lookup_table` VALUES (1,'Houston'),(2,'Austin'),(3,'Dallas'),(4,'Galveston'),(5,'Montgomery'),(6,'Juneau'),(7,'Little Rock'),(8,'Sacramento'),(9,'Denver'),(10,'Hartford'),(11,'Dover'),(12,'Tallahassee'),(13,'Atlanta'),(14,'Honolulu'),(15,'Boise'),(16,'Springfield'),(17,'Indianapolis'),(18,'Des Moines'),(19,'Topeka'),(20,'Frankfort'),(21,'Baton Rouge'),(22,'Augusta'),(23,'Annapolis'),(24,'Boston'),(25,'Lansing'),(26,'St. Paul'),(27,'Jackson'),(28,'Jefferson City'),(29,'Helena'),(30,'Lincoln'),(31,'Carson City'),(32,'Concord'),(33,'Trenton'),(34,'Santa Fe'),(35,'Albany'),(36,'Raleigh'),(37,'Bismarck'),(38,'Columbus'),(39,'Oklahoma City'),(40,'Salem'),(41,'Harrisburg'),(42,'Providence'),(43,'Columbia'),(44,'Pierre'),(45,'Nashville'),(46,'Salt Lake City'),(47,'Montpelier'),(48,'Richmond'),(49,'Olympia'),(50,'Charleston'),(51,'Madison'),(52,'Cheyenne'),(53,'San Antonio'),(54,'Fort Worth'),(55,'El Paso'),(56,'Arlington'),(57,'Corpus Christi'),(58,'Plano'),(59,'Laredo'),(60,'Lubbock'),(61,'Irving'),(62,'Garland'),(63,'Amarillo'),(64,'Grand Prairie'),(65,'Brownsville'),(66,'McKinney'),(67,'Frisco'),(68,'Pasadena'),(69,'Killeen'),(70,'Mesquite'),(71,'McAllen'),(72,'Waco'),(73,'Denton'),(74,'Midland'),(75,'Carrollton'),(76,'Round Rock'),(77,'Abilene'),(78,'Pearland'),(79,'Beaumont'),(80,'Odessa'),(81,'Richardson'),(82,'The Woodlands'),(83,'College Station'),(84,'Lewisville'),(85,'Tyler'),(86,'League City'),(87,'Wichita Falls'),(88,'Allen'),(89,'San Angelo'),(90,'Edinburg'),(91,'Sugar Land'),(92,'Mission'),(93,'Conroe'),(94,'Bryan'),(95,'Longview'),(96,'Pharr'),(97,'New Braunfels'),(98,'Baytown'),(99,'Flower Mound'),(100,'New Orleans'),(101,'NOT ENTERED');
 /*!40000 ALTER TABLE `city_lookup_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,18 +115,14 @@ CREATE TABLE `customer` (
   `customer_zip_code` varchar(10) NOT NULL,
   `customer_phone_number` varchar(15) DEFAULT NULL,
   `customer_email` varchar(45) DEFAULT NULL,
-  `customer_pw_id` int(11) DEFAULT NULL,
   `mail_hold_status` tinyint(1) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `package_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`customer_id`),
-  UNIQUE KEY `city_id_UNIQUE` (`city_id`),
-  UNIQUE KEY `state_id_UNIQUE` (`state_id`),
   UNIQUE KEY `customer_email_UNIQUE` (`customer_email`),
-  UNIQUE KEY `customer_pw_id_UNIQUE` (`customer_pw_id`),
   KEY `employee_id_idx` (`employee_id`),
   CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Email will be used as login tool : needs to be unique. Although, the customer can also track the package without logging in with an email. They just will not be able to see any details\\nPhone number is 15 varchar and front end will accept only integers (calling overseas is at most 15).Package will be shipped domestically; contact may have an overseas number though. Zip code front end will accept integer for now since we are only interested in tracking domestic packages; using varchar to handle if expanding to international. State is 2 letter abbreviation for US for now';
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1 COMMENT='Email will be used as login tool : needs to be unique. Although, the customer can also track the package without logging in with an email. They just will not be able to see any details\\nPhone number is 15 varchar and front end will accept only integers (calling overseas is at most 15).Package will be shipped domestically; contact may have an overseas number though. Zip code front end will accept integer for now since we are only interested in tracking domestic packages; using varchar to handle if expanding to international. State is 2 letter abbreviation for US for now';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,6 +131,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (1,'John','Smithy','3318 Clay Rd',1,43,'77080','7135552218','js@hotmail.com',NULL,NULL,NULL),(2,'Tim','Cook','123 Main St',2,43,'77777','4325556565','tcook@apple.com',NULL,NULL,NULL),(6,'Cash','DeLeon','123 GH',1,43,'77259','324502345','money@gmail.com',NULL,NULL,NULL),(8,'Tricia','Johnson','4411 Main',2,43,'77882','321555345','tjo@gmail.com',NULL,NULL,NULL),(13,'John','Doe','4412 Providence',3,43,'77559','3245552345','jdoe@gmail.com',NULL,NULL,NULL),(25,'George','Walker','13 Young Lang ',1,43,'77023','8327293435','gg@gmail.com',NULL,NULL,NULL),(26,'Exter','Smith','123 Main St. #456',1,43,'77015','832832832','exter@gmail.com',NULL,NULL,NULL),(28,'###','###','123 White House St.',0,0,'###',NULL,'bush@gmail.com',NULL,NULL,NULL),(29,'Rosabel','Alvin','7212 Clark St',3,43,'77291','8325556978','ra@gmail.com',NULL,NULL,NULL),(30,'Alden','Padmore','9888 Greystone Dr',1,43,'77035','7135551315','ap@gmail.com',NULL,NULL,NULL),(31,'Thaddeus','Cannon','507 Chapel Rd',2,43,'77994','8445556121','tc@hotmail.com',NULL,NULL,NULL),(32,'Jean','Barrett','7428 Chestnut Dr',3,43,'77292','9245556535','jb@hotmail.com',NULL,NULL,NULL),(33,'###','###','123 Main St.',0,0,'###',NULL,'bob@gmail.com',NULL,NULL,NULL),(34,'###','###','456 New Rd',0,0,'###',NULL,'new@gmail.com',NULL,NULL,NULL),(35,'###','###','123 Monkey St.',0,0,'###',NULL,'gerogecurios@gmail.com',NULL,NULL,NULL),(36,'###','###','22 Main ST.',0,0,'###',NULL,'123@gmail.com',NULL,NULL,NULL),(37,'###','###','123 Cheery',0,0,'###',NULL,'joejimmy@gmail.com',NULL,NULL,NULL),(38,'Jonas','Salk','1557 Vaccine Dr',54,43,'77782','7775556455','jsalk@nopolio.com',NULL,NULL,NULL),(39,'Julio','Martinez','123 North Shore St. #123',1,43,'77015','8321231234','jmarr@gmail.com',NULL,NULL,NULL),(40,'Tracy','Shoemaker','1234 ForestName St ',82,43,'77382','281-555-5555','tshoe@gmail.com',NULL,NULL,NULL),(41,'Diana','Marshall','456 AnotherStreet ',1,43,'77007','281-111-2228','dmarsh@gmail.com',NULL,NULL,NULL),(42,'Mikey','Marshall','42 Orchard Pines Place ',1,43,'77382','123-425-8965','mikem@gmail.com',NULL,NULL,NULL),(43,'###','###','123 Main St.',0,0,'###',NULL,'sharons@gmail.com',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,10 +147,10 @@ CREATE TABLE `employee` (
   `employee_first_name` varchar(30) NOT NULL,
   `employee_last_name` varchar(30) NOT NULL,
   `employee_position` enum('Clerk','Carrier','Driver','Supervisor','Security') NOT NULL,
-  `employee_work_number` varchar(15) NOT NULL,
+  `employee_work_number` varchar(15) DEFAULT NULL,
   `employee_work_email` varchar(45) NOT NULL,
-  `employee_start_date` date NOT NULL COMMENT 'Chose DATE data type since chances are we do not need the exact time they started, only the actual date',
-  `employee_salary` decimal(9,2) NOT NULL,
+  `employee_start_date` date DEFAULT NULL COMMENT 'Chose DATE data type since chances are we do not need the exact time they started, only the actual date',
+  `employee_salary` decimal(9,2) DEFAULT NULL,
   `employee_address` varchar(45) NOT NULL,
   `city_id` int(4) NOT NULL,
   `state_id` int(2) NOT NULL,
@@ -194,13 +161,11 @@ CREATE TABLE `employee` (
   `facility_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`employee_id`),
   UNIQUE KEY `employee_work_email_UNIQUE` (`employee_work_email`),
-  UNIQUE KEY `city_id_UNIQUE` (`city_id`),
-  UNIQUE KEY `state_id_UNIQUE` (`state_id`),
   KEY `vehicle_fk_id_idx` (`vehicle_fk_id`),
   KEY `facility_fk_id_idx` (`facility_id`),
   KEY `facility_id_idx` (`facility_id`),
   CONSTRAINT `facility_id` FOREIGN KEY (`facility_id`) REFERENCES `facility` (`facility_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Positon is ENUM value of the choices to be used in the front end for a dropdown selection. Salary allows to decimal places, and the DATE datatype is used for the start date and the birthdate that can potentially be used for employee information. Business rule of birthdate - no employee should be younger than 18. Added a CHECK constraint to the employee_salary>0 - does not seem to work';
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=latin1 COMMENT='Positon is ENUM value of the choices to be used in the front end for a dropdown selection. Salary allows to decimal places, and the DATE datatype is used for the start date and the birthdate that can potentially be used for employee information. Business rule of birthdate - no employee should be younger than 18 and entry of an employee with a birthdate younger than 18 will be rejected by a trigger. Added a CHECK constraint to the employee_salary>0 - does not seem to work';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,8 +174,29 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (1,'Sally','Carta','Supervisor','7135552424','sc@usps.gov','2009-10-10',60000.00,'2323 Fondren',2,43,'78702','8324563728','1984-12-03',NULL,2),(2,'Mario','Earnhardt','Driver','7135558888','fastguy@gmail.com','2012-01-30',41000.00,'5050 Willowbend',1,43,'77035',NULL,'1980-03-24',3,1),(3,'Susan','Sorter','Clerk','2815557767','suso@gmail.com','2017-05-15',38000.00,'2020 Academy',3,43,'75001',NULL,'1966-02-04',NULL,4),(4,'Ralph','Wreckit','Driver','1112223333','breakit@gmail.com','2017-05-31',41000.00,'1234 Fast Lane',1,43,'77035','2223334444','1990-03-13',14,1),(5,'Tony','SortsIt','Clerk','6666666666','sorter@usps.gov','2018-02-03',39000.00,'345 My Lane',1,43,'77020','1234567890','1992-03-10',NULL,1),(9,'Bob','SuperMan','Supervisor','1234324567','bobsu@usps.gov','2017-05-15',59000.00,'123 Oak Ridge',53,43,'78202','234564537','1981-04-05',NULL,6),(21,'Tammy','Thompson','Clerk','4445556666','tamtom@usps.gov','2019-04-01',28000.00,'1234 Main St',2,43,'78709','2145555555','2000-04-01',NULL,2),(28,'Jimmy','Doe','Driver','2815676543','jimmydoe@usps.gov','2019-05-01',30000.00,'456 My Lane',1,43,'77023','2142435676','1990-03-13',3,1),(29,'Carlos','Morales','Driver','2811234325','carlosm@usps.gov','1991-04-01',31000.00,'123 Oaks Lane',2,43,'78717','2147898765','1991-12-01',23,2),(32,'Sam','Verlander','Clerk','123123123','sam@usps.gov','2000-01-02',33000.00,'123 Main',53,43,'78112','2147658948','1980-03-02',NULL,6),(33,'Ricardo','Gonzalez','Driver','7775557755','rigo@usps.gov','2010-03-03',32500.00,'4578 New Town Rd',1,43,'77777','2148976543','1987-10-19',1,2),(34,'Stacey','Ewing','Driver','2145678901','staceye@usps.gov','2015-03-01',31000.00,'123 Oak Run',3,43,'75019','2142456789','1995-11-02',2,4),(35,'Jared','Ewing','Driver','2145678902','jaredew@usps.gov','2015-03-01',31000.00,'123 Oak Run',3,43,'75080','2142342310','1994-08-04',10,4),(36,'Gary','Larry','Driver','33333335','glarry@usps.gov','2015-04-04',33000.00,'467 Jan St',54,43,'77048','2149873845','1993-10-15',9,5),(37,'Carmelita','Gonzalez','Driver','2143678972','carmelg@usps.gov','2016-02-01',31000.00,'184 Market St',53,43,'78109','8208987654','1995-01-01',21,6),(38,'Jorge','Escondido','Driver','2145625673','jorgee@usps.gov','2016-02-15',31000.00,'2345 Carmel Dr',53,43,'78202','8209876540','1992-03-04',20,6),(39,'Rocky','Cornell','Supervisor','9815552433','rc@usps.gov','2012-06-12',60000.00,'798 Pearl Drive',1,43,'77007',NULL,'1990-04-21',NULL,1),(40,'Vicky','Stone','Driver','2143872949','vstone@usps.gov','2010-05-04',35250.00,'290 Lewis Ln',54,43,'77023','2143098877','1985-12-07',5,5),(41,'Eliza','Francis','Supervisor','9945552654','ef@usps.gov','2006-08-22',65000.00,'770 Glenlake St',54,43,'77078',NULL,'1986-07-30',NULL,5),(47,'Tom','Thompson','Clerk','2144445556','tomtom@usps.gov','2012-09-03',32500.00,'293 Lewis Lane',54,43,'77002','2413334455','1975-07-31',NULL,5),(48,'Michael','Campbell','Supervisor','2146756543','mikec@usps.gov','2010-02-03',65000.00,'183 Manor Lane',3,43,'75083','2419808909','1965-09-02',NULL,4),(49,'Andrea','Baker','Clerk','8324343434','andreab@usps.gov','2018-04-05',30000.00,'824 North Drive',1,43,'77008','7034513109','1979-05-06',NULL,1),(50,'Magnum','Uzman','Clerk','2816788767','magnau@usps.gov','2008-05-06',30000.00,'123 Pecan St',2,43,'78702','2143533535','1980-11-12',NULL,2),(51,'George','Douglas','Clerk','2143334434','georged@usps.gov','2002-03-09',320000.00,'132 Shenandoah',53,43,'78203','8203454545','1967-09-08',NULL,6),(52,'Marlo','Thomas','Clerk','2145656565','marlot@usps.gov','2011-03-04',35000.00,'345 Nob Hill',3,43,'75098','2143434244','1966-05-06',NULL,4),(53,'Sharon','Miller','Clerk','7135556595','sharonm@usps.gov','2011-03-04',32500.00,'456 Carlton Way',54,43,'77003','2143339999','1964-04-05',NULL,5),(54,'James','Morales','Supervisor','5123334455','jamesm@usps.gov','2015-10-02',58000.00,'123 Peak Lookout',2,43,'78741','5124444444','1960-02-12',NULL,3),(55,'Jane','Jefferson','Clerk','5123334456','janej@usps.gov','2015-12-02',33000.00,'234 Sabine Dr',2,43,'78742','5123333333','1963-03-05',NULL,3),(56,'Walter','Nelson','Driver','5123334457','waltern@usps.gov','2015-12-12',30000.00,'145 Grapeland Dr',2,43,'78741','5124445555','1965-12-12',7,3),(57,'Jamie','Jackson','Driver','5123334458','jamiej@usps.gov','2015-12-12',30000.00,'845 Lamar',2,43,'78741','5124446666','1970-11-11',8,3),(58,'Anne','Knight','Supervisor','4702222222','annek@usps.gov','2017-09-08',60000.00,'123 Bucktown',13,10,'30303','4705555555','1976-04-05',NULL,7),(59,'Clayton','Wilson','Driver','4701122233','clayw@usps.gov','2017-09-12',30000.00,'456 Lambest Ct',13,10,'30302','4706666666','1990-03-14',11,7),(60,'Beth','Williams','Driver','4704445555','bethw@usps.gov','2017-10-11',30000.00,'145 14th Street',13,10,'30300','4704444555','1989-03-04',12,7),(61,'Austin','Morris','Clerk','4701111111','austinm@usps.gov','2017-11-12',31000.00,'156 15th Street',13,10,'30300','4705555666','1987-05-06',NULL,7),(62,'Kimmi','Dawson','Supervisor','8509999999','kimd@usps.gov','2017-12-12',61000.00,'123 Madison',12,9,'32303','8503232323','1965-04-30',NULL,8),(63,'Chris','Reed','Driver','8507878787','chrisr@usps.gov','2017-12-01',31000.00,'234 Duval',12,9,'32303','8503333332','1970-03-02',13,8),(64,'Joy','Sanderson','Driver','8508989898','joys@usps.gov','2017-12-03',31000.00,'345 Gadsden',12,9,'32030','8504545454','1975-06-06',16,8),(65,'Lindsay','Hayes','Clerk','8501231232','lindsayh@usps.gov','2017-12-14',32000.00,'123 Pensacola',12,9,'32030','8504445555','1985-07-16',NULL,8),(66,'Lara','Harris','Clerk','8501456541','larah@usps.gov','2017-12-15',32000.00,'345 Bloxham',12,9,'32030','8504444446','1987-10-19',NULL,8),(67,'Christine','Murphy','Supervisor','4098989898','christinem@usps.gov','2012-03-04',61000.00,'123 10 Mile Rd',4,43,'77551','4095656565','1970-06-08',NULL,9),(68,'John','Jones','Driver','4098989888','johnj@usps.gov','2012-03-31',31000.00,'234 14th Street',4,43,'77551','4096666555','1975-06-09',4,9),(69,'Kendall','Cooper','Driver','4095656565','kendallc@usps.gov','2012-04-06',31000.00,'564 13th Street',4,43,'77550','4098888999','1977-05-06',6,9),(70,'Andrea','Marshall','Clerk','4097777888','andream@usps.gov','2012-06-07',32000.00,'123 16th Street',4,43,'77550','4093333222','1975-04-07',NULL,9),(71,'Scott','Godoy','Clerk','4098888899','scottg@usps.gov','2012-05-04',32000.00,'234 15th Street',4,43,'77550','4093332233','1976-07-04',NULL,9),(72,'Margaret','Smith','Supervisor','4054444555','margs@usps.gov','2010-06-07',61000.00,'123 Grand Avenue',39,36,'73071','5804444455','1970-05-04',NULL,10),(73,'Alexandria','Cortez','Driver','4057777788','alexc@usps.gov','2011-01-15',31000.00,'234 Central Avenue',39,36,'73071','5805555444','1980-10-12',22,10),(74,'Frank','Cheng','Driver','4057778888','frankc@usps.gov','2011-01-18',31000.00,'345 NW 4th Street',39,36,'73071','5804454445','1983-11-15',24,10),(75,'Alana','Bass','Clerk','4058899885','alanab@usps.gov','2012-01-05',32000.00,'123 Walker St',39,36,'73071','5802221112','1985-03-08',NULL,10),(76,'Robert','Leeds','Clerk','4056666555','roberl@usps.gov','2012-01-05',32000.00,'734 15th Street',39,36,'73071','5802221111','1987-04-03',NULL,10),(78,'Mike','Camel','Supervisor','9151112222','mikeca@usps.gov','2009-10-12',61000.00,'123 Dyer St',55,43,'79902','9152222222','1972-04-02',NULL,11),(79,'Elva','Moure','Driver','9155554444','elvam@usps.gov','2010-06-07',31000.00,'234 Hondo Pass',55,43,'79901','9054444222','1980-06-08',25,11),(80,'Jesus','Brown','Driver','9152222111','jesusb@usps.gov','2018-10-19',31000.00,'123 Diana Dr',55,43,'79901','9055555666','1979-11-18',26,11),(81,'Aaron','Garcia','Clerk','9154444455','aarong@usps.gov','2012-12-12',32000.00,'234 Howard St',55,43,'79901','9052222233','1977-10-17',NULL,11),(82,'Alice','Wright','Clerk','9054445554','alicew@usps.gov','2013-11-19',32000.00,'156 Fred Wilson Ave',55,43,'79902','9051112211','1979-11-18',NULL,11),(83,'Boudreau','Martin','Supervisor','5042222222','boudm@usps.gov','2010-09-08',61000.00,'123 Almonaster Ave',100,18,'70113','3182223333','1966-10-13',NULL,12),(84,'Babet','LeBlanc','Driver','5043333222','babetl@usps.gov','2018-12-12',31000.00,'234 Baronne St',100,18,'70112','3185555552','1957-10-12',27,12),(85,'Benjamin','Melancon','Driver','5041123211','benm@usps.gov','2010-12-12',31000.00,'156 Basin',100,18,'70112','3186662222','1964-12-25',28,12),(86,'Camila','Romero','Clerk','5042233211','camilar@usps.gov','2011-11-11',32000.00,'154 Bayou',100,18,'70113','3184445555','1978-02-17',NULL,12),(87,'Emma','Breaux','Clerk','5045555111','emmab@usps.gov','2012-03-03',32000.00,'235 Canal St',100,18,'70114','3185552255','1974-12-19',NULL,12),(88,'Craig','Moore','Driver','7032222111','craigm@usps.gov','2019-02-14',31000.00,'123 Travis St',1,43,'77005','8325555444','1990-10-09',29,1),(89,'Amy','Cox','Driver','7032222122','amyc@usps.gov','2019-03-05',31000.00,'234 Louisiana St',1,43,'77006','8324445554','1989-06-18',30,1),(90,'Eric','Smithsonian','Supervisor','7031252525','ericsm@usps.gov','2019-03-10',61000.00,'645 E TC Jester ',1,43,'77008','8322225525','1970-06-12',NULL,13),(97,'Sophie','Lee','Driver','7034554456','slee@usps.gov','2019-03-11',31000.00,'123 White Oak ',1,43,'77007','9367898795','1975-12-12',NULL,13),(98,'Adrian','White','Driver','7032225895','awh@usps.gov','2019-03-10',31000.00,'456 Shepard',1,43,'77006','9367858582','1980-11-25',NULL,13),(99,'Alison','Summers','Clerk','7032225896','asum@usps.gov','2019-03-09',32000.00,'789 Maple',1,43,'77009','9364789654','1985-10-09',NULL,13),(100,'Ricky','Thompson','Clerk','8325552955','rt@usps.gov',NULL,29000.00,'4751 S Main St',1,43,'77042',NULL,NULL,NULL,5),(101,'John','Cooper','Clerk','832-256-6521','jcoop',NULL,31000.00,'123 AnyMain St',1,43,'77023',NULL,NULL,NULL,9);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`team9`@`%`*/ /*!50003 TRIGGER `PostOffice`.`employee_BEFORE_INSERT` BEFORE INSERT ON `employee` FOR EACH ROW
+BEGIN
+if(timestampdiff(YEAR, NEW.employee_date_birth, CURDATE()) < 18) then
+  signal SQLSTATE '45000' SET message_text = 'Employee is under 18- please re- enter';
+end if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `facility`
@@ -234,11 +220,9 @@ CREATE TABLE `facility` (
   `manager_employee_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`facility_id`),
   UNIQUE KEY `facility_pw_id_UNIQUE` (`facility_pw_id`),
-  UNIQUE KEY `city_id_UNIQUE` (`city_id`),
-  UNIQUE KEY `state_id_UNIQUE` (`state_id`),
   KEY `employee_id_idx` (`manager_employee_id`),
   CONSTRAINT `manager_employee_id` FOREIGN KEY (`manager_employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Enum values are available for facility_type and zip_codes_served. The zip code areas will be defined by management and they will decide which zipcodes belong to Area 1, Area 2, and so on. To login to a facility database, the facility_id will be used and there will be one password for each facility. The name of the manager can be accessed through the employee table with the foreign key. Constraints  added in the CreateTable: a package date_in will not be after the package_date_out.';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 COMMENT='Enum values are available for facility_type and zip_codes_served. The zip code areas will be defined by management and they will decide which zipcodes belong to Area 1, Area 2, and so on. To login to a facility database, the facility_id will be used and there will be one password for each facility. The name of the manager can be accessed through the employee table with the foreign key. Constraints  added in the CreateTable: a package date_in will not be after the package_date_out.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,6 +231,7 @@ CREATE TABLE `facility` (
 
 LOCK TABLES `facility` WRITE;
 /*!40000 ALTER TABLE `facility` DISABLE KEYS */;
+INSERT INTO `facility` VALUES (1,1,'Sorting','Area 1',NULL,NULL,'North Houston','6700 Loop 610 N',1,'43','77097',39),(2,2,'Sales','Area 2',NULL,NULL,'San Jacinto','111 E 17th St',2,'43','78705',1),(3,3,'Drop Off','Area 3',NULL,NULL,'River Side','1712 E Riverside Dr.',2,'43','78741',54),(4,4,'Sorting','Area 1',NULL,NULL,'Dallas Drop','902 Ross Ave',3,'43','75202',48),(5,5,'Drop Off','Area 2',NULL,NULL,'Forth Worth','1234 Summit Avenue',54,'43','76102',41),(6,6,'Sorting','Area 3',NULL,NULL,'San Antonio','123 MLK Drive',53,'43','78203',9),(7,7,'Sorting','Area 5',NULL,NULL,'North Atlanta','1375 Peachtree ST NE',13,'10','30309',58),(8,8,'Sales','Area 4',NULL,NULL,'Tallahassee Sales','1700 N Monroe St',12,'9','32303',62),(9,9,'Drop Off','Area 3',NULL,NULL,'Galveston Drop','527 21st St',4,'43','77550',67),(10,10,'Sorting','Area 1',NULL,NULL,'OKC Sorting','1235 Reno Avenue',39,'36','73071',72),(11,11,'Drop Off','Area 4',NULL,NULL,'El Paso Drop','1234 Hercules St',55,'43','79902',78),(12,12,'Sorting','Area 1',NULL,NULL,'New Orleans Sort','1234 Bayou Road',100,'18','70113',83),(13,13,'Drop Off','Area 2',NULL,NULL,'Houston Drop','10100 I-45 N',1,'43','77010',90);
 /*!40000 ALTER TABLE `facility` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,17 +245,17 @@ DROP TABLE IF EXISTS `package`;
 CREATE TABLE `package` (
   `package_id` int(11) NOT NULL AUTO_INCREMENT,
   `package_type` enum('Parcel','Letter','Flat Envelope') NOT NULL,
-  `sender_customer_id` int(11) DEFAULT NULL,
-  `recepient_customer_id` int(11) DEFAULT NULL,
+  `sender_customer_id` int(11) NOT NULL,
+  `recepient_customer_id` int(11) NOT NULL,
   `date_received` datetime NOT NULL,
   `date_delivered` datetime DEFAULT NULL,
   `package_category` enum('Small','Large','Regular','Irregular') NOT NULL,
-  `delivery_status` enum('Drop Off','In Sorting','In Transit','Out for Delivery') NOT NULL,
-  `mail_class` enum('Overnight','Expedited','First Class','Ground') NOT NULL,
-  `package_weight` decimal(5,2) NOT NULL,
+  `delivery_status` enum('Label Created','Drop Off','In Sorting','In Transit','Out for Delivery','Delivered') NOT NULL,
+  `mail_class` enum('Overnight','Expedited','First Class','Ground') DEFAULT NULL,
+  `package_weight` decimal(5,2) NOT NULL DEFAULT '0.00',
   `insurance` tinyint(4) DEFAULT NULL,
   `signature_confirmation` tinyint(4) DEFAULT NULL,
-  `postage_paid` decimal(5,2) NOT NULL,
+  `postage_paid` decimal(5,2) DEFAULT '0.00',
   `vehicle_id` int(11) DEFAULT NULL,
   `pfacility_fk_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`package_id`),
@@ -279,10 +264,8 @@ CREATE TABLE `package` (
   KEY `sender_customer_id_idx` (`sender_customer_id`),
   KEY `recipient_customer_id_idx` (`recepient_customer_id`),
   CONSTRAINT `pfacility_fk_id` FOREIGN KEY (`pfacility_fk_id`) REFERENCES `facility` (`facility_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `recipient_customer_id` FOREIGN KEY (`recepient_customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `sender_customer_id` FOREIGN KEY (`sender_customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `vehicle_id` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`vehicle_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Enum values for package_type will be presented as dropdown options in the front end, as well as package_cateogry, delivery_status, and mail_class. Foreign key constraints are for vehicle_id, facility_id (package is at), and for sender and recepient customer ids. Both customer and recipient are from customer table.Date_delivered will be entered once the package is received, so NULL is allowed until then. Additional CHECK constraint added to make sure (package_weight >0) and (postage_paid>0), and front end constraint will be added to make sure date_delivered>=date_received';
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1 COMMENT='Enum values for package_type will be presented as dropdown options in the front end, as well as package_cateogry, delivery_status, and mail_class. Foreign key constraints are for vehicle_id, facility_id (package is at), and for sender and recepient customer ids. Both customer and recipient are from customer table. Date_delivered is automatically entered by a trigger once the package delivery_status is enetered as ''Delivered'', so NULL is allowed until then. Date_Received is also entered by a trigger once a package delivery-status is started with ''Label created''. These triggers will help ensure that the date_delivered>=date_received';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,8 +274,49 @@ CREATE TABLE `package` (
 
 LOCK TABLES `package` WRITE;
 /*!40000 ALTER TABLE `package` DISABLE KEYS */;
+INSERT INTO `package` VALUES (1,'Parcel',1,2,'2019-04-07 09:45:01','2019-04-21 01:08:52','Large','Delivered','First Class',32.00,NULL,NULL,2.50,NULL,NULL),(2,'Parcel',13,2,'2019-03-03 10:18:12','2019-03-06 10:20:29','Small','Delivered',NULL,12.00,NULL,NULL,2.85,NULL,NULL),(3,'Flat Envelope',1,25,'2019-03-06 09:23:23','2019-03-11 12:00:25','Small','Delivered',NULL,15.00,NULL,NULL,2.95,NULL,NULL),(4,'Letter',6,8,'2019-04-01 10:45:01','2019-04-14 22:07:56','Small','In Transit','Ground',0.50,NULL,NULL,0.49,NULL,NULL),(5,'Flat Envelope',13,25,'2019-04-01 12:45:01','2019-04-14 22:12:53','Small','In Transit','Overnight',0.75,NULL,NULL,5.00,NULL,NULL),(6,'Letter',1,25,'2019-04-01 08:34:23','2019-04-14 21:56:04','Small','In Transit','Ground',0.50,NULL,NULL,0.49,NULL,NULL),(7,'Letter',6,8,'2019-03-07 10:20:00','2019-03-12 15:50:00','Small','Delivered',NULL,0.84,NULL,NULL,0.49,NULL,NULL),(8,'Flat Envelope',1,8,'2019-04-13 08:59:51','2019-04-14 22:05:10','Small','In Transit',NULL,31.50,NULL,NULL,3.50,NULL,NULL),(9,'Flat Envelope',1,8,'2019-04-13 21:02:06','2019-04-14 21:00:22','Small','In Sorting',NULL,31.50,NULL,NULL,3.50,20,3),(10,'Parcel',6,8,'2019-04-07 00:00:00','2019-04-13 22:24:30','Large','Delivered','Ground',32.00,NULL,NULL,2.50,25,11),(11,'Letter',1,13,'2019-04-07 05:47:50',NULL,'Small','In Transit',NULL,1.00,NULL,NULL,0.49,NULL,NULL),(12,'Parcel',6,8,'2019-04-06 08:30:00','2019-04-14 22:25:18','Small','In Transit','Ground',2.00,NULL,NULL,1.52,NULL,NULL),(13,'Parcel',8,1,'2019-04-07 19:43:42',NULL,'Large','In Sorting',NULL,60.00,NULL,NULL,7.00,NULL,1),(14,'Flat Envelope',8,1,'2019-04-07 19:44:15',NULL,'Small','In Sorting',NULL,24.00,NULL,NULL,2.50,NULL,1),(15,'Parcel',13,8,'2019-04-07 15:11:56',NULL,'Small','In Transit',NULL,15.00,NULL,NULL,2.00,27,12),(18,'Flat Envelope',1,8,'2019-04-08 21:33:58',NULL,'Small','In Transit',NULL,23.00,NULL,NULL,0.49,12,7),(20,'Parcel',8,6,'2019-04-09 12:23:54','2019-04-20 01:42:38','Large','Delivered',NULL,44.00,NULL,NULL,2.53,7,3),(21,'Letter',2,13,'2019-04-13 06:14:42',NULL,'Small','In Transit',NULL,0.75,NULL,NULL,2.50,11,7),(22,'Letter',13,6,'2019-04-13 15:34:31',NULL,'Small','Drop Off',NULL,0.84,NULL,NULL,0.49,13,8),(23,'Parcel',2,25,'2019-04-11 23:20:00',NULL,'Large','In Sorting',NULL,52.36,NULL,NULL,12.08,NULL,1),(24,'Flat Envelope',6,2,'2019-04-10 18:12:18','2019-04-14 21:08:17','Small','Delivered',NULL,10.00,NULL,NULL,2.50,24,12),(25,'Letter',25,1,'2019-04-11 18:45:24',NULL,'Small','Drop Off',NULL,2.10,NULL,NULL,0.50,26,11),(26,'Flat Envelope',26,8,'2019-04-11 07:23:23',NULL,'Small','In Sorting',NULL,19.20,NULL,NULL,5.00,NULL,7),(27,'Parcel',1,8,'2019-04-10 18:55:21','2019-04-20 01:42:38','Large','Delivered',NULL,50.00,NULL,NULL,10.06,2,NULL),(31,'Parcel',1,28,'2019-04-13 18:28:38',NULL,'Large','In Transit',NULL,40.00,NULL,NULL,8.03,2,NULL),(32,'Flat Envelope',32,13,'2019-04-13 20:44:49',NULL,'Small','In Sorting',NULL,26.50,NULL,NULL,2.94,NULL,1),(33,'Flat Envelope',32,30,'2019-04-13 20:45:35',NULL,'Small','Label Created',NULL,4.00,NULL,NULL,0.69,26,11),(34,'Flat Envelope',31,29,'2019-04-13 20:46:31',NULL,'Small','Label Created',NULL,12.00,NULL,NULL,1.49,13,8),(35,'Flat Envelope',31,30,'2019-04-13 20:46:58',NULL,'Small','In Transit',NULL,16.00,NULL,NULL,1.89,NULL,NULL),(36,'Parcel',1,33,'2019-04-14 21:30:48',NULL,'Large','In Transit',NULL,40.00,NULL,NULL,4.29,NULL,NULL),(37,'Flat Envelope',8,34,'2019-04-14 22:17:28','2019-04-14 23:14:44','Small','Delivered',NULL,5.50,NULL,NULL,0.84,NULL,NULL),(38,'Parcel',1,33,'2019-04-14 22:41:53',NULL,'Large','In Transit',NULL,55.00,NULL,NULL,5.79,5,NULL),(39,'Flat Envelope',1,35,'2019-04-14 22:50:14',NULL,'Small','In Sorting',NULL,15.00,NULL,NULL,1.79,NULL,1),(40,'Parcel',1,13,'2019-04-14 23:18:32',NULL,'Large','In Transit',NULL,40.00,NULL,NULL,4.29,5,NULL),(41,'Flat Envelope',1,36,'2019-04-14 23:22:49',NULL,'Small','In Transit',NULL,4.00,NULL,NULL,0.69,5,NULL),(42,'Flat Envelope',8,30,'2019-04-14 23:26:21','2019-04-14 23:27:21','Small','Delivered',NULL,15.00,NULL,NULL,1.79,NULL,NULL),(43,'Parcel',2,37,'2019-04-14 23:41:36','2019-04-14 23:42:16','Large','Delivered',NULL,44.00,NULL,NULL,4.69,NULL,NULL),(44,'Flat Envelope',2,13,'2019-04-14 23:42:22',NULL,'Small','Label Created',NULL,22.20,NULL,NULL,2.51,NULL,NULL),(45,'Flat Envelope',6,8,'2019-04-15 17:26:16','2019-04-17 07:36:43','Small','Delivered',NULL,21.00,NULL,NULL,2.39,NULL,NULL),(46,'Parcel',39,1,'2019-04-17 21:07:41','2019-04-17 21:09:25','Large','Delivered',NULL,50.00,NULL,NULL,5.29,NULL,NULL),(47,'Parcel',1,33,'2019-03-01 12:00:00','2019-04-20 01:42:38','Large','Delivered',NULL,56.00,NULL,NULL,6.06,NULL,NULL),(48,'Parcel',1,37,'2019-03-01 12:00:30','2019-03-04 14:09:10','Large','Delivered',NULL,40.15,NULL,NULL,4.25,NULL,NULL),(49,'Letter',25,1,'2019-03-02 13:10:00','2019-03-06 14:20:20','Small','Delivered',NULL,0.84,NULL,NULL,0.49,NULL,NULL),(50,'Flat Envelope',8,34,'2019-03-02 14:20:00','2019-03-05 14:20:10','Small','Delivered',NULL,12.00,NULL,NULL,2.45,NULL,NULL),(51,'Parcel',8,13,'2019-03-03 09:00:30','2019-03-07 11:03:23','Large','Delivered',NULL,60.00,NULL,NULL,6.78,NULL,NULL),(52,'Flat Envelope',32,30,'2019-03-13 08:30:30','2019-03-18 12:34:00','Small','Delivered',NULL,15.00,NULL,NULL,2.54,NULL,NULL),(53,'Parcel',13,6,'2019-03-13 14:30:00','2019-03-19 12:35:00','Large','Delivered',NULL,56.00,NULL,NULL,6.10,NULL,NULL),(54,'Parcel',35,1,'2019-03-15 14:30:00','2019-03-20 14:00:00','Large','Delivered',NULL,50.00,NULL,NULL,5.29,NULL,NULL),(55,'Letter',6,1,'2019-03-19 13:00:00','2019-03-22 12:00:00','Small','Delivered',NULL,0.84,NULL,NULL,0.49,NULL,NULL),(56,'Flat Envelope',6,8,'2019-03-19 08:00:00','2019-03-20 09:00:00','Small','Delivered',NULL,12.00,NULL,NULL,2.45,NULL,NULL),(57,'Parcel',2,37,'2019-03-20 12:00:00','2019-03-23 09:00:00','Large','Delivered',NULL,44.00,NULL,NULL,4.69,NULL,NULL),(58,'Flat Envelope',37,8,'2019-03-20 14:00:00','2019-03-25 00:00:00','Small','Delivered',NULL,21.00,NULL,NULL,2.39,NULL,NULL),(59,'Letter',32,30,'2019-03-26 08:00:00','2019-03-30 12:05:00','Small','Delivered',NULL,0.84,NULL,NULL,0.49,NULL,NULL),(60,'Parcel',13,6,'2019-03-26 10:09:00','2019-03-30 13:00:00','Large','Delivered',NULL,55.00,NULL,NULL,6.05,NULL,NULL),(61,'Parcel',38,29,'2019-04-20 02:24:50',NULL,'Large','In Transit',NULL,65.00,NULL,NULL,6.79,5,NULL),(62,'Parcel',38,26,'2019-04-20 02:25:33',NULL,'Large','In Transit',NULL,62.00,NULL,NULL,6.49,5,NULL),(63,'Parcel',38,30,'2019-04-20 02:26:05',NULL,'Large','In Transit',NULL,63.00,NULL,NULL,6.59,5,NULL),(64,'Parcel',40,32,'2019-04-20 14:05:38',NULL,'Large','In Transit',NULL,62.00,NULL,NULL,6.49,2,NULL),(65,'Parcel',40,29,'2019-04-20 14:32:46','2019-04-20 22:05:57','Large','Delivered',NULL,75.00,NULL,NULL,7.79,NULL,NULL),(66,'Parcel',40,13,'2019-04-20 14:34:10',NULL,'Large','In Transit',NULL,63.00,NULL,NULL,6.59,5,NULL),(67,'Parcel',40,25,'2019-04-20 22:20:12',NULL,'Large','In Transit',NULL,35.00,NULL,NULL,3.79,2,NULL),(68,'Parcel',40,2,'2019-04-20 22:27:08',NULL,'Large','In Transit',NULL,85.00,NULL,NULL,8.79,5,NULL),(69,'Parcel',40,8,'2019-04-20 23:37:59','2019-04-21 02:43:02','Large','Delivered',NULL,45.00,NULL,NULL,4.79,NULL,NULL),(70,'Parcel',40,38,'2019-04-20 23:51:58',NULL,'Large','In Transit',NULL,36.00,NULL,NULL,3.89,9,NULL),(71,'Flat Envelope',40,29,'2019-04-20 23:58:18',NULL,'Small','Drop Off',NULL,25.00,NULL,NULL,2.79,NULL,13),(72,'Flat Envelope',40,29,'2019-04-21 02:41:29','2019-04-21 02:43:05','Small','Delivered',NULL,30.00,NULL,NULL,3.29,NULL,NULL),(73,'Parcel',40,25,'2019-04-21 03:11:44',NULL,'Large','In Transit',NULL,45.00,NULL,NULL,4.79,8,NULL),(74,'Flat Envelope',40,8,'2019-04-21 03:34:30',NULL,'Small','In Transit',NULL,15.00,NULL,NULL,1.79,4,NULL),(75,'Parcel',40,32,'2019-04-21 04:27:01',NULL,'Large','Drop Off',NULL,65.00,NULL,NULL,6.79,NULL,3),(77,'Parcel',41,40,'2019-04-21 04:35:19',NULL,'Large','In Transit',NULL,54.00,NULL,NULL,5.69,4,NULL),(78,'Parcel',41,40,'2019-04-21 04:35:57','2019-04-21 05:28:25','Large','Delivered',NULL,60.00,NULL,NULL,6.29,NULL,NULL),(79,'Parcel',42,40,'2019-04-21 05:09:45',NULL,'Large','Drop Off',NULL,35.00,NULL,NULL,3.79,NULL,5),(80,'Flat Envelope',40,25,'2019-04-21 16:03:54',NULL,'Small','Drop Off',NULL,15.00,NULL,NULL,1.79,NULL,9),(81,'Flat Envelope',40,2,'2019-04-21 16:04:33','2019-04-21 16:16:01','Small','Delivered',NULL,25.00,NULL,NULL,2.79,NULL,NULL),(82,'Parcel',40,2,'2019-04-21 16:05:14','2019-04-21 16:16:07','Large','Delivered',NULL,36.00,NULL,NULL,3.89,NULL,NULL),(83,'Flat Envelope',38,42,'2019-04-21 22:46:25',NULL,'Small','Drop Off',NULL,29.00,NULL,NULL,3.19,NULL,5),(84,'Flat Envelope',26,13,'2019-04-22 21:19:20',NULL,'Small','Drop Off',NULL,13.00,NULL,NULL,1.59,NULL,5),(85,'Flat Envelope',25,26,'2019-04-22 21:20:47',NULL,'Small','Drop Off',NULL,9.00,NULL,NULL,1.19,NULL,5),(86,'Letter',1,43,'2019-04-22 22:13:38','2019-04-22 22:14:43','Small','Delivered',NULL,1.00,NULL,NULL,0.49,NULL,NULL);
 /*!40000 ALTER TABLE `package` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`team9`@`%`*/ /*!50003 TRIGGER `PostOffice`.`package_BEFORE_INSERT` BEFORE INSERT ON `package` FOR EACH ROW
+BEGIN
+ if(New.delivery_status = 'Label Created') then
+  set NEW.date_received = NOW(); -- In case we want Houston local time displayed - INTERVAL 5 HOUR;
+  end if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`team9`@`%`*/ /*!50003 TRIGGER `PostOffice`.`package_BEFORE_UPDATE` BEFORE UPDATE ON `package` FOR EACH ROW
+BEGIN
+ if(New.delivery_status = 'Delivered') then
+  set NEW.date_delivered = NOW(); -- in case Houston time needs to be displayed - INTERVAL 5 HOUR;
+  end if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `state_lookup_table`
@@ -307,7 +331,7 @@ CREATE TABLE `state_lookup_table` (
   `state_abbrev` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`state_id`),
   UNIQUE KEY `state_id_UNIQUE` (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lookup table of all the 50 states to be used by the facility, customer and employee table';
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1 COMMENT='Lookup table of all the 50 states to be used by the facility, customer and employee table';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,6 +340,7 @@ CREATE TABLE `state_lookup_table` (
 
 LOCK TABLES `state_lookup_table` WRITE;
 /*!40000 ALTER TABLE `state_lookup_table` DISABLE KEYS */;
+INSERT INTO `state_lookup_table` VALUES (0,'NOT ENTERED','NA'),(1,'Alabama','AL'),(2,'Alaska','AK'),(3,'Arizona','AZ'),(4,'Arkansas','AR'),(5,'California','CA'),(6,'Colorado','CO'),(7,'Connecticut','CT'),(8,'Delaware','DE'),(9,'Florida','FL'),(10,'Georgia','GA'),(11,'Hawaii','HI'),(12,'Idaho','ID'),(13,'Illinois','IL'),(14,'Indiana','IN'),(15,'Iowa','IA'),(16,'Kansas','KS'),(17,'Kentucky','KY'),(18,'Louisiana','LA'),(19,'Maine','ME'),(20,'Maryland','MD'),(21,'Massachusetts','MA'),(22,'Michigan','MI'),(23,'Minnesota','MN'),(24,'Mississippi','MS'),(25,'Missouri','MO'),(26,'Montana','MT'),(27,'Nebraska','NE'),(28,'Nevada','NV'),(29,'New Hampshire','NH'),(30,'New Jersey','NJ'),(31,'New Mexico','NM'),(32,'New York','NY'),(33,'North Carolina','NC'),(34,'North Dakota','ND'),(35,'Ohio','OH'),(36,'Oklahoma','OK'),(37,'Oregon','OR'),(38,'Pennsylvania','PA'),(39,'Rhode Island','RI'),(40,'South Carolina','SC'),(41,'South Dakota','SD'),(42,'Tennessee','TN'),(43,'Texas','TX'),(44,'Utah','UT'),(45,'Vermont','VT'),(46,'Virginia','VA'),(47,'Washington','WA'),(48,'West Virginia','WV'),(49,'Wisconsin','WI'),(50,'Wyoming','WY');
 /*!40000 ALTER TABLE `state_lookup_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -328,7 +353,7 @@ DROP TABLE IF EXISTS `tracking`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tracking` (
   `tracking_id` int(11) NOT NULL AUTO_INCREMENT,
-  `event_type` enum('Arrived to Facility','Left Facility','In Vehicle','Off Vehicle','Out for Delivery') DEFAULT NULL,
+  `event_type` enum('Label Created','Dropped Off','Arrived to Facility','Left Facility','In Vehicle','Off Vehicle','Out for Delivery','Delivered') DEFAULT NULL,
   `time_of_event` datetime DEFAULT NULL,
   `facility_fk_id` int(11) DEFAULT NULL,
   `vehicle_fk_id` int(11) DEFAULT NULL,
@@ -340,7 +365,7 @@ CREATE TABLE `tracking` (
   CONSTRAINT `facility_fk_id` FOREIGN KEY (`facility_fk_id`) REFERENCES `facility` (`facility_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `package_fk_id` FOREIGN KEY (`package_fk_id`) REFERENCES `package` (`package_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `vehicle_fk_id` FOREIGN KEY (`vehicle_fk_id`) REFERENCES `vehicle` (`vehicle_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='ENUM value for event_type (dropdown list) of tracking event and the time of the event will also be entered then on the front end. Each package will have a tracking_id and the tracking entity has foreign keys for vehicle, facility, and the package_id (has the date_delivered) that will contain a table of the event, time and location (vehicle(s), facility(s)) the package went through. The date package arrived and was received will be accessed through the package entity';
+) ENGINE=InnoDB AUTO_INCREMENT=288 DEFAULT CHARSET=latin1 COMMENT='ENUM value for event_type (dropdown list) of tracking event and the time of the event will also be entered then on the front end. Each package will have a tracking_id and the tracking entity has foreign keys for vehicle, facility, and the package_id (has the date_delivered) that will contain a table of the event, time and location (vehicle(s), facility(s)) the package went through. When tracking is entered, the date package arrived and was received will be also set in the package entity with triggers.When all of the event_types are entered, the datetimes will be populated using triggers';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -349,8 +374,168 @@ CREATE TABLE `tracking` (
 
 LOCK TABLES `tracking` WRITE;
 /*!40000 ALTER TABLE `tracking` DISABLE KEYS */;
+INSERT INTO `tracking` VALUES (1,'Arrived to Facility','2019-04-01 12:45:01',4,NULL,5),(3,'In Vehicle','2019-04-01 14:25:30',NULL,2,5),(4,'Arrived to Facility','2019-04-01 19:49:22',1,NULL,5),(6,'Delivered','2019-04-13 19:32:16',NULL,4,5),(8,'Out for Delivery','2019-04-13 09:10:23',NULL,4,5),(10,'Arrived to Facility','2019-04-01 10:45:01',5,NULL,4),(12,'In Vehicle','2019-04-01 11:00:01',NULL,13,4),(13,'Off Vehicle','2019-04-01 13:23:03',NULL,13,4),(14,'Arrived to Facility','2019-04-01 14:20:32',6,NULL,4),(16,'In Vehicle','2019-04-13 07:29:34',NULL,7,4),(17,'Out for Delivery','2019-04-13 08:21:23',NULL,7,4),(18,'Delivered','2019-04-13 22:23:54',11,25,10),(19,'Arrived to Facility','2019-04-06 08:30:00',2,2,12),(21,'In Vehicle','2019-04-06 11:30:00',NULL,2,12),(25,'Arrived to Facility','2019-04-07 19:54:00',4,NULL,12),(26,'Arrived to Facility','2019-04-07 15:15:11',6,NULL,15),(27,'In Vehicle','2019-04-07 15:35:31',NULL,4,13),(28,'In Vehicle','2019-04-07 15:35:31',10,4,14),(29,'In Vehicle','2019-04-07 15:46:15',6,4,15),(30,'Delivered','2019-04-13 22:19:47',NULL,20,1),(31,'In Vehicle','2019-04-07 18:21:58',6,4,15),(32,'Delivered','2019-04-07 18:24:24',NULL,NULL,6),(33,'Arrived to Facility','2019-04-07 18:35:56',7,2,13),(34,'Arrived to Facility','2019-04-07 18:35:56',10,2,14),(35,'Arrived to Facility','2019-04-13 22:12:10',12,27,15),(36,'In Vehicle','2019-04-07 17:42:26',NULL,25,10),(37,'In Vehicle','2019-04-13 18:51:02',NULL,4,8),(38,'Delivered','2019-04-13 20:27:53',NULL,NULL,8),(39,'Arrived to Facility','2019-04-07 05:47:50',5,5,11),(43,'Label Created','2019-04-08 21:33:58',7,NULL,18),(45,'Label Created','2019-04-09 12:23:55',NULL,NULL,20),(46,'Dropped Off','2019-04-09 13:43:19',3,NULL,20),(49,'Label Created','2019-04-10 18:55:21',NULL,NULL,27),(50,'Dropped Off','2019-04-10 18:56:21',3,NULL,27),(51,'Left Facility','2019-04-10 18:57:46',3,NULL,27),(52,'Arrived to Facility','2019-04-10 19:00:34',4,NULL,27),(53,'Left Facility','2019-04-13 22:03:29',4,10,27),(54,'Delivered','2019-04-13 19:34:57',NULL,NULL,27),(58,'Label Created','2019-04-13 21:51:21',4,NULL,31),(59,'Delivered','2019-04-13 19:24:26',NULL,NULL,4),(60,'Arrived to Facility','2019-04-13 08:59:51',6,NULL,8),(61,'In Vehicle','2019-04-10 12:23:00',NULL,7,20),(62,'Delivered','2019-04-13 19:57:02',NULL,NULL,20),(69,'Label Created','2019-04-07 09:45:01',3,NULL,1),(70,'Arrived to Facility','2019-04-07 09:45:01',3,NULL,1),(71,'In Vehicle','2019-04-10 08:00:12',NULL,2,12),(72,'Delivered','2019-04-13 20:07:28',NULL,NULL,12),(73,'Dropped Off','2019-04-01 10:45:01',5,NULL,4),(74,'Label Created','2019-04-01 10:45:01',NULL,NULL,4),(76,'Label Created','2019-04-01 12:45:01',4,NULL,5),(77,'Dropped Off','2019-04-01 12:45:01',4,NULL,5),(89,'Label Created','2019-04-01 08:34:23',5,NULL,6),(90,'Arrived to Facility','2019-04-01 08:34:23',5,NULL,6),(91,'Dropped Off','2019-04-01 08:34:23',5,NULL,6),(92,'In Vehicle','2019-04-07 17:24:24',NULL,24,6),(93,'Out for Delivery','2019-04-07 17:30:15',NULL,24,6),(94,'Label Created','2019-04-13 08:59:51',6,NULL,8),(95,'Dropped Off','2019-04-13 08:59:51',6,NULL,8),(98,'Dropped Off','2019-04-13 20:39:03',7,NULL,21),(102,'Dropped Off','2019-04-07 00:00:00',11,NULL,10),(103,'Label Created','2019-04-07 00:00:00',11,NULL,10),(104,'Arrived to Facility','2019-04-07 00:00:00',11,NULL,10),(105,'Dropped Off','2019-04-13 20:44:40',8,NULL,22),(106,'Label Created','2019-04-13 21:53:20',9,NULL,32),(107,'Label Created','2019-04-13 21:55:01',11,NULL,33),(108,'Dropped Off','2019-04-13 20:45:49',9,NULL,23),(109,'Label Created','2019-04-13 21:56:24',8,NULL,34),(110,'Label Created','2019-04-13 21:57:15',5,NULL,35),(111,'Label Created','2019-04-13 20:48:08',10,NULL,24),(116,'Dropped Off','2019-04-07 05:47:50',5,NULL,11),(117,'Label Created','2019-04-07 05:47:50',5,NULL,11),(118,'Dropped Off','2019-04-13 20:49:24',11,NULL,25),(119,'Label Created','2019-04-13 20:51:12',12,NULL,26),(120,'In Vehicle','2019-04-13 08:00:00',10,24,24),(121,'Delivered','2019-04-14 21:08:17',10,NULL,24),(122,'Label Created','2019-04-13 21:02:05',3,NULL,9),(123,'Arrived to Facility','2019-04-14 21:02:16',3,20,9),(124,'In Vehicle','2019-04-13 21:00:00',NULL,11,21),(125,'In Vehicle','2019-04-13 21:00:00',NULL,13,22),(126,'In Vehicle','2019-04-13 21:05:00',NULL,21,23),(127,'In Vehicle','2019-04-13 21:08:00',NULL,26,25),(128,'In Vehicle','2019-04-13 22:00:00',NULL,28,26),(129,'In Vehicle','2019-04-13 21:45:31',NULL,2,31),(130,'In Vehicle','2019-04-13 20:50:00',NULL,21,32),(131,'In Vehicle','2019-04-13 21:50:00',NULL,26,33),(132,'In Vehicle','2019-04-13 21:00:00',NULL,13,34),(133,'Left Facility','2019-04-14 21:06:05',7,12,18),(134,'Left Facility','2019-04-14 21:04:24',12,27,15),(135,'Left Facility','2019-04-14 21:03:35',10,22,14),(136,'Left Facility','2019-04-14 21:00:22',3,20,9),(137,'Delivered','2019-04-14 21:00:22',3,20,9),(138,'Label Created','2019-04-14 21:30:48',NULL,NULL,36),(139,'Dropped Off','2019-04-14 21:34:33',5,NULL,36),(140,'Left Facility','2019-04-14 21:35:31',5,NULL,36),(141,'Left Facility','2019-04-14 21:35:31',5,NULL,35),(142,'Left Facility','2019-04-14 21:41:14',5,NULL,11),(143,'Left Facility','2019-04-14 21:56:04',5,NULL,6),(144,'Left Facility','2019-04-14 22:05:10',6,NULL,8),(145,'Left Facility','2019-04-14 22:07:56',6,NULL,4),(146,'Left Facility','2019-04-14 22:12:53',1,NULL,5),(147,'Label Created','2019-04-14 22:17:28',NULL,NULL,37),(148,'Dropped Off','2019-04-14 22:20:31',5,NULL,37),(149,'Left Facility','2019-04-14 22:25:18',5,NULL,12),(150,'Arrived to Facility','2019-04-14 22:26:29',10,NULL,37),(152,'Left Facility','2019-04-14 22:29:19',4,NULL,31),(153,'Left Facility','2019-04-14 22:34:28',10,NULL,37),(155,'Label Created','2019-04-14 22:41:53',NULL,NULL,38),(156,'Dropped Off','2019-04-14 22:42:14',5,NULL,38),(157,'Left Facility','2019-04-14 22:42:23',5,NULL,38),(158,'Label Created','2019-04-14 22:50:14',NULL,NULL,39),(159,'Dropped Off','2019-04-14 22:50:28',5,NULL,39),(160,'Left Facility','2019-04-14 22:50:38',5,NULL,39),(161,'Left Facility','2019-04-14 23:14:21',5,NULL,39),(162,'Delivered','2019-04-14 23:14:44',NULL,NULL,37),(163,'Label Created','2019-04-14 23:18:32',NULL,NULL,40),(164,'Dropped Off','2019-04-14 23:18:58',5,NULL,40),(165,'Left Facility','2019-04-14 23:19:01',5,NULL,40),(166,'Label Created','2019-04-14 23:22:49',NULL,NULL,41),(167,'Dropped Off','2019-04-14 23:23:07',5,NULL,41),(168,'Left Facility','2019-04-14 23:23:11',5,NULL,41),(169,'Label Created','2019-04-14 23:26:21',NULL,NULL,42),(170,'Dropped Off','2019-04-14 23:27:03',5,NULL,42),(171,'Left Facility','2019-04-14 23:27:09',5,NULL,42),(172,'Delivered','2019-04-14 23:27:21',NULL,NULL,42),(173,'Label Created','2019-04-14 23:41:36',NULL,NULL,43),(174,'Dropped Off','2019-04-14 23:41:59',5,NULL,43),(175,'Left Facility','2019-04-14 23:42:05',5,NULL,43),(176,'Delivered','2019-04-14 23:42:16',NULL,NULL,43),(177,'Label Created','2019-04-14 23:42:22',NULL,NULL,44),(178,'Label Created','2019-04-15 17:26:16',NULL,NULL,45),(179,'Dropped Off','2019-04-15 17:36:50',5,NULL,45),(180,'Left Facility','2019-04-15 17:37:00',5,NULL,45),(181,'Delivered','2019-04-17 07:36:43',NULL,NULL,45),(182,'Label Created','2019-04-17 21:07:41',NULL,NULL,46),(183,'Dropped Off','2019-04-17 21:08:33',5,NULL,46),(184,'Left Facility','2019-04-17 21:09:08',5,NULL,46),(185,'Delivered','2019-04-17 21:09:25',NULL,NULL,46),(186,'Label Created','2019-04-20 02:24:50',NULL,NULL,61),(187,'Label Created','2019-04-20 02:25:33',NULL,NULL,62),(188,'Label Created','2019-04-20 02:26:05',NULL,NULL,63),(189,'Dropped Off','2019-04-20 02:28:41',5,NULL,61),(190,'Dropped Off','2019-04-20 02:28:51',5,NULL,62),(191,'Dropped Off','2019-04-20 02:28:58',5,NULL,63),(192,'Left Facility','2019-04-20 02:31:56',5,NULL,61),(193,'Left Facility','2019-04-20 02:31:56',5,NULL,62),(194,'Left Facility','2019-04-20 02:31:56',5,NULL,63),(195,'Label Created','2019-04-20 14:05:38',NULL,NULL,64),(196,'Label Created','2019-04-20 14:32:46',NULL,NULL,65),(197,'Label Created','2019-04-20 14:34:10',NULL,NULL,66),(198,'Dropped Off','2019-04-20 15:16:23',5,NULL,64),(199,'Dropped Off','2019-04-20 21:42:39',9,NULL,64),(200,'Left Facility','2019-04-20 21:48:22',9,NULL,64),(201,'Arrived to Facility','2019-04-20 21:59:29',1,NULL,23),(202,'Arrived to Facility','2019-04-20 21:59:29',1,NULL,32),(203,'Dropped Off','2019-04-20 22:02:37',5,NULL,65),(204,'Left Facility','2019-04-20 22:02:58',5,NULL,65),(205,'Delivered','2019-04-20 22:05:57',NULL,NULL,65),(206,'Dropped Off','2019-04-20 22:16:22',5,NULL,66),(207,'Left Facility','2019-04-20 22:16:57',5,NULL,66),(208,'Label Created','2019-04-20 22:20:12',NULL,NULL,67),(209,'Dropped Off','2019-04-20 22:22:01',11,NULL,67),(210,'Left Facility','2019-04-20 22:22:21',11,NULL,67),(211,'Label Created','2019-04-20 22:27:08',NULL,NULL,68),(212,'Dropped Off','2019-04-20 22:27:58',11,NULL,68),(213,'Left Facility','2019-04-20 22:28:09',11,NULL,68),(214,'Dropped Off','2019-04-20 22:30:08',5,NULL,68),(215,'Left Facility','2019-04-20 22:30:34',5,NULL,68),(216,'Label Created','2019-04-20 23:37:59',NULL,NULL,69),(217,'Dropped Off','2019-04-20 23:41:27',3,NULL,69),(218,'Left Facility','2019-04-20 23:42:09',3,NULL,69),(219,'Label Created','2019-04-20 23:51:58',NULL,NULL,70),(220,'Dropped Off','2019-04-20 23:53:24',5,NULL,70),(221,'Left Facility','2019-04-20 23:53:38',5,NULL,70),(222,'Label Created','2019-04-20 23:58:18',NULL,NULL,71),(223,'Dropped Off','2019-04-20 23:59:04',9,NULL,71),(224,'Left Facility','2019-04-20 23:59:14',9,NULL,71),(225,'Dropped Off','2019-04-21 00:36:12',3,NULL,71),(226,'Left Facility','2019-04-21 00:37:00',3,NULL,71),(227,'Delivered','2019-04-21 01:08:52',NULL,NULL,1),(228,'Left Facility','2019-04-21 01:43:55',2,NULL,13),(229,'Left Facility','2019-04-21 01:43:56',2,NULL,14),(230,'Arrived to Facility','2019-04-21 01:44:39',1,NULL,13),(231,'Arrived to Facility','2019-04-21 01:44:39',1,NULL,14),(232,'Arrived to Facility','2019-04-21 01:44:39',1,NULL,39),(234,'Label Created','2019-04-21 02:41:29',NULL,NULL,72),(235,'Dropped Off','2019-04-21 02:42:35',3,NULL,72),(236,'Left Facility','2019-04-21 02:42:42',3,NULL,72),(237,'Delivered','2019-04-21 02:43:02',NULL,NULL,69),(238,'Delivered','2019-04-21 02:43:05',NULL,NULL,72),(239,'Label Created','2019-04-21 03:11:44',NULL,NULL,73),(240,'Dropped Off','2019-04-21 03:12:38',3,NULL,73),(241,'Left Facility','2019-04-21 03:12:47',3,NULL,73),(242,'Label Created','2019-04-21 03:34:30',NULL,NULL,74),(243,'Dropped Off','2019-04-21 03:35:27',9,NULL,74),(244,'Left Facility','2019-04-21 03:35:38',9,NULL,74),(248,'Label Created','2019-04-21 04:27:02',NULL,NULL,75),(253,'Dropped Off','2019-04-21 04:28:07',3,NULL,75),(254,'Label Created','2019-04-21 04:34:42',NULL,NULL,NULL),(255,'Label Created','2019-04-21 04:36:18',5,NULL,77),(256,'Label Created','2019-04-21 04:35:57',NULL,NULL,78),(257,'Dropped Off','2019-04-21 04:36:31',9,NULL,77),(258,'Dropped Off','2019-04-21 04:36:36',9,NULL,78),(259,'Dropped Off','2019-04-21 04:37:06',5,NULL,NULL),(260,'Label Created','2019-04-21 05:09:45',NULL,NULL,79),(261,'Dropped Off','2019-04-21 05:10:15',5,NULL,79),(262,'Left Facility','2019-04-21 05:22:47',9,NULL,77),(263,'Left Facility','2019-04-21 05:27:57',9,NULL,78),(264,'Delivered','2019-04-21 05:28:25',NULL,NULL,78),(265,'Label Created','2019-04-21 16:03:54',NULL,NULL,80),(266,'Label Created','2019-04-21 16:04:33',NULL,NULL,81),(267,'Label Created','2019-04-21 16:05:14',NULL,NULL,82),(268,'Dropped Off','2019-04-21 16:06:04',9,NULL,80),(269,'Dropped Off','2019-04-21 16:06:09',9,NULL,81),(270,'Dropped Off','2019-04-21 16:06:14',9,NULL,82),(271,'Left Facility','2019-04-21 16:11:02',9,NULL,81),(272,'Left Facility','2019-04-21 16:11:02',9,NULL,82),(273,'Delivered','2019-04-21 16:16:01',NULL,NULL,81),(274,'Delivered','2019-04-21 16:16:07',NULL,NULL,82),(276,'Label Created','2019-04-21 22:46:25',NULL,NULL,83),(277,'Dropped Off','2019-04-21 22:47:06',5,NULL,83),(278,'Left Facility','2019-04-22 20:23:12',12,NULL,26),(279,'Arrived to Facility','2019-04-22 20:24:04',7,NULL,26),(280,'Label Created','2019-04-22 21:19:20',NULL,NULL,84),(281,'Dropped Off','2019-04-22 21:19:48',5,NULL,84),(282,'Label Created','2019-04-22 21:20:47',NULL,NULL,85),(283,'Dropped Off','2019-04-22 21:21:17',5,NULL,85),(284,'Label Created','2019-04-22 22:13:38',NULL,NULL,86),(285,'Dropped Off','2019-04-22 22:14:15',5,NULL,86),(286,'Left Facility','2019-04-22 22:14:23',5,NULL,86),(287,'Delivered','2019-04-22 22:14:43',NULL,NULL,86);
 /*!40000 ALTER TABLE `tracking` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`team9`@`%`*/ /*!50003 TRIGGER `PostOffice`.`tracking_BEFORE_INSERT` BEFORE INSERT ON `tracking` FOR EACH ROW
+BEGIN
+if(new.event_type = 'Label Created')then
+  update package
+  SET package.delivery_status ='Label Created'
+  where new.package_fk_id = package.package_id;
+ end if;
+if(new.event_type = 'Label Created')then
+  set NEW.time_of_event = NOW(); -- in case we want to display Houston time - INTERVAL 5 HOUR;
+ end if;
+ 
+if(new.event_type = 'Dropped Off')then
+  update package
+  SET package.delivery_status ='Drop Off'
+  where new.package_fk_id = package.package_id;
+ end if;
+if(new.event_type = 'Dropped Off')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+  
+if(new.event_type = 'Arrived to Facility')then
+  update package
+  SET package.delivery_status ='In Sorting'
+  where new.package_fk_id = package.package_id;
+ end if;
+ if(new.event_type = 'Arrived to Facility')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+ 
+ if(new.event_type = 'Left Facility') then
+   update package
+   set package.delivery_status = 'In Transit'
+    where new.package_fk_id = package.package_id;
+ end if;
+ if(new.event_type = 'Left Facility')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+  
+ if(new.event_type = 'In Vehicle')then
+   update package
+    set  package.delivery_status = 'In Transit'
+   where new.package_fk_id = package.package_id;
+ end if;
+ 
+ if(new.event_type = 'Off Vehicle')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+ 
+ if(new.event_type = 'Out for Delivery') then
+   update package
+   set package.delivery_status = 'Out for Delivery'
+   where new.package_fk_id = package.package_id;
+ end if;
+ if(new.event_type = 'Out for Delivery')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+
+ if(NEW.event_type = 'Delivered') then
+ update package SET package.delivery_status = 'Delivered'
+    WHERE NEW.package_fk_id = package.package_id;
+ end if;
+ if(new.event_type = 'Delivered')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`team9`@`%`*/ /*!50003 TRIGGER `PostOffice`.`tracking_BEFORE_UPDATE` BEFORE UPDATE ON `tracking` FOR EACH ROW
+BEGIN
+if(new.event_type = 'Label Created')then
+  update package
+  SET package.delivery_status ='Label Created'
+  where new.package_fk_id = package.package_id;
+ end if;
+if(new.event_type = 'Label Created')then
+  set NEW.time_of_event = NOW(); -- in case we want to display Houston time - INTERVAL 5 HOUR;
+ end if;
+ 
+if(new.event_type = 'Dropped Off')then
+  update package
+  SET package.delivery_status ='Drop Off'
+  where new.package_fk_id = package.package_id;
+ end if;
+if(new.event_type = 'Dropped Off')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+  
+if(new.event_type = 'Arrived to Facility')then
+  update package
+  SET package.delivery_status ='In Sorting'
+  where new.package_fk_id = package.package_id;
+ end if;
+ if(new.event_type = 'Arrived to Facility')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+   
+ if(new.event_type = 'Left Facility') then
+   update package
+   set package.delivery_status = 'In Transit'
+   where new.package_fk_id = package.package_id;
+ end if;
+ if(new.event_type = 'Left Facility')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+ 
+ if(new.event_type = 'In Vehicle')then
+   update package
+    set package.delivery_status = 'In Transit'
+   where new.package_fk_id = package.package_id;
+ end if;
+ 
+ if(new.event_type = 'Off Vehicle')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+ 
+ if(new.event_type = 'Out for Delivery') then
+   update package
+   set package.delivery_status = 'Out for Delivery'
+   where new.package_fk_id = package.package_id;
+ end if;
+ if(new.event_type = 'Out for Delivery')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+  
+ if(NEW.event_type = 'Delivered') then
+ update package 
+   SET package.delivery_status = 'Delivered'
+    WHERE NEW.package_fk_id = package.package_id;
+ end if;
+ if(new.event_type = 'Delivered')then
+  set NEW.time_of_event = NOW(); -- - INTERVAL 5 HOUR;
+ end if;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `vehicle`
@@ -361,20 +546,16 @@ DROP TABLE IF EXISTS `vehicle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vehicle` (
   `vehicle_id` int(11) NOT NULL AUTO_INCREMENT,
-  `vehicle_pw_id` int(11) NOT NULL,
-  `date_vehicle_in` datetime NOT NULL,
-  `date_vehicle_out` datetime NOT NULL,
-  `zip_code_destination` enum('Zone 1','Zone 2','Zone 3','Zone 4','Zone 5','Zone 6','Zone 7','Zone 8','Zone 9','Zone 10') NOT NULL,
-  `method_travel` enum('Air','Truck') NOT NULL,
+  `zip_code_destination` enum('Zone 1','Zone 2','Zone 3','Zone 4','Zone 5','Zone 6','Zone 7','Zone 8','Zone 9','Zone 10') DEFAULT NULL,
+  `destination_type` enum('Transfer','Delivery') DEFAULT NULL,
   `vfacility_fk_id` int(11) DEFAULT NULL,
   `employee_fk_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`vehicle_id`),
-  UNIQUE KEY `vehicle_pw_id_UNIQUE` (`vehicle_pw_id`),
   KEY `vfacility_fk_id_idx` (`vfacility_fk_id`),
   KEY `employee_fk_id_idx` (`employee_fk_id`),
   CONSTRAINT `employee_fk_id` FOREIGN KEY (`employee_fk_id`) REFERENCES `employee` (`employee_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `vfacility_fk_id` FOREIGN KEY (`vfacility_fk_id`) REFERENCES `facility` (`facility_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='ENUM options are used for the zip_code destination and the method_travel for each vehicle. Like the Areas in facility, the zipcodes will be in Zones that a manager will determine which zipcodes are in each zone that the vehicle will travel to. The foreign keys are for facility and employee ids. The vehicle_id will be used as the username for the vehicle password when logging in';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 COMMENT='ENUM options are used for the zip_code destination and the method_travel for each vehicle. Like the Areas in facility, the zipcodes will be in Zones that a manager will determine which zipcodes are in each zone that the vehicle will travel to. The foreign keys are for facility and employee ids. The vehicle_id will be used as the username for the vehicle password when logging in';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,6 +564,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
+INSERT INTO `vehicle` VALUES (1,'Zone 4','Transfer',2,33),(2,'Zone 1','Transfer',4,34),(3,'Zone 2','Delivery',1,28),(4,'Zone 1','Delivery',9,68),(5,'Zone 5','Transfer',5,40),(6,'Zone 5','Transfer',9,69),(7,'Zone 5','Delivery',3,56),(8,'Zone 1','Transfer',3,57),(9,'Zone 4','Delivery',5,36),(10,'Zone 2','Delivery',4,35),(11,'Zone 5','Transfer',7,59),(12,'Zone 4','Delivery',7,60),(13,'Zone 3','Transfer',8,63),(14,'Zone 1','Transfer',1,4),(16,'Zone 2','Delivery',8,64),(20,'Zone 2','Delivery',6,38),(21,'Zone 4','Transfer',6,38),(22,'Zone 5','Transfer',10,73),(23,'Zone 1','Delivery',2,29),(24,'Zone 5','Delivery',10,74),(25,'Zone 4','Delivery',11,79),(26,'Zone 2','Transfer',11,80),(27,'Zone 5','Delivery',12,84),(28,'Zone 4','Transfer',12,85),(29,'Zone 1','Transfer',1,88),(30,'Zone 3','Delivery',1,89),(31,'Zone 1','Delivery',13,97),(32,'Zone 4','Transfer',13,98);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -708,7 +890,7 @@ CREATE TABLE `innodb_index_stats` (
 
 LOCK TABLES `innodb_index_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_index_stats` DISABLE KEYS */;
-INSERT INTO `innodb_index_stats` VALUES ('PostOffice','auth_password_customer','PRIMARY','2019-03-21 02:34:44','n_diff_pfx01',0,1,'customer_pw_id'),('PostOffice','auth_password_customer','PRIMARY','2019-03-21 02:34:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_customer','PRIMARY','2019-03-21 02:34:44','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-03-21 02:34:44','n_diff_pfx01',0,1,'customer_fk_pw_id'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-03-21 02:34:44','n_diff_pfx02',0,1,'customer_fk_pw_id,customer_pw_id'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-03-21 02:34:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-03-21 02:34:44','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_customer','customer_pw_id_UNIQUE','2019-03-21 02:34:44','n_diff_pfx01',0,1,'customer_pw_id'),('PostOffice','auth_password_customer','customer_pw_id_UNIQUE','2019-03-21 02:34:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_customer','customer_pw_id_UNIQUE','2019-03-21 02:34:44','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_facility','PRIMARY','2019-03-21 02:34:27','n_diff_pfx01',0,1,'facility_pw_id'),('PostOffice','auth_password_facility','PRIMARY','2019-03-21 02:34:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_facility','PRIMARY','2019-03-21 02:34:27','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_facility','employee_pw_id_UNIQUE','2019-03-21 02:34:27','n_diff_pfx01',0,1,'facility_pw_id'),('PostOffice','auth_password_facility','employee_pw_id_UNIQUE','2019-03-21 02:34:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_facility','employee_pw_id_UNIQUE','2019-03-21 02:34:27','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_facility','facility_fk_pw_id_idx','2019-03-21 02:34:27','n_diff_pfx01',0,1,'facility_fk_pw_id'),('PostOffice','auth_password_facility','facility_fk_pw_id_idx','2019-03-21 02:34:27','n_diff_pfx02',0,1,'facility_fk_pw_id,facility_pw_id'),('PostOffice','auth_password_facility','facility_fk_pw_id_idx','2019-03-21 02:34:27','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_facility','facility_fk_pw_id_idx','2019-03-21 02:34:27','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_vehicle','PRIMARY','2019-03-21 02:34:03','n_diff_pfx01',0,1,'vehicle_pw_id'),('PostOffice','auth_password_vehicle','PRIMARY','2019-03-21 02:34:03','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_vehicle','PRIMARY','2019-03-21 02:34:03','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_vehicle','vehicle_fk_pw_id_idx','2019-03-21 02:34:03','n_diff_pfx01',0,1,'vehicle_fk_pw_id'),('PostOffice','auth_password_vehicle','vehicle_fk_pw_id_idx','2019-03-21 02:34:03','n_diff_pfx02',0,1,'vehicle_fk_pw_id,vehicle_pw_id'),('PostOffice','auth_password_vehicle','vehicle_fk_pw_id_idx','2019-03-21 02:34:03','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_vehicle','vehicle_fk_pw_id_idx','2019-03-21 02:34:03','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_vehicle','vehicle_pw_id_UNIQUE','2019-03-21 02:34:03','n_diff_pfx01',0,1,'vehicle_pw_id'),('PostOffice','auth_password_vehicle','vehicle_pw_id_UNIQUE','2019-03-21 02:34:03','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_vehicle','vehicle_pw_id_UNIQUE','2019-03-21 02:34:03','size',1,NULL,'Number of pages in the index'),('PostOffice','city_lookup_table','PRIMARY','2019-03-20 23:25:54','n_diff_pfx01',0,1,'city_id'),('PostOffice','city_lookup_table','PRIMARY','2019-03-20 23:25:54','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','city_lookup_table','PRIMARY','2019-03-20 23:25:54','size',1,NULL,'Number of pages in the index'),('PostOffice','city_lookup_table','city_id_UNIQUE','2019-03-21 01:51:18','n_diff_pfx01',0,1,'city_id'),('PostOffice','city_lookup_table','city_id_UNIQUE','2019-03-21 01:51:18','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','city_lookup_table','city_id_UNIQUE','2019-03-21 01:51:18','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','PRIMARY','2019-03-21 01:29:21','n_diff_pfx01',0,1,'customer_id'),('PostOffice','customer','PRIMARY','2019-03-21 01:29:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','PRIMARY','2019-03-21 01:29:21','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','city_id_UNIQUE','2019-03-21 01:48:40','n_diff_pfx01',0,1,'city_id'),('PostOffice','customer','city_id_UNIQUE','2019-03-21 01:48:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','city_id_UNIQUE','2019-03-21 01:48:40','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','customer_email_UNIQUE','2019-03-21 01:29:21','n_diff_pfx01',0,1,'customer_email'),('PostOffice','customer','customer_email_UNIQUE','2019-03-21 01:29:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','customer_email_UNIQUE','2019-03-21 01:29:21','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','customer_pw_id_UNIQUE','2019-03-21 01:47:01','n_diff_pfx01',0,1,'customer_pw_id'),('PostOffice','customer','customer_pw_id_UNIQUE','2019-03-21 01:47:01','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','customer_pw_id_UNIQUE','2019-03-21 01:47:01','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','employee_id_idx','2019-03-21 01:29:21','n_diff_pfx01',0,1,'employee_id'),('PostOffice','customer','employee_id_idx','2019-03-21 01:29:21','n_diff_pfx02',0,1,'employee_id,customer_id'),('PostOffice','customer','employee_id_idx','2019-03-21 01:29:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','employee_id_idx','2019-03-21 01:29:21','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','state_id_UNIQUE','2019-03-21 01:48:40','n_diff_pfx01',0,1,'state_id'),('PostOffice','customer','state_id_UNIQUE','2019-03-21 01:48:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','state_id_UNIQUE','2019-03-21 01:48:40','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','PRIMARY','2019-03-20 23:48:21','n_diff_pfx01',0,1,'employee_id'),('PostOffice','employee','PRIMARY','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','PRIMARY','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','city_id_UNIQUE','2019-03-21 01:51:51','n_diff_pfx01',0,1,'city_id'),('PostOffice','employee','city_id_UNIQUE','2019-03-21 01:51:51','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','city_id_UNIQUE','2019-03-21 01:51:51','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','employee_work_email_UNIQUE','2019-03-20 23:48:21','n_diff_pfx01',0,1,'employee_work_email'),('PostOffice','employee','employee_work_email_UNIQUE','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','employee_work_email_UNIQUE','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx01',0,1,'facility_id'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx02',0,1,'facility_id,employee_id'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','facility_fk_id_idx','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','n_diff_pfx01',0,1,'facility_id'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','n_diff_pfx02',0,1,'facility_id,employee_id'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','facility_id_idx','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','state_id_UNIQUE','2019-03-21 01:51:51','n_diff_pfx01',0,1,'state_id'),('PostOffice','employee','state_id_UNIQUE','2019-03-21 01:51:51','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','state_id_UNIQUE','2019-03-21 01:51:51','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx01',0,1,'vehicle_fk_id'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','n_diff_pfx02',0,1,'vehicle_fk_id,employee_id'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','vehicle_fk_id_idx','2019-03-20 23:48:21','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','PRIMARY','2019-03-21 01:55:46','n_diff_pfx01',0,1,'facility_id'),('PostOffice','facility','PRIMARY','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','PRIMARY','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','city_id_UNIQUE','2019-03-21 01:55:46','n_diff_pfx01',0,1,'city_id'),('PostOffice','facility','city_id_UNIQUE','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','city_id_UNIQUE','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','employee_id_idx','2019-03-21 01:55:46','n_diff_pfx01',0,1,'manager_employee_id'),('PostOffice','facility','employee_id_idx','2019-03-21 01:55:46','n_diff_pfx02',0,1,'manager_employee_id,facility_id'),('PostOffice','facility','employee_id_idx','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','employee_id_idx','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','facility_pw_id_UNIQUE','2019-03-21 01:55:46','n_diff_pfx01',0,1,'facility_pw_id'),('PostOffice','facility','facility_pw_id_UNIQUE','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','facility_pw_id_UNIQUE','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','state_id_UNIQUE','2019-03-21 01:55:46','n_diff_pfx01',0,1,'state_id'),('PostOffice','facility','state_id_UNIQUE','2019-03-21 01:55:46','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','state_id_UNIQUE','2019-03-21 01:55:46','size',1,NULL,'Number of pages in the index'),('PostOffice','package','PRIMARY','2019-03-20 23:50:30','n_diff_pfx01',0,1,'package_id'),('PostOffice','package','PRIMARY','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','PRIMARY','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'pfacility_fk_id'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'pfacility_fk_id,package_id'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','pfacility_fk_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'recepient_customer_id'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'recepient_customer_id,package_id'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','recipient_customer_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'sender_customer_id'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'sender_customer_id,package_id'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','sender_customer_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','n_diff_pfx01',0,1,'vehicle_id'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','n_diff_pfx02',0,1,'vehicle_id,package_id'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','vehicle_id_idx','2019-03-20 23:50:30','size',1,NULL,'Number of pages in the index'),('PostOffice','state_lookup_table','PRIMARY','2019-03-20 23:29:26','n_diff_pfx01',0,1,'state_id'),('PostOffice','state_lookup_table','PRIMARY','2019-03-20 23:29:26','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','state_lookup_table','PRIMARY','2019-03-20 23:29:26','size',1,NULL,'Number of pages in the index'),('PostOffice','state_lookup_table','state_id_UNIQUE','2019-03-21 01:50:13','n_diff_pfx01',0,1,'state_id'),('PostOffice','state_lookup_table','state_id_UNIQUE','2019-03-21 01:50:13','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','state_lookup_table','state_id_UNIQUE','2019-03-21 01:50:13','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','PRIMARY','2019-03-20 23:51:22','n_diff_pfx01',0,1,'tracking_id'),('PostOffice','tracking','PRIMARY','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','PRIMARY','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx01',0,1,'facility_fk_id'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx02',0,1,'facility_fk_id,tracking_id'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','facility_fk_id_idx','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx01',0,1,'package_fk_id'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx02',0,1,'package_fk_id,tracking_id'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','package_fk_id_idx','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx01',0,1,'vehicle_fk_id'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','n_diff_pfx02',0,1,'vehicle_fk_id,tracking_id'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','vehicle_fk_id_idx','2019-03-20 23:51:22','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','PRIMARY','2019-03-21 01:35:44','n_diff_pfx01',0,1,'vehicle_id'),('PostOffice','vehicle','PRIMARY','2019-03-21 01:35:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','PRIMARY','2019-03-21 01:35:44','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-21 01:35:44','n_diff_pfx01',0,1,'employee_fk_id'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-21 01:35:44','n_diff_pfx02',0,1,'employee_fk_id,vehicle_id'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-21 01:35:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','employee_fk_id_idx','2019-03-21 01:35:44','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','vehicle_pw_id_UNIQUE','2019-03-21 01:50:49','n_diff_pfx01',0,1,'vehicle_pw_id'),('PostOffice','vehicle','vehicle_pw_id_UNIQUE','2019-03-21 01:50:49','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','vehicle_pw_id_UNIQUE','2019-03-21 01:50:49','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-21 01:35:44','n_diff_pfx01',0,1,'vfacility_fk_id'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-21 01:35:44','n_diff_pfx02',0,1,'vfacility_fk_id,vehicle_id'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-21 01:35:44','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-03-21 01:35:44','size',1,NULL,'Number of pages in the index'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','n_diff_pfx01',2,1,'variable'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','size',1,NULL,'Number of pages in the index');
+INSERT INTO `innodb_index_stats` VALUES ('PostOffice','auth_password_customer','GEN_CLUST_INDEX','2019-04-21 05:09:16','n_diff_pfx01',16,1,'DB_ROW_ID'),('PostOffice','auth_password_customer','GEN_CLUST_INDEX','2019-04-21 05:09:16','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_customer','GEN_CLUST_INDEX','2019-04-21 05:09:16','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_customer','customer_fk_pw_id_UNIQUE','2019-04-21 05:09:16','n_diff_pfx01',16,1,'customer_fk_pw_id'),('PostOffice','auth_password_customer','customer_fk_pw_id_UNIQUE','2019-04-21 05:09:16','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_customer','customer_fk_pw_id_UNIQUE','2019-04-21 05:09:16','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-04-21 05:09:16','n_diff_pfx01',16,1,'customer_fk_pw_id'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-04-21 05:09:16','n_diff_pfx02',16,1,'customer_fk_pw_id,DB_ROW_ID'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-04-21 05:09:16','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_customer','customer_fk_pw_id_idx','2019-04-21 05:09:16','size',1,NULL,'Number of pages in the index'),('PostOffice','auth_password_employee','employee_id_fk_UNIQUE','2019-04-21 04:45:35','n_diff_pfx01',54,1,'employee_id_fk'),('PostOffice','auth_password_employee','employee_id_fk_UNIQUE','2019-04-21 04:45:35','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','auth_password_employee','employee_id_fk_UNIQUE','2019-04-21 04:45:35','size',1,NULL,'Number of pages in the index'),('PostOffice','city_lookup_table','PRIMARY','2019-04-02 04:09:52','n_diff_pfx01',99,1,'city_id'),('PostOffice','city_lookup_table','PRIMARY','2019-04-02 04:09:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','city_lookup_table','PRIMARY','2019-04-02 04:09:52','size',1,NULL,'Number of pages in the index'),('PostOffice','city_lookup_table','city_id_UNIQUE','2019-04-02 04:09:52','n_diff_pfx01',99,1,'city_id'),('PostOffice','city_lookup_table','city_id_UNIQUE','2019-04-02 04:09:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','city_lookup_table','city_id_UNIQUE','2019-04-02 04:09:52','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','PRIMARY','2019-04-22 22:13:38','n_diff_pfx01',23,1,'customer_id'),('PostOffice','customer','PRIMARY','2019-04-22 22:13:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','PRIMARY','2019-04-22 22:13:38','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','customer_email_UNIQUE','2019-04-22 22:13:38','n_diff_pfx01',23,1,'customer_email'),('PostOffice','customer','customer_email_UNIQUE','2019-04-22 22:13:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','customer_email_UNIQUE','2019-04-22 22:13:38','size',1,NULL,'Number of pages in the index'),('PostOffice','customer','employee_id_idx','2019-04-22 22:13:38','n_diff_pfx01',1,1,'employee_id'),('PostOffice','customer','employee_id_idx','2019-04-22 22:13:38','n_diff_pfx02',23,1,'employee_id,customer_id'),('PostOffice','customer','employee_id_idx','2019-04-22 22:13:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','customer','employee_id_idx','2019-04-22 22:13:38','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','PRIMARY','2019-04-21 03:08:39','n_diff_pfx01',66,1,'employee_id'),('PostOffice','employee','PRIMARY','2019-04-21 03:08:39','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','PRIMARY','2019-04-21 03:08:39','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','employee_work_email_UNIQUE','2019-04-21 03:08:39','n_diff_pfx01',66,1,'employee_work_email'),('PostOffice','employee','employee_work_email_UNIQUE','2019-04-21 03:08:39','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','employee_work_email_UNIQUE','2019-04-21 03:08:39','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','facility_fk_id_idx','2019-04-21 03:08:39','n_diff_pfx01',13,1,'facility_id'),('PostOffice','employee','facility_fk_id_idx','2019-04-21 03:08:39','n_diff_pfx02',66,1,'facility_id,employee_id'),('PostOffice','employee','facility_fk_id_idx','2019-04-21 03:08:39','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','facility_fk_id_idx','2019-04-21 03:08:39','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','facility_id_idx','2019-04-21 03:08:39','n_diff_pfx01',13,1,'facility_id'),('PostOffice','employee','facility_id_idx','2019-04-21 03:08:39','n_diff_pfx02',66,1,'facility_id,employee_id'),('PostOffice','employee','facility_id_idx','2019-04-21 03:08:39','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','facility_id_idx','2019-04-21 03:08:39','size',1,NULL,'Number of pages in the index'),('PostOffice','employee','vehicle_fk_id_idx','2019-04-21 03:08:39','n_diff_pfx01',27,1,'vehicle_fk_id'),('PostOffice','employee','vehicle_fk_id_idx','2019-04-21 03:08:39','n_diff_pfx02',66,1,'vehicle_fk_id,employee_id'),('PostOffice','employee','vehicle_fk_id_idx','2019-04-21 03:08:39','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','employee','vehicle_fk_id_idx','2019-04-21 03:08:39','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','PRIMARY','2019-04-12 01:25:50','n_diff_pfx01',12,1,'facility_id'),('PostOffice','facility','PRIMARY','2019-04-12 01:25:50','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','PRIMARY','2019-04-12 01:25:50','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','employee_id_idx','2019-04-12 01:25:50','n_diff_pfx01',12,1,'manager_employee_id'),('PostOffice','facility','employee_id_idx','2019-04-12 01:25:50','n_diff_pfx02',12,1,'manager_employee_id,facility_id'),('PostOffice','facility','employee_id_idx','2019-04-12 01:25:50','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','employee_id_idx','2019-04-12 01:25:50','size',1,NULL,'Number of pages in the index'),('PostOffice','facility','facility_pw_id_UNIQUE','2019-04-12 01:25:50','n_diff_pfx01',12,1,'facility_pw_id'),('PostOffice','facility','facility_pw_id_UNIQUE','2019-04-12 01:25:50','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','facility','facility_pw_id_UNIQUE','2019-04-12 01:25:50','size',1,NULL,'Number of pages in the index'),('PostOffice','package','PRIMARY','2019-04-22 21:21:17','n_diff_pfx01',78,1,'package_id'),('PostOffice','package','PRIMARY','2019-04-22 21:21:17','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','PRIMARY','2019-04-22 21:21:17','size',1,NULL,'Number of pages in the index'),('PostOffice','package','pfacility_fk_id_idx','2019-04-22 21:21:17','n_diff_pfx01',10,1,'pfacility_fk_id'),('PostOffice','package','pfacility_fk_id_idx','2019-04-22 21:21:17','n_diff_pfx02',78,1,'pfacility_fk_id,package_id'),('PostOffice','package','pfacility_fk_id_idx','2019-04-22 21:21:17','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','pfacility_fk_id_idx','2019-04-22 21:21:17','size',1,NULL,'Number of pages in the index'),('PostOffice','package','recipient_customer_id_idx','2019-04-22 21:21:17','n_diff_pfx01',19,1,'recepient_customer_id'),('PostOffice','package','recipient_customer_id_idx','2019-04-22 21:21:17','n_diff_pfx02',78,1,'recepient_customer_id,package_id'),('PostOffice','package','recipient_customer_id_idx','2019-04-22 21:21:17','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','recipient_customer_id_idx','2019-04-22 21:21:17','size',1,NULL,'Number of pages in the index'),('PostOffice','package','sender_customer_id_idx','2019-04-22 21:21:17','n_diff_pfx01',16,1,'sender_customer_id'),('PostOffice','package','sender_customer_id_idx','2019-04-22 21:21:17','n_diff_pfx02',78,1,'sender_customer_id,package_id'),('PostOffice','package','sender_customer_id_idx','2019-04-22 21:21:17','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','sender_customer_id_idx','2019-04-22 21:21:17','size',1,NULL,'Number of pages in the index'),('PostOffice','package','vehicle_id_idx','2019-04-22 21:21:17','n_diff_pfx01',15,1,'vehicle_id'),('PostOffice','package','vehicle_id_idx','2019-04-22 21:21:17','n_diff_pfx02',78,1,'vehicle_id,package_id'),('PostOffice','package','vehicle_id_idx','2019-04-22 21:21:17','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','package','vehicle_id_idx','2019-04-22 21:21:17','size',1,NULL,'Number of pages in the index'),('PostOffice','state_lookup_table','PRIMARY','2019-03-29 02:31:38','n_diff_pfx01',50,1,'state_id'),('PostOffice','state_lookup_table','PRIMARY','2019-03-29 02:31:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','state_lookup_table','PRIMARY','2019-03-29 02:31:38','size',1,NULL,'Number of pages in the index'),('PostOffice','state_lookup_table','state_id_UNIQUE','2019-03-29 02:31:38','n_diff_pfx01',50,1,'state_id'),('PostOffice','state_lookup_table','state_id_UNIQUE','2019-03-29 02:31:38','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','state_lookup_table','state_id_UNIQUE','2019-03-29 02:31:38','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','PRIMARY','2019-04-22 22:14:15','n_diff_pfx01',228,1,'tracking_id'),('PostOffice','tracking','PRIMARY','2019-04-22 22:14:15','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','PRIMARY','2019-04-22 22:14:15','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','facility_fk_id_idx','2019-04-22 22:14:15','n_diff_pfx01',13,1,'facility_fk_id'),('PostOffice','tracking','facility_fk_id_idx','2019-04-22 22:14:15','n_diff_pfx02',228,1,'facility_fk_id,tracking_id'),('PostOffice','tracking','facility_fk_id_idx','2019-04-22 22:14:15','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','facility_fk_id_idx','2019-04-22 22:14:15','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','package_fk_id_idx','2019-04-22 22:14:15','n_diff_pfx01',63,1,'package_fk_id'),('PostOffice','tracking','package_fk_id_idx','2019-04-22 22:14:15','n_diff_pfx02',228,1,'package_fk_id,tracking_id'),('PostOffice','tracking','package_fk_id_idx','2019-04-22 22:14:15','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','package_fk_id_idx','2019-04-22 22:14:15','size',1,NULL,'Number of pages in the index'),('PostOffice','tracking','vehicle_fk_id_idx','2019-04-22 22:14:15','n_diff_pfx01',17,1,'vehicle_fk_id'),('PostOffice','tracking','vehicle_fk_id_idx','2019-04-22 22:14:15','n_diff_pfx02',228,1,'vehicle_fk_id,tracking_id'),('PostOffice','tracking','vehicle_fk_id_idx','2019-04-22 22:14:15','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','tracking','vehicle_fk_id_idx','2019-04-22 22:14:15','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','PRIMARY','2019-04-21 03:39:48','n_diff_pfx01',28,1,'vehicle_id'),('PostOffice','vehicle','PRIMARY','2019-04-21 03:39:48','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','PRIMARY','2019-04-21 03:39:48','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','employee_fk_id_idx','2019-04-21 03:39:48','n_diff_pfx01',27,1,'employee_fk_id'),('PostOffice','vehicle','employee_fk_id_idx','2019-04-21 03:39:48','n_diff_pfx02',28,1,'employee_fk_id,vehicle_id'),('PostOffice','vehicle','employee_fk_id_idx','2019-04-21 03:39:48','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','employee_fk_id_idx','2019-04-21 03:39:48','size',1,NULL,'Number of pages in the index'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-04-21 03:39:48','n_diff_pfx01',13,1,'vfacility_fk_id'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-04-21 03:39:48','n_diff_pfx02',28,1,'vfacility_fk_id,vehicle_id'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-04-21 03:39:48','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('PostOffice','vehicle','vfacility_fk_id_idx','2019-04-21 03:39:48','size',1,NULL,'Number of pages in the index'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2019-02-19 04:16:41','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','n_diff_pfx01',2,1,'variable'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2019-02-19 04:16:41','size',1,NULL,'Number of pages in the index');
 /*!40000 ALTER TABLE `innodb_index_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -736,7 +918,7 @@ CREATE TABLE `innodb_table_stats` (
 
 LOCK TABLES `innodb_table_stats` WRITE;
 /*!40000 ALTER TABLE `innodb_table_stats` DISABLE KEYS */;
-INSERT INTO `innodb_table_stats` VALUES ('PostOffice','auth_password_customer','2019-03-21 02:34:44',0,1,2),('PostOffice','auth_password_facility','2019-03-21 02:34:27',0,1,2),('PostOffice','auth_password_vehicle','2019-03-21 02:34:03',0,1,2),('PostOffice','city_lookup_table','2019-03-21 01:51:18',0,1,0),('PostOffice','customer','2019-03-21 01:48:40',0,1,2),('PostOffice','employee','2019-03-21 01:51:51',0,1,4),('PostOffice','facility','2019-03-21 01:55:46',0,1,4),('PostOffice','package','2019-03-20 23:50:30',0,1,4),('PostOffice','state_lookup_table','2019-03-21 01:50:13',0,1,0),('PostOffice','tracking','2019-03-20 23:51:22',0,1,3),('PostOffice','vehicle','2019-03-21 01:50:49',0,1,2),('mysql','gtid_executed','2019-02-19 04:16:41',0,1,0),('sys','sys_config','2019-02-19 04:16:41',2,1,0);
+INSERT INTO `innodb_table_stats` VALUES ('PostOffice','auth_password_customer','2019-04-21 05:09:16',16,1,2),('PostOffice','auth_password_employee','2019-04-21 04:45:35',54,1,0),('PostOffice','city_lookup_table','2019-04-02 04:09:52',99,1,1),('PostOffice','customer','2019-04-22 22:13:38',23,1,2),('PostOffice','employee','2019-04-21 03:08:39',66,1,4),('PostOffice','facility','2019-04-12 01:25:50',12,1,2),('PostOffice','package','2019-04-22 21:21:17',78,1,4),('PostOffice','state_lookup_table','2019-03-29 02:31:38',50,1,1),('PostOffice','tracking','2019-04-22 22:14:15',228,1,3),('PostOffice','vehicle','2019-04-21 03:39:48',28,1,2),('mysql','gtid_executed','2019-02-19 04:16:41',0,1,0),('sys','sys_config','2019-02-19 04:16:41',2,1,0);
 /*!40000 ALTER TABLE `innodb_table_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1308,4 +1490,4 @@ CREATE TABLE IF NOT EXISTS `slow_log` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-21  3:47:21
+-- Dump completed on 2019-04-22 22:20:35
